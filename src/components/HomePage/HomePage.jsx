@@ -1,4 +1,3 @@
-import "../App.css";
 import {Link} from 'react-router-dom'
 
 function HomePage() {
@@ -26,4 +25,3 @@ function HomePage() {
 }
 
 export default HomePage;
-                
