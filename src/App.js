@@ -7,8 +7,9 @@ import { API_URL } from "./config";
 import SignUp from "./components/signup/SignUp";
 
 function App(props) {
-  const { user, updateUser } = useState(null);
-  const { myError, updateError } = useState(null);
+  const [user, updateUser] = useState(null);
+  const [myError, updateError] = useState(null);
+  const [newUser, updateNewUser] = useState(null);
 
   const handleSignIn = async (event) => {
     event.preventDefault();
@@ -55,7 +56,11 @@ function App(props) {
     };
 
     try {
-      await axios.post(`http://localhost:5005/api/signup`, newUser);
+      let response = await axios.post(
+        `http://localhost:5005/api/signup`,
+        newUser
+      );
+      updateNewUser(response.data);
       props.history.push("/");
     } catch (err) {
       console.log("Signup failed", err);
