@@ -5,17 +5,33 @@ import HomePage from "./components/HomePage/HomePage";
 import SignIn from "./components/SignIn/SignIn";
 import { API_URL } from "./config";
 import SignUp from "./components/signup/SignUp";
+import Profile from "./components/Profile/Profile";
 
 function App(props) {
   const [user, updateUser] = useState(null);
   const [myError, updateError] = useState(null);
   const [newUser, updateNewUser] = useState(null);
+  const [foodData, updateFoodData] = useState([]);
+
+  const getData = async () => {
+    try {
+      let response = await axios.get(
+        `https://api.nytimes.com/svc/topstories/v2/foods.json?api-key=aE2ooFQxAx0es9T0hnh0CI0I54wQzTtM`
+      );
+      updateFoodData(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log("Food fetch failed", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleSignIn = async (event) => {
     event.preventDefault();
-
     const { email, password } = event.target;
-
     let myUser = {
       email: email.value,
       password: password.value,
@@ -43,7 +59,10 @@ function App(props) {
       passwordHash,
       country,
       city,
+      interests,
     } = event.target;
+
+    let values = interests.value.map((i) => i.value);
 
     let newUser = {
       username: username.value,
@@ -53,6 +72,7 @@ function App(props) {
       country: country.value,
       city: city.value,
       passwordHash: passwordHash.value,
+      interests: values,
     };
 
     try {
@@ -83,6 +103,13 @@ function App(props) {
           }}
         />
         <Route exact path="/" component={HomePage} />
+        <Route
+          exact
+          path={"/profile"}
+          render={() => {
+            return <Profile foodData={foodData} />;
+          }}
+        />
         <Route
           path="/signup"
           render={(routeProps) => {
