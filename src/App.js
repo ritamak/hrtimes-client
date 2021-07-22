@@ -10,26 +10,26 @@ import Profile from "./components/Profile/Profile";
 function App(props) {
   const [user, updateUser] = useState(null);
   const [myError, updateError] = useState(null);
-  const [foodData, updateFoodData] = useState([]);
+  const [data, updateData] = useState([]);
   const [interests, updateInterests] = useState([]);
 
   const handleTopicChange = (newInterests) => {
     updateInterests(newInterests);
   };
 
-  const getData = async () => {
-    try {
-      let response = await axios.get(`https://api.nytimes.com/svc/topstories/v2/foods.json?api-key=aE2ooFQxAx0es9T0hnh0CI0I54wQzTtM`);
-      updateFoodData(response.data);
-      
-    } catch (error) {
-      console.log("Food fetch failed", error);
-    }
+  const handleDataChange = (param) => {
+    updateData(param);
+  };
+
+  const getData = (param) => {
+    return axios.get(
+      `https://api.nytimes.com/svc/topstories/v2/${param}.json?api-key=aE2ooFQxAx0es9T0hnh0CI0I54wQzTtM`
+    );
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    console.log(data);
+  }, [data]);
 
   const handleSignIn = async (event) => {
     event.preventDefault();
@@ -84,10 +84,19 @@ function App(props) {
     console.log(newUser.interests);
 
     try {
+<<<<<<< HEAD
       let response = await axios.post(`http://localhost:5005/api/signup`, newUser, { withCredentials: true });
       
       updateUser(response.data);
       props.history.push("/");
+=======
+      let response = await axios.post(
+        `http://localhost:5005/api/signup`,
+        newUser
+      );
+      updateUser(response.data);
+      props.history.push("/profile");
+>>>>>>> 5c737d374e74176a5b2278b862b5456f8b89c324
     } catch (err) {
       console.log("Signup failed", err);
     }
@@ -97,6 +106,7 @@ function App(props) {
     <div>
       <Switch>
         <Route exact path="/" component={HomePage} />
+<<<<<<< HEAD
         <Route path="/signin" render={(routerProps) => {
             return <SignIn error={myError} onSignIn={handleSignIn} {...routerProps}/>;
         }}/>
@@ -104,6 +114,25 @@ function App(props) {
             return <Profile foodData={foodData} />;
           }}/>
         <Route path="/signup" render={(routeProps) => {
+=======
+        <Route
+          exact
+          path={"/profile"}
+          render={() => {
+            return (
+              <Profile
+                data={data}
+                user={user}
+                getData={getData}
+                onDataChange={handleDataChange}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/signup"
+          render={(routeProps) => {
+>>>>>>> 5c737d374e74176a5b2278b862b5456f8b89c324
             return (
               <SignUp
                 onSignUp={handleSignUp}
