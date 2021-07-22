@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Link } from "react";
 
 function Profile(props) {
   const { getData, data, user, onDataChange } = props;
@@ -24,7 +24,18 @@ function Profile(props) {
 
   return (
     <div>
-      <p></p>
+      <h1>Welcome {user.firstName}</h1>
+      {data.map((interest) => {
+        return interest.data.results.map((el) => {
+          console.log(el.title);
+          return (
+            <>
+              <p>{el.title}</p>
+              <a href={el.url}>link for the article</a>
+            </>
+          );
+        });
+      })}
     </div>
   );
 }
