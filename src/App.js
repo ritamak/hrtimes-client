@@ -6,6 +6,7 @@ import SignIn from "./components/SignIn/SignIn";
 import { API_URL } from "./config";
 import SignUp from "./components/signup/SignUp";
 import Profile from "./components/Profile/Profile";
+import EditProfile from "./components/EditProfile/EditProfile";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -20,6 +21,10 @@ function App(props) {
 
   const handleDataChange = (param) => {
     updateData(param);
+  };
+
+  const handleUserChange = (param) => {
+    updateUser(param);
   };
 
   useEffect(() => {
@@ -101,6 +106,43 @@ function App(props) {
       console.log("Signup failed", err);
     }
   };
+
+  const handleEditProfile = async (event) => {
+    event.preventDefault();
+    const {
+      username,
+      firstName,
+      lastName,
+      email,
+      passwordHash,
+      country,
+      city,
+      topics,
+    } = event.target;
+
+    let values = interests.map((i) => i.value);
+
+    let updatedUser = {
+      username: username.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      country: country.value,
+      city: city.value,
+      passwordHash: passwordHash.value,
+      interests: values,
+    };
+
+    try {
+      let response = await axios.patch(`${API_URL}/${user._id}`, updatedUser);
+      updateUser(response.data);
+
+      props.history.push("/profile");
+    } catch (err) {
+      console.log("Edited failed", err);
+    }
+  };
+
   console.log(fetchingUser);
   if (fetchingUser) {
     return <p>Loading...</p>;
@@ -143,6 +185,21 @@ function App(props) {
                 onSignUp={handleSignUp}
                 {...routeProps}
                 onTopicChange={handleTopicChange}
+                interests={interests}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/:id"
+          render={(routeProps) => {
+            return (
+              <EditProfile
+                onEditProfile={handleEditProfile}
+                {...routeProps}
+                onTopicChange={handleTopicChange}
+                onUserChange={handleUserChange}
+                user={user}
                 interests={interests}
               />
             );
