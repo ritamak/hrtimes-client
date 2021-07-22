@@ -1,21 +1,22 @@
 import React, { useEffect, Link } from "react";
+import { API_URL } from "../../config";
+import axios from "axios";
 
 function Profile(props) {
-  const { getData, data, user, onDataChange } = props;
+  const { getData, data, user, onDataChange, fetchingUser } = props;
   const { interests } = user;
 
   useEffect(() => {
-    let myPromises = [];
-    interests.map((interest) => {
-      myPromises.push(getData(interest)); //pushing n promises in this array
-    });
-    Promise.all(myPromises)
-      .then((data) => {
-        console.log("see here", data);
-        //call some func from App.js to update the data state
-        onDataChange(data);
+    axios
+      .post(
+        `${API_URL}/api/fetchNews`,
+        { interests },
+        { withCredentials: true }
+      )
+      .then((result) => {
+        onDataChange(result.data.data);
       })
-      .catch();
+      .catch((err) => {});
   }, []);
 
   if (!data.length) {
@@ -25,17 +26,16 @@ function Profile(props) {
   return (
     <div>
       <h1>Welcome {user.firstName}</h1>
-      {data.map((interest) => {
-        return interest.data.results.map((el) => {
-          console.log(el.title);
+      {/* {data.map((interest) => {
+        return interest.data.results.map((el, index) => {
           return (
-            <>
+            <div key={index}>
               <p>{el.title}</p>
               <a href={el.url}>link for the article</a>
-            </>
+            </div>
           );
         });
-      })}
+      })} */}
     </div>
   );
 }

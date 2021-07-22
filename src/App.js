@@ -9,6 +9,7 @@ import Profile from "./components/Profile/Profile";
 
 function App(props) {
   const [user, updateUser] = useState(null);
+  const [fetchingUser, updateStatus] = useState(true);
   const [myError, updateError] = useState(null);
   const [data, updateData] = useState([]);
   const [interests, updateInterests] = useState([]);
@@ -21,11 +22,20 @@ function App(props) {
     updateData(param);
   };
 
-  const getData = (param) => {
-    return axios.get(
-      `https://api.nytimes.com/svc/topstories/v2/${param}.json?api-key=aE2ooFQxAx0es9T0hnh0CI0I54wQzTtM`
-    );
-  };
+  useEffect(() => {(
+      async () => {
+        try {
+          let userResponse = await axios.get(`${API_URL}/api/profile`, { withCredentials: true });
+          console.log(userResponse.data);
+          updateUser(userResponse.data);
+          updateStatus(false);
+        }
+        catch (err) {
+          console.log('Todo fetch failed', err)
+          updateStatus(false);
+        }
+      })();
+  }, [])
 
   useEffect(() => {
     console.log(data);
@@ -66,8 +76,6 @@ function App(props) {
       topics,
     } = event.target;
 
-    console.log(interests);
-    console.log(topics);
     let values = interests.map((i) => i.value);
 
     let newUser = {
@@ -81,8 +89,6 @@ function App(props) {
       interests: values,
     };
 
-    console.log(newUser.interests);
-
     try {
       let response = await axios.post(
         `http://localhost:5005/api/signup`,
@@ -94,6 +100,10 @@ function App(props) {
       console.log("Signup failed", err);
     }
   };
+  console.log(fetchingUser);
+  if (fetchingUser) {
+    return <p>Loading...</p>
+  }
 
   return (
     <div>
@@ -106,8 +116,8 @@ function App(props) {
           return <Profile
             data={data}
                 user={user}
-                getData={getData}
-                onDataChange={handleDataChange} />;
+                onDataChange={handleDataChange}
+              />;
           }}/>
         <Route
           path="/signup"
