@@ -5,10 +5,31 @@ import HomePage from "./components/HomePage/HomePage";
 import SignIn from "./components/SignIn/SignIn";
 import { API_URL } from "./config";
 import SignUp from "./components/signup/SignUp";
+import Profile from "./components/Profile/Profile";
 
 function App(props) {
-  const [ user, updateUser ] = useState(null);
-  const [ myError, updateError ] = useState(null);
+  const [user, updateUser] = useState(null);
+  const [myError, updateError] = useState(null);
+  const [foodData, updateFoodData] = useState([]);
+  const [interests, updateInterests] = useState([]);
+
+  const handleTopicChange = (newInterests) => {
+    updateInterests(newInterests);
+  };
+
+  const getData = async () => {
+    try {
+      let response = await axios.get(`https://api.nytimes.com/svc/topstories/v2/foods.json?api-key=aE2ooFQxAx0es9T0hnh0CI0I54wQzTtM`);
+      updateFoodData(response.data);
+      
+    } catch (error) {
+      console.log("Food fetch failed", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleSignIn = async (event) => {
     event.preventDefault();
@@ -24,6 +45,7 @@ function App(props) {
       let response = await axios.post(`${API_URL}/api/signin`, myUser, {withCredentials: true});
 
       updateUser(response.data);
+
       props.history.push("/profile");
     } catch (error) {
       updateError(error);
@@ -41,7 +63,12 @@ function App(props) {
       passwordHash,
       country,
       city,
+      topics,
     } = event.target;
+
+    console.log(interests);
+    console.log(topics);
+    let values = interests.map((i) => i.value);
 
     let newUser = {
       username: username.value,
@@ -51,12 +78,16 @@ function App(props) {
       country: country.value,
       city: city.value,
       passwordHash: passwordHash.value,
+      interests: values,
     };
 
-    try {
-      await axios.post(`${API_URL}/api/signup`, newUser, {withCredentials: true});
+    console.log(newUser.interests);
 
-      props.history.push("/profile");
+    try {
+      let response = await axios.post(`http://localhost:5005/api/signup`, newUser, { withCredentials: true });
+      
+      updateUser(response.data);
+      props.history.push("/");
     } catch (err) {
       console.log("Signup failed", err);
     }
@@ -69,9 +100,19 @@ function App(props) {
         <Route path="/signin" render={(routerProps) => {
             return <SignIn error={myError} onSignIn={handleSignIn} {...routerProps}/>;
         }}/>
+        <Route exact path={"/profile"} render={() => {
+            return <Profile foodData={foodData} />;
+          }}/>
         <Route path="/signup" render={(routeProps) => {
-            return <SignUp onSignUp={handleSignUp} {...routeProps} />;
-        }}/>
+            return (
+              <SignUp
+                onSignUp={handleSignUp}
+                {...routeProps}
+                onTopicChange={handleTopicChange}
+                interests={interests}
+              />
+            );
+          }}/>
       </Switch>
     </div>
   );
