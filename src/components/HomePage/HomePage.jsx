@@ -12,11 +12,11 @@ function HomePage() {
       </p>
 
       <Link to="/signin">
-        <button>Sing In</button>
+        <button>Sign In</button>
       </Link>
 
       <Link to="/signup">
-        <button>Sing Up</button>
+        <button>Sign Up</button>
       </Link>
     </div>
   );
