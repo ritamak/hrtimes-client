@@ -24,7 +24,12 @@ function Profile(props) {
 
   return (
     <div>
-      <p></p>
+      {data.map((interest) => {
+        return interest.data.results.map((el) => {
+          console.log(el.title);
+          return <p>{el.title}</p>;
+        });
+      })}
     </div>
   );
 }
