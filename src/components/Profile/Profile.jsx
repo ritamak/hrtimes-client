@@ -1,6 +1,7 @@
 import React, { useEffect, Link } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 
 function Profile(props) {
   const { data, user, onDataChange } = props;
@@ -38,6 +39,7 @@ function Profile(props) {
   }
   return (
     <div>
+      <Navbar />
       <h1>Welcome {user.firstName}</h1>
       <a href={user._id}>Edit Profile</a>
       {flatted.map((el) => (
