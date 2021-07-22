@@ -12,6 +12,7 @@ function App(props) {
   const [myError, updateError] = useState(null);
   const [data, updateData] = useState([]);
   const [interests, updateInterests] = useState([]);
+  const [loggedUser, updateLoggedUser] = useState(null);
   console.log(interests);
 
   const handleTopicChange = (newInterests) => {
@@ -41,9 +42,7 @@ function App(props) {
     };
 
     try {
-      let response = await axios.post(`${API_URL}/api/signin`, myUser, {
-        withCredentials: true,
-      });
+      let response = await axios.post(`${API_URL}/api/signin`, myUser);
 
       updateUser(response.data);
       props.history.push("/profile");
@@ -81,11 +80,9 @@ function App(props) {
     };
     console.log(newUser.interests);
     try {
-      let response = await axios.post(
-        `http://localhost:5005/api/signup`,
-        newUser
-      );
+      let response = await axios.post(`${API_URL}/api/signup`, newUser);
       updateUser(response.data);
+
       props.history.push("/profile");
     } catch (err) {
       console.log("Signup failed", err);
