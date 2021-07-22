@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import Select from "react-select";
-import axios from "axios";
-import { API_URL } from "../../config";
 
 import { topStoriesTopics } from "../../data/data";
 
@@ -10,37 +8,37 @@ export default function EditProfile(props) {
 
   const handleUserName = (event) => {
     let newUserName = event.target.value;
-    updateUser([...user, newUserName]);
+    updateUser({ ...user, username: newUserName });
   };
   const handleFirstName = (event) => {
     let newFirstName = event.target.value;
-    updateUser([...user, newFirstName]);
+    updateUser({ ...user, firstName: newFirstName });
   };
 
   const handleLastName = (event) => {
     let newLastName = event.target.value;
-    updateUser([...user, newLastName]);
+    updateUser({ ...user, lastName: newLastName });
   };
 
   const handleEmail = (event) => {
     let newEmail = event.target.value;
-    updateUser([...user, newEmail]);
+    updateUser({ ...user, email: newEmail });
   };
   const handleCountry = (event) => {
     let newCountry = event.target.value;
-    updateUser([...user, newCountry]);
+    updateUser({ ...user, country: newCountry });
   };
   const handleCity = (event) => {
     let newCity = event.target.value;
-    updateUser([...user, newCity]);
+    updateUser({ ...user, city: newCity });
   };
   const handlePassword = (event) => {
     let newPassword = event.target.value;
-    updateUser([...user, newPassword]);
+    updateUser({ ...user, password: newPassword });
   };
   const handleInterest = (event) => {
     let newInterest = event.target.value;
-    updateUser([...user, newInterest]);
+    updateUser({ ...user, interests: newInterest });
   };
 
   if (!user) {
@@ -132,7 +130,7 @@ export default function EditProfile(props) {
             </div>
             <h1>Interests</h1>
             <Select
-              onChange={onTopicChange}
+              onChange={handleInterest}
               closeMenuOnSelect={false}
               defaultValue={[]}
               isMulti

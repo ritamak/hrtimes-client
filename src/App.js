@@ -138,7 +138,7 @@ function App(props) {
         withCredentials: true,
       });
       updateUser(response.data);
-
+      console.log(response.data);
       props.history.push("/profile");
     } catch (err) {
       console.log("Edited failed", err);
@@ -202,6 +202,7 @@ function App(props) {
                 onTopicChange={handleTopicChange}
                 onUserChange={handleUserChange}
                 user={user}
+                updateUser={updateUser}
                 interests={interests}
               />
             );
