@@ -12,6 +12,12 @@ function App(props) {
   const [myError, updateError] = useState(null);
   const [newUser, updateNewUser] = useState(null);
   const [foodData, updateFoodData] = useState([]);
+  const [interests, updateInterests] = useState([]);
+  console.log(interests);
+
+  const handleTopicChange = (newInterests) => {
+    updateInterests(newInterests);
+  };
 
   const getData = async () => {
     try {
@@ -59,10 +65,12 @@ function App(props) {
       passwordHash,
       country,
       city,
-      interests,
+      topics,
     } = event.target;
 
-    let values = interests.value.map((i) => i.value);
+    console.log(interests);
+    console.log(topics);
+    let values = interests.map((i) => i.value);
 
     let newUser = {
       username: username.value,
@@ -74,7 +82,7 @@ function App(props) {
       passwordHash: passwordHash.value,
       interests: values,
     };
-
+    console.log(newUser.interests);
     try {
       let response = await axios.post(
         `http://localhost:5005/api/signup`,
@@ -113,7 +121,14 @@ function App(props) {
         <Route
           path="/signup"
           render={(routeProps) => {
-            return <SignUp onSignUp={handleSignUp} {...routeProps} />;
+            return (
+              <SignUp
+                onSignUp={handleSignUp}
+                {...routeProps}
+                onTopicChange={handleTopicChange}
+                interests={interests}
+              />
+            );
           }}
         />
       </Switch>

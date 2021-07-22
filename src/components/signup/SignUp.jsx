@@ -4,13 +4,7 @@ import Select from "react-select";
 import { topStoriesTopics } from "../../data/data";
 
 function SignUp(props) {
-  const { onSignUp } = props;
-  const [interests, updateInterests] = useState([]);
-  console.log(interests);
-
-  const handleTopicChange = (newInterests) => {
-    updateInterests(newInterests);
-  };
+  const { onSignUp, interests, onTopicChange } = props;
 
   return (
     <>
@@ -85,11 +79,11 @@ function SignUp(props) {
           </div>
           <h1>Interests</h1>
           <Select
-            onChange={handleTopicChange}
+            onChange={onTopicChange}
             closeMenuOnSelect={false}
             defaultValue={[]}
             isMulti
-            name="topStoriesTopics"
+            name="topics"
             options={topStoriesTopics}
             className="basic-multi-select"
             classNamePrefix="select"
