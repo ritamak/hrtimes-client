@@ -4,7 +4,7 @@ import axios from "axios";
 import Navbar from "../MyNav/Navbar";
 
 function Profile(props) {
-  const { data, user, onDataChange } = props;
+  const { data, user, onDataChange, onLogOut } = props;
   const { interests } = user;
 
   useEffect(() => {
@@ -39,15 +39,13 @@ function Profile(props) {
   }
   return (
     <div>
-      <Navbar />
+      <Navbar onLogOut={onLogOut} user={user} />
       <h1>Welcome {user.firstName}</h1>
-      <a href={user._id}>Edit Profile</a>
-      {flatted.map((el) => (
-        <>
-          <p>{el.section}</p>
+      {flatted.map((el, index) => (
+        <div key={index}>
           <p>{el.title}</p>
           <a href={el.url}>read article</a>
-        </>
+        </div>
       ))}
     </div>
   );

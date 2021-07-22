@@ -33,7 +33,7 @@ function App(props) {
         let userResponse = await axios.get(`${API_URL}/api/profile`, {
           withCredentials: true,
         });
-        console.log(userResponse.data);
+
         updateUser(userResponse.data);
         updateStatus(false);
       } catch (err) {
@@ -146,6 +146,19 @@ function App(props) {
   };
 
   console.log(fetchingUser);
+
+  const handleLogOut = async () => {
+    try {
+      await axios.post(`${API_URL}/api/logout`, {}, { withCredentials: true });
+
+      props.history.push("/");
+
+      updateUser(null);
+    } catch (error) {
+      console.log("Logout failed", error);
+    }
+  };
+
   if (fetchingUser) {
     return <p>Loading...</p>;
   }
@@ -169,12 +182,14 @@ function App(props) {
         <Route
           exact
           path={"/profile"}
-          render={() => {
+          render={(routerProps) => {
             return (
               <Profile
                 data={data}
                 user={user}
                 onDataChange={handleDataChange}
+                onLogOut={handleLogOut}
+                {...routerProps}
               />
             );
           }}
