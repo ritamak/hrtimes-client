@@ -134,7 +134,9 @@ function App(props) {
     };
 
     try {
-      let response = await axios.patch(`${API_URL}/${user._id}`, updatedUser);
+      let response = await axios.patch(`${API_URL}/${user._id}`, updatedUser, {
+        withCredentials: true,
+      });
       updateUser(response.data);
 
       props.history.push("/profile");
