@@ -1,9 +1,10 @@
 import React, { useEffect, Link } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 
 function Profile(props) {
-  const { getData, data, user, onDataChange, fetchingUser } = props;
+  const { data, user, onDataChange } = props;
   const { interests } = user;
 
   useEffect(() => {
@@ -25,6 +26,7 @@ function Profile(props) {
 
   return (
     <div>
+      <Navbar />
       <h1>Welcome {user.firstName}</h1>
       {/* {data.map((interest) => {
         return interest.data.results.map((el, index) => {
