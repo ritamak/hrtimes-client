@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-function Profile({ foodData }) {
-  const { results } = foodData;
-  console.log(results);
-  //console.log(foodData);
+function Profile(props) {
+  const { getData, data, user, onDataChange } = props;
+  const { interests } = user;
 
-  if (!results) {
+  useEffect(() => {
+    let myPromises = [];
+    interests.map((interest) => {
+      myPromises.push(getData(interest)); //pushing n promises in this array
+    });
+    Promise.all(myPromises)
+      .then((data) => {
+        console.log("see here", data);
+        //call some func from App.js to update the data state
+        onDataChange(data);
+      })
+      .catch();
+  }, []);
+
+  if (!data.length) {
     return <p>Loading</p>;
   }
+
   return (
     <div>
-      {results.map((food, i) => {
-        return <p key={i}>{food.title}</p>;
-      })}
+      <p></p>
     </div>
   );
 }

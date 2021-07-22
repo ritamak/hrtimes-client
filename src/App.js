@@ -10,8 +10,7 @@ import Profile from "./components/Profile/Profile";
 function App(props) {
   const [user, updateUser] = useState(null);
   const [myError, updateError] = useState(null);
-  const [newUser, updateNewUser] = useState(null);
-  const [foodData, updateFoodData] = useState([]);
+  const [data, updateData] = useState([]);
   const [interests, updateInterests] = useState([]);
   console.log(interests);
 
@@ -19,21 +18,19 @@ function App(props) {
     updateInterests(newInterests);
   };
 
-  const getData = async () => {
-    try {
-      let response = await axios.get(
-        `https://api.nytimes.com/svc/topstories/v2/foods.json?api-key=aE2ooFQxAx0es9T0hnh0CI0I54wQzTtM`
-      );
-      updateFoodData(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.log("Food fetch failed", error);
-    }
+  const handleDataChange = (param) => {
+    updateData(param);
+  };
+
+  const getData = (param) => {
+    return axios.get(
+      `https://api.nytimes.com/svc/topstories/v2/${param}.json?api-key=aE2ooFQxAx0es9T0hnh0CI0I54wQzTtM`
+    );
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    console.log(data);
+  }, [data]);
 
   const handleSignIn = async (event) => {
     event.preventDefault();
@@ -88,8 +85,8 @@ function App(props) {
         `http://localhost:5005/api/signup`,
         newUser
       );
-      updateNewUser(response.data);
-      props.history.push("/");
+      updateUser(response.data);
+      props.history.push("/profile");
     } catch (err) {
       console.log("Signup failed", err);
     }
@@ -115,7 +112,14 @@ function App(props) {
           exact
           path={"/profile"}
           render={() => {
-            return <Profile foodData={foodData} />;
+            return (
+              <Profile
+                data={data}
+                user={user}
+                getData={getData}
+                onDataChange={handleDataChange}
+              />
+            );
           }}
         />
         <Route
