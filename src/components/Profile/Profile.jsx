@@ -26,8 +26,6 @@ function Profile(props) {
   if (!data.length) {
     return <p>Loading</p>;
   }
-  let spreaded = [...data];
-  console.log(spreaded);
   return (
     <div>
       <h1>Welcome {user.firstName}</h1>
