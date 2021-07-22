@@ -84,19 +84,12 @@ function App(props) {
     console.log(newUser.interests);
 
     try {
-<<<<<<< HEAD
-      let response = await axios.post(`http://localhost:5005/api/signup`, newUser, { withCredentials: true });
-      
-      updateUser(response.data);
-      props.history.push("/");
-=======
       let response = await axios.post(
         `http://localhost:5005/api/signup`,
         newUser
       );
       updateUser(response.data);
       props.history.push("/profile");
->>>>>>> 5c737d374e74176a5b2278b862b5456f8b89c324
     } catch (err) {
       console.log("Signup failed", err);
     }
@@ -106,33 +99,19 @@ function App(props) {
     <div>
       <Switch>
         <Route exact path="/" component={HomePage} />
-<<<<<<< HEAD
         <Route path="/signin" render={(routerProps) => {
             return <SignIn error={myError} onSignIn={handleSignIn} {...routerProps}/>;
         }}/>
         <Route exact path={"/profile"} render={() => {
-            return <Profile foodData={foodData} />;
-          }}/>
-        <Route path="/signup" render={(routeProps) => {
-=======
-        <Route
-          exact
-          path={"/profile"}
-          render={() => {
-            return (
-              <Profile
-                data={data}
+          return <Profile
+            data={data}
                 user={user}
                 getData={getData}
-                onDataChange={handleDataChange}
-              />
-            );
-          }}
-        />
+                onDataChange={handleDataChange} />;
+          }}/>
         <Route
           path="/signup"
           render={(routeProps) => {
->>>>>>> 5c737d374e74176a5b2278b862b5456f8b89c324
             return (
               <SignUp
                 onSignUp={handleSignUp}
