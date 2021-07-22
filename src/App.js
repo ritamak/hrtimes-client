@@ -22,20 +22,21 @@ function App(props) {
     updateData(param);
   };
 
-  useEffect(() => {(
-      async () => {
-        try {
-          let userResponse = await axios.get(`${API_URL}/api/profile`, { withCredentials: true });
-          console.log(userResponse.data);
-          updateUser(userResponse.data);
-          updateStatus(false);
-        }
-        catch (err) {
-          console.log('Todo fetch failed', err)
-          updateStatus(false);
-        }
-      })();
-  }, [])
+  useEffect(() => {
+    (async () => {
+      try {
+        let userResponse = await axios.get(`${API_URL}/api/profile`, {
+          withCredentials: true,
+        });
+        console.log(userResponse.data);
+        updateUser(userResponse.data);
+        updateStatus(false);
+      } catch (err) {
+        console.log("Todo fetch failed", err);
+        updateStatus(false);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     console.log(data);
@@ -52,7 +53,9 @@ function App(props) {
     };
 
     try {
-      let response = await axios.post(`${API_URL}/api/signin`, myUser, {withCredentials: true});
+      let response = await axios.post(`${API_URL}/api/signin`, myUser, {
+        withCredentials: true,
+      });
 
       updateUser(response.data);
 
@@ -90,11 +93,9 @@ function App(props) {
     };
 
     try {
-      let response = await axios.post(
-        `http://localhost:5005/api/signup`,
-        newUser
-      );
+      let response = await axios.post(`${API_URL}/api/signup`, newUser);
       updateUser(response.data);
+
       props.history.push("/profile");
     } catch (err) {
       console.log("Signup failed", err);
@@ -102,23 +103,38 @@ function App(props) {
   };
   console.log(fetchingUser);
   if (fetchingUser) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   return (
     <div>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/signin" render={(routerProps) => {
-            return <SignIn error={myError} onSignIn={handleSignIn} {...routerProps}/>;
-        }}/>
-        <Route exact path={"/profile"} render={() => {
-          return <Profile
-            data={data}
+        <Route
+          path="/signin"
+          render={(routerProps) => {
+            return (
+              <SignIn
+                error={myError}
+                onSignIn={handleSignIn}
+                {...routerProps}
+              />
+            );
+          }}
+        />
+        <Route
+          exact
+          path={"/profile"}
+          render={() => {
+            return (
+              <Profile
+                data={data}
                 user={user}
                 onDataChange={handleDataChange}
-              />;
-          }}/>
+              />
+            );
+          }}
+        />
         <Route
           path="/signup"
           render={(routeProps) => {
@@ -130,7 +146,8 @@ function App(props) {
                 interests={interests}
               />
             );
-          }}/>
+          }}
+        />
       </Switch>
     </div>
   );
