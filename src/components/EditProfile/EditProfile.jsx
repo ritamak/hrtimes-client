@@ -6,20 +6,46 @@ import { API_URL } from "../../config";
 import { topStoriesTopics } from "../../data/data";
 
 export default function EditProfile(props) {
-  const { onUserChange, onEditProfile, interests, onTopicChange, user } = props;
+  const { updateUser, onEditProfile, interests, onTopicChange, user } = props;
 
-  useEffect(() => {
-    let userId = user._id;
-    axios
-      .get(`${API_URL}/api/${userId}`)
-      .then((response) => {
-        onUserChange(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const handleUserName = (event) => {
+    let newUserName = event.target.value;
+    updateUser([...user, newUserName]);
+  };
+  const handleFirstName = (event) => {
+    let newFirstName = event.target.value;
+    updateUser([...user, newFirstName]);
+  };
 
+  const handleLastName = (event) => {
+    let newLastName = event.target.value;
+    updateUser([...user, newLastName]);
+  };
+
+  const handleEmail = (event) => {
+    let newEmail = event.target.value;
+    updateUser([...user, newEmail]);
+  };
+  const handleCountry = (event) => {
+    let newCountry = event.target.value;
+    updateUser([...user, newCountry]);
+  };
+  const handleCity = (event) => {
+    let newCity = event.target.value;
+    updateUser([...user, newCity]);
+  };
+  const handlePassword = (event) => {
+    let newPassword = event.target.value;
+    updateUser([...user, newPassword]);
+  };
+  const handleInterest = (event) => {
+    let newInterest = event.target.value;
+    updateUser([...user, newInterest]);
+  };
+
+  if (!user) {
+    return <p>Loading</p>;
+  }
   return (
     <div>
       <>
@@ -34,6 +60,7 @@ export default function EditProfile(props) {
                 id="InputUsername"
                 name="username"
                 placeholder={user.username}
+                onChange={handleUserName}
               />
             </div>
             <div className="form-group">
@@ -43,7 +70,7 @@ export default function EditProfile(props) {
                 className="form-control"
                 id="InputUsername"
                 name="firstName"
-                value={user.firstName}
+                onChange={handleFirstName}
               />
               <div className="form-group">
                 <label htmlFor="InputUsername">Last Name</label>
@@ -52,7 +79,7 @@ export default function EditProfile(props) {
                   className="form-control"
                   id="InputUsername"
                   name="lastName"
-                  value={user.lastName}
+                  onChange={handleLastName}
                 />
               </div>
             </div>
@@ -63,7 +90,7 @@ export default function EditProfile(props) {
                 className="form-control"
                 id="InputEmail"
                 name="email"
-                value={user.email}
+                onChange={handleEmail}
               />
               <small id="emailHelp" className="form-text text-muted">
                 We'll never share your email with anyone else.
@@ -76,7 +103,7 @@ export default function EditProfile(props) {
                 className="form-control"
                 id="InputCountry"
                 name="country"
-                value={user.country}
+                onChange={handleCountry}
               />
               <div className="form-group">
                 <label htmlFor="InputUsername">City</label>
@@ -85,7 +112,7 @@ export default function EditProfile(props) {
                   className="form-control"
                   id="InputCity"
                   name="city"
-                  value={user.city}
+                  onChange={handleCity}
                 />
               </div>
             </div>
@@ -97,6 +124,7 @@ export default function EditProfile(props) {
                 className="form-control"
                 id="InputPassword"
                 placeholder="re-enter your password"
+                onChange={handlePassword}
               />
               <small id="emailHelp" className="form-text text-muted">
                 Re-enter your password even if you don't want to change it

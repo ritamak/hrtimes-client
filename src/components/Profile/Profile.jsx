@@ -1,7 +1,7 @@
 import React, { useEffect, Link } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../MyNav/Navbar";
 
 function Profile(props) {
   const { data, user, onDataChange } = props;
