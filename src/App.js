@@ -137,7 +137,7 @@ function App(props) {
     };
 
     try {
-      let response = await axios.patch(`${API_URL}/${user._id}`, updatedUser, {
+      let response = await axios.patch(`${API_URL}/api/${user._id}/edit`, updatedUser, {
         withCredentials: true,
       });
       updateUser(response.data);
@@ -210,7 +210,7 @@ function App(props) {
         />
         <Route
           exact
-          path="/:id"
+          path="/:id/edit"
           render={(routeProps) => {
             return (
               <EditProfile
