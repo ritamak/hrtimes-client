@@ -10,6 +10,8 @@ import EditProfile from "./components/EditProfile/EditProfile";
 import Footer from "./components/Footer/Footer";
 import CreateArticle from "./components/CreateArticle/CreateArticle";
 import EditArticle from "./components/EditArticle/EditArticle";
+import CreatedArticles from "./components/CreatedArticles/CreatedArticles";
+import Navbar from "./components/Navbar/Navbar";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -30,6 +32,21 @@ function App(props) {
   const handleUserChange = (param) => {
     updateUser(param);
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let articleResponse = await axios.get(`${API_URL}/api/articles`, {
+          withCredentials: true,
+        });
+
+        updateArticle(articleResponse.data);
+        console.log(articleResponse.data);
+      } catch (err) {
+        console.log("Articles fetch failed", err);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -69,8 +86,10 @@ function App(props) {
       updateUser(response.data);
 
       props.history.push("/profile");
+      updateStatus(false);
     } catch (error) {
-      updateError(error);
+      updateError(error.response.data.error);
+      updateStatus(false);
     }
   };
 
@@ -102,10 +121,13 @@ function App(props) {
     };
 
     try {
-      let response = await axios.post(`${API_URL}/api/signup`, newUser);
+      let response = await axios.post(`${API_URL}/api/signup`, newUser, {
+        withCredentials: true,
+      });
       updateUser(response.data);
 
       props.history.push("/profile");
+      updateStatus(false);
     } catch (err) {
       console.log("Signup failed", err);
     }
@@ -142,11 +164,14 @@ function App(props) {
       let response = await axios.patch(`${API_URL}/api/${user._id}/edit`, updatedUser, {
         withCredentials: true,
       });
+      
       updateUser(response.data);
+      updateStatus(false);
 
       props.history.push("/profile");
     } catch (err) {
       console.log("Edited failed", err);
+      updateStatus(false);
     }
   };
 
@@ -176,8 +201,11 @@ function App(props) {
     };
 
     try {
-      let response = await axios.post(`${API_URL}/api/create`, newArticle);
+      let response = await axios.post(`${API_URL}/api/create`, newArticle, {
+        withCredentials: true,
+      });
       updateArticle(response.data);
+      updateStatus(false);
 
       props.history.push("/profile");
     } catch (err) {
@@ -232,13 +260,17 @@ function App(props) {
           path={"/profile"}
           render={(routerProps) => {
             return (
-              <Profile
-                data={data}
-                user={user}
-                onDataChange={handleDataChange}
-                onLogOut={handleLogOut}
-                {...routerProps}
-              />
+              <>
+                <Navbar onLogOut={handleLogOut} user={user} />
+                <Profile
+                  data={data}
+                  user={user}
+                  article={article}
+                  onDataChange={handleDataChange}
+                  onLogOut={handleLogOut}
+                  {...routerProps}
+                />
+              </>
             );
           }}
         />
@@ -261,15 +293,20 @@ function App(props) {
           path="/:id/edit"
           render={(routeProps) => {
             return (
-              <EditProfile
-                onEditProfile={handleEditProfile}
-                {...routeProps}
-                onTopicChange={handleTopicChange}
-                onUserChange={handleUserChange}
-                user={user}
-                updateUser={updateUser}
-                interests={interests}
-              />
+              <>
+                <Navbar onLogOut={handleLogOut} user={user} />
+
+                <EditProfile
+                  onEditProfile={handleEditProfile}
+                  {...routeProps}
+                  onTopicChange={handleTopicChange}
+                  onUserChange={handleUserChange}
+                  user={user}
+                  updateUser={updateUser}
+                  interests={interests}
+                  article={article}
+                />
+              </>
             );
           }}
         />
@@ -278,11 +315,26 @@ function App(props) {
           path="/create"
           render={(routeProps) => {
             return (
-              <CreateArticle
-                {...routeProps}
-                article={article}
-                onCreateArticle={handleCreateArticle}
-              />
+              <>
+                <Navbar onLogOut={handleLogOut} user={user} />
+                <CreateArticle
+                  {...routeProps}
+                  article={article}
+                  onCreateArticle={handleCreateArticle}
+                />
+              </>
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/article/:id"
+          render={(routeProps) => {
+            return (
+              <>
+                <Navbar onLogOut={handleLogOut} user={user} />
+                <CreatedArticles {...routeProps} article={article} />
+              </>
             );
           }}
         />
