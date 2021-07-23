@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import Select from "react-select";
+import React from "react";
+//import Select from "react-select";
 
-import { topStoriesTopics } from "../../data/data";
+//import { topStoriesTopics } from "../../data/data";
 
 export default function EditProfile(props) {
-  const { updateUser, onEditProfile, interests, onTopicChange, user } = props;
+  const { updateUser, onEditProfile, user } = props;
 
   const handleUserName = (event) => {
     let newUserName = event.target.value;
@@ -114,6 +114,7 @@ export default function EditProfile(props) {
                 />
               </div>
             </div>
+
             <div className="form-group">
               <label htmlFor="InputPassword">Password</label>
               <input
@@ -128,6 +129,7 @@ export default function EditProfile(props) {
                 Re-enter your password even if you don't want to change it
               </small>
             </div>
+            {/*
             <h1>Interests</h1>
             <Select
               onChange={handleInterest}
@@ -140,6 +142,7 @@ export default function EditProfile(props) {
               classNamePrefix="select"
               multiValue={interests}
             />
+            */}
             <button type="submit" className="btn btn-primary">
               Submit
             </button>

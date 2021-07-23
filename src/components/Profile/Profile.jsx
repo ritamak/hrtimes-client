@@ -1,7 +1,7 @@
 import React, { useEffect, Link } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
-import Navbar from "../MyNav/Navbar";
+import Navbar from "../Navbar/Navbar";
 
 function Profile(props) {
   const { data, user, onDataChange, onLogOut } = props;
@@ -41,6 +41,12 @@ function Profile(props) {
     <div>
       <Navbar onLogOut={onLogOut} user={user} />
       <h1>Welcome {user.firstName}</h1>
+      <a href={`/${user._id}`}>Edit your profile</a>
+
+      {/*
+      <a href="/create">Create your article</a>
+      <br></br>
+*/}
       {flatted.map((el, index) => (
         <div key={index}>
           <p>{el.title}</p>
