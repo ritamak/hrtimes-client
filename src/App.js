@@ -16,6 +16,7 @@ function App(props) {
   const [myError, updateError] = useState(null);
   const [data, updateData] = useState([]);
   const [interests, updateInterests] = useState([]);
+  const [article, updateArticle] = useState([]);
 
   const handleTopicChange = (newInterests) => {
     updateInterests(newInterests);
@@ -159,6 +160,30 @@ function App(props) {
     }
   };
 
+  const handleCreateArticle = async (event) => {
+    event.preventDefault();
+    const { section, subsection, title, body, created_date, author } =
+      event.target;
+
+    let newArticle = {
+      section: section.value,
+      subsection: subsection.value,
+      title: title.value,
+      body: body.value,
+      created_date: created_date.value,
+      author: author.value,
+    };
+
+    try {
+      let response = await axios.post(`${API_URL}/api/create`, newArticle);
+      updateArticle(response.data);
+
+      props.history.push("/profile");
+    } catch (err) {
+      console.log("Creating Article failed", err);
+    }
+  };
+
   if (fetchingUser) {
     return <p>Loading...</p>;
   }
@@ -229,7 +254,13 @@ function App(props) {
           exact
           path="/create"
           render={(routeProps) => {
-            return <CreateArticle {...routeProps} />;
+            return (
+              <CreateArticle
+                {...routeProps}
+                article={article}
+                onCreateArticle={handleCreateArticle}
+              />
+            );
           }}
         />
       </Switch>
