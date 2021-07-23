@@ -8,6 +8,7 @@ import SignUp from "./components/signup/SignUp";
 import Profile from "./components/Profile/Profile";
 import EditProfile from "./components/EditProfile/EditProfile";
 import CreateArticle from "./components/CreateArticle/CreateArticle";
+import CreatedArticles from "./components/CreatedArticles/CreatedArticles";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -28,6 +29,23 @@ function App(props) {
   const handleUserChange = (param) => {
     updateUser(param);
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let articleResponse = await axios.get(`${API_URL}/api/articles`, {
+          withCredentials: true,
+        });
+
+        updateArticle(articleResponse.data);
+        console.log(articleResponse.data);
+        updateStatus(false);
+      } catch (err) {
+        console.log("Articles fetch failed", err);
+        updateStatus(false);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -217,6 +235,7 @@ function App(props) {
               <Profile
                 data={data}
                 user={user}
+                article={article}
                 onDataChange={handleDataChange}
                 onLogOut={handleLogOut}
                 {...routerProps}
@@ -251,6 +270,7 @@ function App(props) {
                 user={user}
                 updateUser={updateUser}
                 interests={interests}
+                article={article}
               />
             );
           }}
@@ -266,6 +286,13 @@ function App(props) {
                 onCreateArticle={handleCreateArticle}
               />
             );
+          }}
+        />
+        <Route
+          exact
+          path="/article/:id"
+          render={(routeProps) => {
+            return <CreatedArticles {...routeProps} article={article} />;
           }}
         />
       </Switch>
