@@ -1,10 +1,9 @@
 import React, { useEffect, Link } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
-import Navbar from "../Navbar/Navbar";
 
 function Profile(props) {
-  const { data, user, onDataChange, onLogOut, article } = props;
+  const { data, user, onDataChange, article } = props;
   const { interests } = user;
 
   useEffect(() => {
@@ -39,7 +38,6 @@ function Profile(props) {
   }
   return (
     <div>
-      <Navbar onLogOut={onLogOut} user={user} />
       <h1>Welcome {user.firstName}</h1>
       <a href={`/${user._id}/edit`}>Edit your profile</a>
 

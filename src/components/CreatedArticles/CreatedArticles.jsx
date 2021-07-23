@@ -23,8 +23,13 @@ export default function CreatedArticles(props) {
   }
   return (
     <>
-      <h1>Hello</h1>
+      <h1>Articles our users created</h1>
+      <p>{articleDetail.section}</p>
+      <p>{articleDetail.subsection}</p>
       <p>{articleDetail.title}</p>
+      <p>{articleDetail.body}</p>
+      <p>{articleDetail.created_date}</p>
+      <p>{articleDetail.author}</p>
     </>
   );
 }

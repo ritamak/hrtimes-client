@@ -24,7 +24,7 @@ function Navbar(props) {
           ></IconButton>
           <Link to={"/profile"}>
             <Button>
-              <img src={user.imageUrl} alt="profile" />
+              <img src={user.image} alt="profile" />
             </Button>
           </Link>
           <div>

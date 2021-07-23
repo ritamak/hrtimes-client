@@ -9,6 +9,7 @@ import Profile from "./components/Profile/Profile";
 import EditProfile from "./components/EditProfile/EditProfile";
 import CreateArticle from "./components/CreateArticle/CreateArticle";
 import CreatedArticles from "./components/CreatedArticles/CreatedArticles";
+import Navbar from "./components/Navbar/Navbar";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -39,10 +40,8 @@ function App(props) {
 
         updateArticle(articleResponse.data);
         console.log(articleResponse.data);
-        updateStatus(false);
       } catch (err) {
         console.log("Articles fetch failed", err);
-        updateStatus(false);
       }
     })();
   }, []);
@@ -85,8 +84,10 @@ function App(props) {
       updateUser(response.data);
 
       props.history.push("/profile");
+      updateStatus(false);
     } catch (error) {
       updateError(error.response.data.error);
+      updateStatus(false);
     }
   };
 
@@ -118,10 +119,13 @@ function App(props) {
     };
 
     try {
-      let response = await axios.post(`${API_URL}/api/signup`, newUser);
+      let response = await axios.post(`${API_URL}/api/signup`, newUser, {
+        withCredentials: true,
+      });
       updateUser(response.data);
 
       props.history.push("/profile");
+      updateStatus(false);
     } catch (err) {
       console.log("Signup failed", err);
     }
@@ -163,9 +167,12 @@ function App(props) {
       );
       updateUser(response.data);
       console.log(response.data);
+      updateStatus(false);
+
       props.history.push("/profile");
     } catch (err) {
       console.log("Edited failed", err);
+      updateStatus(false);
     }
   };
 
@@ -196,8 +203,11 @@ function App(props) {
     };
 
     try {
-      let response = await axios.post(`${API_URL}/api/create`, newArticle);
+      let response = await axios.post(`${API_URL}/api/create`, newArticle, {
+        withCredentials: true,
+      });
       updateArticle(response.data);
+      updateStatus(false);
 
       props.history.push("/profile");
     } catch (err) {
@@ -230,14 +240,17 @@ function App(props) {
           path={"/profile"}
           render={(routerProps) => {
             return (
-              <Profile
-                data={data}
-                user={user}
-                article={article}
-                onDataChange={handleDataChange}
-                onLogOut={handleLogOut}
-                {...routerProps}
-              />
+              <>
+                <Navbar onLogOut={handleLogOut} user={user} />
+                <Profile
+                  data={data}
+                  user={user}
+                  article={article}
+                  onDataChange={handleDataChange}
+                  onLogOut={handleLogOut}
+                  {...routerProps}
+                />
+              </>
             );
           }}
         />
@@ -260,16 +273,20 @@ function App(props) {
           path="/:id/edit"
           render={(routeProps) => {
             return (
-              <EditProfile
-                onEditProfile={handleEditProfile}
-                {...routeProps}
-                onTopicChange={handleTopicChange}
-                onUserChange={handleUserChange}
-                user={user}
-                updateUser={updateUser}
-                interests={interests}
-                article={article}
-              />
+              <>
+                <Navbar onLogOut={handleLogOut} user={user} />
+
+                <EditProfile
+                  onEditProfile={handleEditProfile}
+                  {...routeProps}
+                  onTopicChange={handleTopicChange}
+                  onUserChange={handleUserChange}
+                  user={user}
+                  updateUser={updateUser}
+                  interests={interests}
+                  article={article}
+                />
+              </>
             );
           }}
         />
@@ -278,11 +295,14 @@ function App(props) {
           path="/create"
           render={(routeProps) => {
             return (
-              <CreateArticle
-                {...routeProps}
-                article={article}
-                onCreateArticle={handleCreateArticle}
-              />
+              <>
+                <Navbar onLogOut={handleLogOut} user={user} />
+                <CreateArticle
+                  {...routeProps}
+                  article={article}
+                  onCreateArticle={handleCreateArticle}
+                />
+              </>
             );
           }}
         />
@@ -290,7 +310,12 @@ function App(props) {
           exact
           path="/article/:id"
           render={(routeProps) => {
-            return <CreatedArticles {...routeProps} article={article} />;
+            return (
+              <>
+                <Navbar onLogOut={handleLogOut} user={user} />
+                <CreatedArticles {...routeProps} article={article} />
+              </>
+            );
           }}
         />
       </Switch>
