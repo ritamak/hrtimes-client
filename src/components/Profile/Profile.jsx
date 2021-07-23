@@ -41,7 +41,7 @@ function Profile(props) {
     <div>
       <Navbar onLogOut={onLogOut} user={user} />
       <h1>Welcome {user.firstName}</h1>
-      <a href={`/${user._id}`}>Edit your profile</a>
+      <a href={`/${user._id}/edit`}>Edit your profile</a>
 
       {/*
       <a href="/create">Create your article</a>

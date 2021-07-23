@@ -38,7 +38,7 @@ function App(props) {
         updateUser(userResponse.data);
         updateStatus(false);
       } catch (err) {
-        console.log("Todo fetch failed", err);
+        console.log("User fetch failed", err);
         updateStatus(false);
       }
     })();
@@ -135,9 +135,13 @@ function App(props) {
     };
 
     try {
-      let response = await axios.patch(`${API_URL}/${user._id}`, updatedUser, {
-        withCredentials: true,
-      });
+      let response = await axios.patch(
+        `${API_URL}/api/${user._id}/edit`,
+        updatedUser,
+        {
+          withCredentials: true,
+        }
+      );
       updateUser(response.data);
       console.log(response.data);
       props.history.push("/profile");
@@ -211,7 +215,7 @@ function App(props) {
         />
         <Route
           exact
-          path="/:id"
+          path="/:id/edit"
           render={(routeProps) => {
             return (
               <EditProfile
