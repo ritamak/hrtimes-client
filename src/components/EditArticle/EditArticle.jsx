@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../config";
+import { API_URL } from "../../config";
 
 function EditArticle(props) {
   const [articleDetails, updateDetails] = useState(null);
@@ -33,17 +33,17 @@ function EditArticle(props) {
     updateDetails({ ...articleDetails, title: newTitle });
   };
 
-  const handleSectionChange = (event) => {
+  const handleBodyChange = (event) => {
     let newBody = event.target.value;
     updateDetails({ ...articleDetails, body: newBody });
   };
 
-  const handleSectionChange = (event) => {
+  const handleCreatedDateChange = (event) => {
     let newCreatedDate = event.target.value;
     updateDetails({ ...articleDetails, created_date: newCreatedDate });
   };
 
-  const handleSectionChange = (event) => {
+  const handleAuthorChange = (event) => {
     let newAuthor = event.target.value;
     updateDetails({ ...articleDetails, author: newAuthor });
   };
@@ -55,10 +55,60 @@ function EditArticle(props) {
   const { onEditArticle } = props;
 
   return (
-    <div>
-
-    </div>;
-  )
+    <div className="editArticle">
+      <form
+        onSubmit={(event) => {
+          onEditArticle(event, articleDetails);
+        }}
+      >
+        <label htmlFor="Section">Section</label>
+        <input
+          type="text"
+          className="form-control"
+          id="sectionEdit"
+          name="section"
+          onChange={handleSectionChange}
+        />
+        <label htmlFor="SubSection">Sub-Section</label>
+        <input
+          type="text"
+          className="form-control"
+          id="subSectionEdit"
+          name="subsection"
+          onChange={handleSubSectionChange}
+        />
+        <label htmlFor="Title">Title</label>
+        <input
+          type="text"
+          className="form-control"
+          id="titleEdit"
+          name="title"
+          onChange={handleTitleChange}
+        />
+        <label>
+          Your article:
+          <textarea name="body" onChange={handleBodyChange} />
+        </label>
+        <label htmlFor="Created_Date">Created Date</label>
+        <input
+          type="text"
+          className="form-control"
+          id="createdDateEdit"
+          name="created_date"
+          onChange={handleCreatedDateChange}
+        />
+        <label htmlFor="Author">Author</label>
+        <input
+          type="text"
+          className="form-control"
+          id="authorEdit"
+          name="author"
+          onChange={handleAuthorChange}
+        />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  );
 }
 
 export default EditArticle;

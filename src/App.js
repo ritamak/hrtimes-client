@@ -9,6 +9,7 @@ import Profile from "./components/Profile/Profile";
 import EditProfile from "./components/EditProfile/EditProfile";
 import Footer from "./components/Footer/Footer";
 import CreateArticle from "./components/CreateArticle/CreateArticle";
+import EditArticle from "./components/EditArticle/EditArticle";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -184,6 +185,28 @@ function App(props) {
     }
   };
 
+  const handleEditArticle = (event, editedArticle) => {
+    event.preventDefault();
+
+    axios.patch(`${API_URL}/api/article/${editedArticle._id}`, editedArticle, { withCredentials: true })
+      .then(() => {
+        let updatedArticles = article.map((singleArticle) => {
+          if (singleArticle._id === editedArticle._id) {
+            singleArticle.section = editedArticle.section;
+            singleArticle.subsection = editedArticle.subsection;
+            singleArticle.title = editedArticle.title;
+            singleArticle.body = editedArticle.body;
+            singleArticle.created_date = editedArticle.created_date;
+            singleArticle.author = editedArticle.author;
+          }
+          return singleArticle;
+        })
+        updateArticle(updatedArticles);
+      }).catch((err) => {
+        console.log('Edit failed!', err);
+      });
+  }
+
   if (fetchingUser) {
     return <p>Loading...</p>;
   }
@@ -259,6 +282,19 @@ function App(props) {
                 {...routeProps}
                 article={article}
                 onCreateArticle={handleCreateArticle}
+              />
+            );
+          }}
+        />
+        <Route
+          exact
+          path="article/:id/edit"
+          render={(routeProps) => {
+            return (
+              <EditArticle
+                {...routeProps}
+                article={article}
+                onEditArticle={handleEditArticle}
               />
             );
           }}
