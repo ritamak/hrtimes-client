@@ -9,7 +9,7 @@ function EditArticle(props) {
     (async () => {
       try {
         let id = props.match.params.id;
-        let response = await axios.get(`${API_URL}/api/article/${id}`);
+        let response = await axios.get(`${API_URL}/api/article/${id}/edit`);
 
         updateDetails(response.data);
       } catch (error) {

@@ -230,7 +230,6 @@ function App(props) {
     }
   };
 
-<<<<<<< HEAD
   const handleEditArticle = (event, editedArticle) => {
     event.preventDefault();
 
@@ -252,7 +251,7 @@ function App(props) {
         console.log('Edit failed!', err);
       });
   }
-=======
+  
   const handleCreateComments = async (event) => {
     event.preventDefault();
     const { commentBody } = event.target;
@@ -274,7 +273,6 @@ function App(props) {
       console.log("Creating Comments failed", err);
     }
   };
->>>>>>> 05250bd5194fc8a46151578c21989efc2423324f
 
   if (fetchingUser) {
     return <p>Loading...</p>;
