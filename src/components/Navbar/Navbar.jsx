@@ -5,10 +5,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
   IconButton,
   InputBase,
+  Avatar,
 } from "@material-ui/core";
 
 function Navbar(props) {
@@ -17,20 +17,20 @@ function Navbar(props) {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          ></IconButton>
-          <Link to={"/profile"}>
-            <Button>
-              <img src={user.imageUrl} alt="profile" />
-            </Button>
-          </Link>
           <div>
-            <div>
-              <SearchIcon />
-            </div>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+            ></IconButton>
+            <Link to={"/profile"}>
+              <Button>
+                <Avatar alt="profile" src={user.imageUrl} />
+              </Button>
+            </Link>
+          </div>
+          <div>
+            <SearchIcon />
             <InputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}

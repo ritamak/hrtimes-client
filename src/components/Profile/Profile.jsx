@@ -1,7 +1,7 @@
 import React, { useEffect, Link } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
-import Navbar from "../MyNav/Navbar";
+import Navbar from "../Navbar/Navbar";
 
 function Profile(props) {
   const { data, user, onDataChange, onLogOut } = props;
@@ -32,7 +32,6 @@ function Profile(props) {
     }
     return 0;
   });
-  console.log(sorted);
 
   if (!data.length) {
     return <p>Loading</p>;

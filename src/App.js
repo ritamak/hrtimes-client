@@ -7,6 +7,7 @@ import { API_URL } from "./config";
 import SignUp from "./components/signup/SignUp";
 import Profile from "./components/Profile/Profile";
 import EditProfile from "./components/EditProfile/EditProfile";
+import Footer from "./components/Footer/Footer";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -44,7 +45,7 @@ function App(props) {
   }, []);
 
   useEffect(() => {
-    console.log(data);
+
   }, [data]);
 
   const handleSignIn = async (event) => {
@@ -109,6 +110,7 @@ function App(props) {
 
   const handleEditProfile = async (event) => {
     event.preventDefault();
+    
     const {
       username,
       firstName,
@@ -138,21 +140,18 @@ function App(props) {
         withCredentials: true,
       });
       updateUser(response.data);
-      console.log(response.data);
+
       props.history.push("/profile");
     } catch (err) {
       console.log("Edited failed", err);
     }
   };
 
-  console.log(fetchingUser);
-
   const handleLogOut = async () => {
     try {
       await axios.post(`${API_URL}/api/logout`, {}, { withCredentials: true });
 
       props.history.push("/");
-
       updateUser(null);
     } catch (error) {
       console.log("Logout failed", error);
@@ -224,6 +223,7 @@ function App(props) {
           }}
         />
       </Switch>
+      <Footer/>
     </div>
   );
 }
