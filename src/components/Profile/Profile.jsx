@@ -33,7 +33,7 @@ function Profile(props) {
   });
   console.log(sorted);
   console.log(article);
-  if (!data.length) {
+  if (!data.length || !article.length) {
     return <p>Loading</p>;
   }
   return (

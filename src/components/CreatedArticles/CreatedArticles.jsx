@@ -6,7 +6,7 @@ import { TextField, Button } from "@material-ui/core";
 export default function CreatedArticles(props) {
   const [articleDetail, updateArticleDetail] = useState(null);
   const { id } = props.match.params;
-  const { onCreateComments, comments } = props;
+  const { onCreateComments, comments, user } = props;
 
   useEffect(() => {
     (async () => {
@@ -20,7 +20,7 @@ export default function CreatedArticles(props) {
     })();
   }, [id]);
 
-  if (!articleDetail) {
+  if (!articleDetail || !user) {
     return <p>Loading...</p>;
   }
   return (
