@@ -34,6 +34,7 @@ function Profile(props) {
   if (!data.length || !article.length || !user) {
     return <p>Loading</p>;
   }
+
   return (
     <div>
       <h1>Welcome {user.firstName}</h1>
