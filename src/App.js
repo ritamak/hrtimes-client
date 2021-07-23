@@ -12,7 +12,6 @@ import CreateArticle from "./components/CreateArticle/CreateArticle";
 import EditArticle from "./components/EditArticle/EditArticle";
 import CreatedArticles from "./components/CreatedArticles/CreatedArticles";
 import Navbar from "./components/Navbar/Navbar";
-import "semantic-ui-css/semantic.min.css";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -147,6 +146,7 @@ function App(props) {
       updateStatus(false);
     } catch (err) {
       console.log("Signup failed", err);
+      updateStatus(false);
     }
   };
 
@@ -233,7 +233,7 @@ function App(props) {
   const handleEditArticle = (event, editedArticle) => {
     event.preventDefault();
 
-    axios.patch(`${API_URL}/api/article/${editedArticle._id}`, editedArticle, { withCredentials: true })
+    axios.patch(`${API_URL}/api/article/${editedArticle._id}/edit`, editedArticle, { withCredentials: true })
       .then(() => {
         let updatedArticles = article.map((singleArticle) => {
           if (singleArticle._id === editedArticle._id) {
@@ -251,7 +251,7 @@ function App(props) {
         console.log('Edit failed!', err);
       });
   }
-  
+
   const handleCreateComments = async (event) => {
     event.preventDefault();
     const { commentBody } = event.target;
