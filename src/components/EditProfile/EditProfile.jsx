@@ -37,7 +37,8 @@ export default function EditProfile(props) {
     let newPassword = event.target.value;
     updateUser({ ...user, password: newPassword });
   };
-
+  console.log(user);
+  console.log(user.comments);
   if (!user) {
     return <p>Loading</p>;
   }

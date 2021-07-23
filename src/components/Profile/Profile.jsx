@@ -31,8 +31,9 @@ function Profile(props) {
     }
     return 0;
   });
-
-  if (!data.length) {
+  console.log(sorted);
+  console.log(article);
+  if (!data.length || !article.length) {
     return <p>Loading</p>;
   }
 

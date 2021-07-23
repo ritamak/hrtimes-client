@@ -141,9 +141,9 @@ function App(props) {
         withCredentials: true,
       });
       updateUser(response.data);
+      updateStatus(false);
 
       props.history.push("/profile");
-      updateStatus(false);
     } catch (err) {
       console.log("Signup failed", err);
       updateStatus(false);
@@ -255,7 +255,11 @@ function App(props) {
   const handleCreateComments = async (event) => {
     event.preventDefault();
     const { commentBody } = event.target;
-    let newComment = { commentBody: commentBody.value };
+    let newComment = {
+      commentBody: commentBody.value,
+      authorId: user._id,
+      author: user.username,
+    };
 
     console.log(commentBody.value);
     console.log(newComment);
@@ -377,6 +381,7 @@ function App(props) {
                   article={article}
                   onCreateComments={handleCreateComments}
                   comments={comments}
+                  user={user}
                 />
               </>
             );
