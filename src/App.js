@@ -7,11 +7,8 @@ import { API_URL } from "./config";
 import SignUp from "./components/signup/SignUp";
 import Profile from "./components/Profile/Profile";
 import EditProfile from "./components/EditProfile/EditProfile";
-<<<<<<< HEAD
 import Footer from "./components/Footer/Footer";
-=======
 import CreateArticle from "./components/CreateArticle/CreateArticle";
->>>>>>> bd66c8e472505b6b287d82aef4fbaac5f8d0bd81
 
 function App(props) {
   const [user, updateUser] = useState(null);
