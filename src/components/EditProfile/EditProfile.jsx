@@ -1,10 +1,11 @@
 import React from "react";
-//import Select from "react-select";
+import Select from "react-select";
 
-//import { topStoriesTopics } from "../../data/data";
+import { topStoriesTopics } from "../../data/data";
 
 export default function EditProfile(props) {
-  const { updateUser, onEditProfile, user } = props;
+  const { updateUser, onEditProfile, user, onTopicChange } = props;
+  const { interests } = user;
 
   const handleUserName = (event) => {
     let newUserName = event.target.value;
@@ -35,10 +36,6 @@ export default function EditProfile(props) {
   const handlePassword = (event) => {
     let newPassword = event.target.value;
     updateUser({ ...user, password: newPassword });
-  };
-  const handleInterest = (event) => {
-    let newInterest = event.target.value;
-    updateUser({ ...user, interests: newInterest });
   };
 
   if (!user) {
@@ -129,10 +126,10 @@ export default function EditProfile(props) {
                 Re-enter your password even if you don't want to change it
               </small>
             </div>
-            {/*
+
             <h1>Interests</h1>
             <Select
-              onChange={handleInterest}
+              onChange={onTopicChange}
               closeMenuOnSelect={false}
               defaultValue={[]}
               isMulti
@@ -142,7 +139,7 @@ export default function EditProfile(props) {
               classNamePrefix="select"
               multiValue={interests}
             />
-            */}
+
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
