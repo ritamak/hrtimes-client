@@ -10,6 +10,7 @@ import EditProfile from "./components/EditProfile/EditProfile";
 import CreateArticle from "./components/CreateArticle/CreateArticle";
 import CreatedArticles from "./components/CreatedArticles/CreatedArticles";
 import Navbar from "./components/Navbar/Navbar";
+import "semantic-ui-css/semantic.min.css";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -18,6 +19,7 @@ function App(props) {
   const [data, updateData] = useState([]);
   const [interests, updateInterests] = useState([]);
   const [article, updateArticle] = useState([]);
+  const [comments, updateComments] = useState([]);
 
   const handleTopicChange = (newInterests) => {
     updateInterests(newInterests);
@@ -30,6 +32,21 @@ function App(props) {
   const handleUserChange = (param) => {
     updateUser(param);
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let commentResponse = await axios.get(`${API_URL}/api/comments`, {
+          withCredentials: true,
+        });
+
+        updateComments(commentResponse.data);
+        console.log(commentResponse.data);
+      } catch (err) {
+        console.log("Comments fetch failed", err);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -215,6 +232,28 @@ function App(props) {
     }
   };
 
+  const handleCreateComments = async (event) => {
+    event.preventDefault();
+    const { commentBody } = event.target;
+    let newComment = { commentBody: commentBody.value };
+
+    console.log(commentBody.value);
+    console.log(newComment);
+    try {
+      let response = await axios.post(
+        `${API_URL}/api/comments/create`,
+        newComment,
+        { withCredentials: true }
+      );
+      console.log(response);
+      updateComments(response.data);
+      updateStatus(false);
+      props.history.push("/profile");
+    } catch (err) {
+      console.log("Creating Comments failed", err);
+    }
+  };
+
   if (fetchingUser) {
     return <p>Loading...</p>;
   }
@@ -313,7 +352,12 @@ function App(props) {
             return (
               <>
                 <Navbar onLogOut={handleLogOut} user={user} />
-                <CreatedArticles {...routeProps} article={article} />
+                <CreatedArticles
+                  {...routeProps}
+                  article={article}
+                  onCreateComments={handleCreateComments}
+                  comments={comments}
+                />
               </>
             );
           }}

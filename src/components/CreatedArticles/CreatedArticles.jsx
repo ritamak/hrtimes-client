@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
+import { TextField, Button } from "@material-ui/core";
 
 export default function CreatedArticles(props) {
   const [articleDetail, updateArticleDetail] = useState(null);
   const { id } = props.match.params;
+  const { onCreateComments, comments } = props;
 
   useEffect(() => {
     (async () => {
@@ -30,6 +32,17 @@ export default function CreatedArticles(props) {
       <p>{articleDetail.body}</p>
       <p>{articleDetail.created_date}</p>
       <p>{articleDetail.author}</p>
+      <h5>Comments</h5>
+      <form onSubmit={onCreateComments} autoComplete="off">
+        <TextField
+          id="outlined-basic"
+          label="comment the article here"
+          variant="outlined"
+          style={{ width: "80vw" }}
+          name="commentBody"
+        />
+        <input type="submit" value="Submit" />
+      </form>
     </>
   );
 }
