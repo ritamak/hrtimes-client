@@ -86,7 +86,7 @@ function App(props) {
 
       props.history.push("/profile");
     } catch (error) {
-      updateError(error);
+      updateError(error.response.data.error);
     }
   };
 
