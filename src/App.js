@@ -10,7 +10,6 @@ import EditProfile from "./components/EditProfile/EditProfile";
 import CreateArticle from "./components/CreateArticle/CreateArticle";
 import CreatedArticles from "./components/CreatedArticles/CreatedArticles";
 import Navbar from "./components/Navbar/Navbar";
-import "semantic-ui-css/semantic.min.css";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -243,6 +242,7 @@ function App(props) {
 
     console.log(commentBody.value);
     console.log(newComment);
+    console.log(user.comments);
     try {
       let response = await axios.post(
         `${API_URL}/api/comments/create`,
@@ -355,7 +355,6 @@ function App(props) {
           render={(routeProps) => {
             return (
               <>
-                <Navbar onLogOut={handleLogOut} user={user} />
                 <CreatedArticles
                   {...routeProps}
                   article={article}
