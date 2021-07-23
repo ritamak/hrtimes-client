@@ -7,7 +7,9 @@ import { API_URL } from "./config";
 import SignUp from "./components/signup/SignUp";
 import Profile from "./components/Profile/Profile";
 import EditProfile from "./components/EditProfile/EditProfile";
+import Footer from "./components/Footer/Footer";
 import CreateArticle from "./components/CreateArticle/CreateArticle";
+import EditArticle from "./components/EditArticle/EditArticle";
 import CreatedArticles from "./components/CreatedArticles/CreatedArticles";
 import Navbar from "./components/Navbar/Navbar";
 import "semantic-ui-css/semantic.min.css";
@@ -80,7 +82,7 @@ function App(props) {
   }, []);
 
   useEffect(() => {
-    console.log(data);
+
   }, [data]);
 
   const handleSignIn = async (event) => {
@@ -150,6 +152,7 @@ function App(props) {
 
   const handleEditProfile = async (event) => {
     event.preventDefault();
+    
     const {
       username,
       firstName,
@@ -175,15 +178,11 @@ function App(props) {
     };
 
     try {
-      let response = await axios.patch(
-        `${API_URL}/api/${user._id}/edit`,
-        updatedUser,
-        {
-          withCredentials: true,
-        }
-      );
+      let response = await axios.patch(`${API_URL}/api/${user._id}/edit`, updatedUser, {
+        withCredentials: true,
+      });
+      
       updateUser(response.data);
-      console.log(response.data);
       updateStatus(false);
 
       props.history.push("/profile");
@@ -198,7 +197,6 @@ function App(props) {
       await axios.post(`${API_URL}/api/logout`, {}, { withCredentials: true });
 
       props.history.push("/");
-
       updateUser(null);
     } catch (error) {
       console.log("Logout failed", error);
@@ -232,6 +230,28 @@ function App(props) {
     }
   };
 
+  const handleEditArticle = (event, editedArticle) => {
+    event.preventDefault();
+
+    axios.patch(`${API_URL}/api/article/${editedArticle._id}`, editedArticle, { withCredentials: true })
+      .then(() => {
+        let updatedArticles = article.map((singleArticle) => {
+          if (singleArticle._id === editedArticle._id) {
+            singleArticle.section = editedArticle.section;
+            singleArticle.subsection = editedArticle.subsection;
+            singleArticle.title = editedArticle.title;
+            singleArticle.body = editedArticle.body;
+            singleArticle.created_date = editedArticle.created_date;
+            singleArticle.author = editedArticle.author;
+          }
+          return singleArticle;
+        })
+        updateArticle(updatedArticles);
+      }).catch((err) => {
+        console.log('Edit failed!', err);
+      });
+  }
+  
   const handleCreateComments = async (event) => {
     event.preventDefault();
     const { commentBody } = event.target;
@@ -367,7 +387,21 @@ function App(props) {
             );
           }}
         />
+        <Route
+          exact
+          path="article/:id/edit"
+          render={(routeProps) => {
+            return (
+              <EditArticle
+                {...routeProps}
+                article={article}
+                onEditArticle={handleEditArticle}
+              />
+            );
+          }}
+        />
       </Switch>
+      <Footer/>
     </div>
   );
 }
