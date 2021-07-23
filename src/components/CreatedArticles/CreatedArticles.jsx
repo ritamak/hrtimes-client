@@ -3,30 +3,28 @@ import { API_URL } from "../../config";
 import axios from "axios";
 
 export default function CreatedArticles(props) {
-  const { article } = props;
-  const [articleDetail, updateArticleDetail] = useState(article);
+  const [articleDetail, updateArticleDetail] = useState(null);
+  const { id } = props.match.params;
 
   useEffect(() => {
     (async () => {
       try {
-        let response = await axios.get(`${API_URL}/api/article/${article._id}`);
-
+        let response = await axios.get(`${API_URL}/api/article/${id}`);
         updateArticleDetail(response.data);
         console.log(response.data);
       } catch (err) {
         console.log("Article Details fetch failed", err);
       }
     })();
-  }, [article._id]);
-  console.log(article);
+  }, [id]);
 
-  if (!article.length) {
+  if (!articleDetail) {
     return <p>Loading...</p>;
   }
   return (
     <>
       <h1>Hello</h1>
-      <p>{articleDetail.body}</p>
+      <p>{articleDetail.title}</p>
     </>
   );
 }

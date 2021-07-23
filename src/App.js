@@ -169,8 +169,6 @@ function App(props) {
     }
   };
 
-  console.log(fetchingUser);
-
   const handleLogOut = async () => {
     try {
       await axios.post(`${API_URL}/api/logout`, {}, { withCredentials: true });
