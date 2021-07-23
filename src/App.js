@@ -39,7 +39,7 @@ function App(props) {
         updateUser(userResponse.data);
         updateStatus(false);
       } catch (err) {
-        console.log("Todo fetch failed", err);
+        console.log("User fetch failed", err);
         updateStatus(false);
       }
     })();
@@ -137,9 +137,19 @@ function App(props) {
     };
 
     try {
+<<<<<<< HEAD
       let response = await axios.patch(`${API_URL}/api/${user._id}/edit`, updatedUser, {
         withCredentials: true,
       });
+=======
+      let response = await axios.patch(
+        `${API_URL}/api/${user._id}/edit`,
+        updatedUser,
+        {
+          withCredentials: true,
+        }
+      );
+>>>>>>> 5b4580bbea3a069b5aaa5d0942443cd820452c55
       updateUser(response.data);
 
       props.history.push("/profile");
