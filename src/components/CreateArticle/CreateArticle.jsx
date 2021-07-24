@@ -38,13 +38,6 @@ export default function CreateArticle(props) {
           id="createdDateCreate"
           name="created_date"
         />
-        <label htmlFor="Author">Author</label>
-        <input
-          type="text"
-          className="form-control"
-          id="authorCreate"
-          name="author"
-        />
         <input type="submit" value="Submit" />
       </form>
     </div>

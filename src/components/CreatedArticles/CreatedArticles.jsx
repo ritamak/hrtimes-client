@@ -27,7 +27,6 @@ export default function CreatedArticles(props) {
     <>
       {articleDetail && (
         <>
-          <h1>Articles our users created</h1>
           <p>{articleDetail.section}</p>
           <p>{articleDetail.subsection}</p>
           <p>{articleDetail.title}</p>
@@ -47,6 +46,13 @@ export default function CreatedArticles(props) {
           </form>
         </>
       )}
+      {comments &&
+        comments.map((comment, index) => (
+          <div key={index}>
+            <p>{comment.author}</p>
+            <h5>{comment.commentBody}</h5>
+          </div>
+        ))}
     </>
   );
 }

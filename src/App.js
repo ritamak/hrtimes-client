@@ -56,7 +56,6 @@ function App(props) {
         });
 
         updateArticles(articleResponse.data);
-
       } catch (err) {
         console.log("Articles fetch failed", err);
       }
@@ -96,9 +95,7 @@ function App(props) {
       let response = await axios.post(`${API_URL}/api/signin`, myUser, {
         withCredentials: true,
       });
-
       updateUser(response.data);
-
       props.history.push("/profile");
       updateStatus(false);
     } catch (error) {
@@ -119,6 +116,7 @@ function App(props) {
       country,
       city,
       topics,
+      image,
     } = event.target;
 
     let values = interests.map((i) => i.value);
@@ -132,6 +130,7 @@ function App(props) {
       city: city.value,
       passwordHash: passwordHash.value,
       interests: values,
+      image: image.value,
     };
 
     try {
@@ -207,8 +206,7 @@ function App(props) {
 
   const handleCreateArticle = async (event) => {
     event.preventDefault();
-    const { section, subsection, title, body, created_date, author } =
-      event.target;
+    const { section, subsection, title, body, created_date } = event.target;
 
     let newArticle = {
       section: section.value,
@@ -216,7 +214,7 @@ function App(props) {
       title: title.value,
       body: body.value,
       created_date: created_date.value,
-      author: author.value,
+      author: user.firstName + " " + user.lastName,
     };
 
     try {
@@ -227,7 +225,6 @@ function App(props) {
       const { data } = response;
       updateArticles([...articles, data]);
       updateStatus(false);
-
       props.history.push("/profile");
     } catch (err) {
       console.log("Creating Article failed", err);
@@ -237,7 +234,10 @@ function App(props) {
   const handleEditArticle = (event, article) => {
     event.preventDefault();
 
-    axios.patch(`${API_URL}/api/article/${article._id}/edit`, article, { withCredentials: true })
+    axios
+      .patch(`${API_URL}/api/article/${article._id}/edit`, article, {
+        withCredentials: true,
+      })
       .then(() => {
         let updatedArticles = articles.map((singleArticle) => {
           if (singleArticle._id === article._id) {
@@ -249,49 +249,72 @@ function App(props) {
             singleArticle.author = article.author;
           }
           return singleArticle;
-        })
+        });
         props.history.push(`/article/${article._id}`);
 
         updateArticles(updatedArticles);
-      }).catch((err) => {
-        console.log('Edit failed!', err);
+      })
+      .catch((err) => {
+        console.log("Edit failed!", err);
       });
   };
 
   const handleDeleteArticle = (id) => {
-    axios.delete(`${API_URL}/api/article/${id}`, { withCredentials: true })
+    axios
+      .delete(`${API_URL}/api/article/${id}`, { withCredentials: true })
       .then(() => {
         let updatedArticles = articles.filter((article) => {
           return article._id !== id;
-        })
+        });
 
         updateArticles(updatedArticles);
         props.history.push("/profile");
-      }).catch((err) => {
-        console.log('Delete failed!', err);
+      })
+      .catch((err) => {
+        console.log("Delete failed!", err);
       });
-  }
+  };
 
   const handleCreateComments = async (event) => {
     event.preventDefault();
     const { commentBody } = event.target;
+
     let newComment = {
       commentBody: commentBody.value,
       authorId: user._id,
-      author: user.username,
+      author: user.firstName + " " + user.lastName,
     };
+
     try {
       let response = await axios.post(
         `${API_URL}/api/comments/create`,
         newComment,
         { withCredentials: true }
       );
-      updateComments(response.data);
+      const { data } = response;
+
+      updateComments([...comments, data]);
       updateStatus(false);
       props.history.push("/profile");
     } catch (err) {
       console.log("Creating Comments failed", err);
     }
+  };
+
+  const handleDeleteComment = (id) => {
+    axios
+      .delete(`${API_URL}/api/comments/${id}`, { withCredentials: true })
+      .then(() => {
+        let updatedComments = comments.filter((comment) => {
+          return comment._id !== id;
+        });
+
+        updateComments(updatedComments);
+        props.history.push("/profile");
+      })
+      .catch((err) => {
+        console.log("Delete comments failed!", err);
+      });
   };
 
   if (fetchingUser) {
@@ -354,7 +377,6 @@ function App(props) {
             return (
               <>
                 <Navbar onLogOut={handleLogOut} user={user} />
-
                 <EditProfile
                   onEditProfile={handleEditProfile}
                   {...routeProps}
@@ -364,6 +386,8 @@ function App(props) {
                   updateUser={updateUser}
                   interests={interests}
                   articles={articles}
+                  onDeleteComment={handleDeleteComment}
+                  onDeleteArticle={handleDeleteArticle}
                 />
               </>
             );
@@ -409,10 +433,13 @@ function App(props) {
           path="/article/:id/edit"
           render={(routeProps) => {
             return (
-              <EditArticle
-                {...routeProps}
-                onEditArticle={handleEditArticle}
-              />
+              <>
+                <Navbar onLogOut={handleLogOut} user={user} />
+                <EditArticle
+                  {...routeProps}
+                  onEditArticle={handleEditArticle}
+                />
+              </>
             );
           }}
         />
