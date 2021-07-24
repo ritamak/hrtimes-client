@@ -10,7 +10,7 @@ function SignUp(props) {
     <>
       <div>
         <h1>Your info</h1>
-        <form onSubmit={onSignUp}>
+        <form onSubmit={onSignUp} enctype="multipart/form-data">
           <div className="form-group">
             <label htmlFor="InputUsername">Username</label>
             <input
@@ -89,6 +89,8 @@ function SignUp(props) {
             classNamePrefix="select"
             multiValue={interests}
           />
+          <input type="file" name="myImage" accept="image/png, image/jpg" />
+
           <button type="submit" className="btn btn-primary">
             Submit
           </button>

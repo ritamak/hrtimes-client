@@ -116,6 +116,7 @@ function App(props) {
       country,
       city,
       topics,
+      image,
     } = event.target;
 
     let values = interests.map((i) => i.value);
@@ -129,6 +130,7 @@ function App(props) {
       city: city.value,
       passwordHash: passwordHash.value,
       interests: values,
+      image: image.value,
     };
 
     try {
