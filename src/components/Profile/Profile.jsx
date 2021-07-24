@@ -42,12 +42,14 @@ function Profile(props) {
 
       <a href="/create">Create your article</a>
       <br></br>
+
       <h1>Articles created by our users</h1>
-      {articles.map((article, index) => (
-        <div key={index}>
-          <a href={`/article/${article._id}`}>{article.title}</a>
-        </div>
-      ))}
+      {articles &&
+        articles.map((article, index) => (
+          <div key={index}>
+            <a href={`/article/${article._id}`}>{article.title}</a>
+          </div>
+        ))}
 
       <h1>Articles you may like</h1>
 
