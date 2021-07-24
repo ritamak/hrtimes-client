@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { API_URL } from "../../config";
 import axios from "axios";
 import { TextField, Button } from "@material-ui/core";
@@ -6,7 +7,7 @@ import { TextField, Button } from "@material-ui/core";
 export default function CreatedArticles(props) {
   const [articleDetail, updateArticleDetail] = useState(null);
   const { id } = props.match.params;
-  const { onCreateComments, comments, user } = props;
+  const { onCreateComments, comments, user, onDeleteArticle } = props;
 
   useEffect(() => {
     (async () => {

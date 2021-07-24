@@ -1,9 +1,10 @@
-import React, { useEffect, Link } from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { API_URL } from "../../config";
 import axios from "axios";
 
 function Profile(props) {
-  const { data, user, onDataChange, article } = props;
+  const { data, user, onDataChange, articles } = props;
   const { interests } = user;
 
   useEffect(() => {
@@ -34,26 +35,29 @@ function Profile(props) {
   if (!data.length || !user) {
     return <p>Loading</p>;
   }
-  console.log(article);
+
   return (
     <div>
-      <h1>Welcome {user.firstName}</h1>
-      <a href={`/${user._id}/edit`}>Edit your profile</a>
+      <h1>Welcome {user.username}</h1>
 
-      <a href="/create">Create your article</a>
-      <br></br>
-      {article &&
-        article.map((el, index) => (
-          <a href={`/article/${el._id}`} key={index}>
-            {el.title}
-          </a>
+      <Link to={`/${user._id}/edit`}>Edit your profile</Link>
+
+      <Link to={"/create"}>Create your article</Link>
+
+      <h1>Articles created by our users</h1>
+      {articles &&
+        articles.map((article, index) => (
+          <div key={index}>
+            <Link to={`/article/${article._id}`}>{article.title}</Link>
+          </div>
         ))}
+
       <h1>Articles you may like</h1>
 
-      {flatted.map((el, index) => (
+      {flatted.map((article, index) => (
         <div key={index}>
-          <p>{el.title}</p>
-          <a href={el.url}>read article</a>
+          <p>{article.title}</p>
+          <a href={article.url}>read article</a>
         </div>
       ))}
     </div>

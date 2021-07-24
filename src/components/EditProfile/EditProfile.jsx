@@ -58,7 +58,7 @@ export default function EditProfile(props) {
                 className="form-control"
                 id="InputUsername"
                 name="username"
-                placeholder={user.username}
+                value={user.username}
                 onChange={handleUserName}
               />
             </div>

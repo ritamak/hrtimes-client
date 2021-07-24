@@ -67,6 +67,7 @@ function EditArticle(props) {
           className="form-control"
           id="sectionEdit"
           name="section"
+          value={articleDetails.section}
           onChange={handleSectionChange}
         />
         <label htmlFor="SubSection">Sub-Section</label>
@@ -75,6 +76,7 @@ function EditArticle(props) {
           className="form-control"
           id="subSectionEdit"
           name="subsection"
+          value={articleDetails.subsection}
           onChange={handleSubSectionChange}
         />
         <label htmlFor="Title">Title</label>
@@ -83,11 +85,14 @@ function EditArticle(props) {
           className="form-control"
           id="titleEdit"
           name="title"
+          value={articleDetails.title}
           onChange={handleTitleChange}
         />
         <label>
           Your article:
-          <textarea name="body" onChange={handleBodyChange} />
+          <textarea name="body" onChange={handleBodyChange}>
+            {articleDetails.body}
+          </textarea>
         </label>
         <label htmlFor="Created_Date">Created Date</label>
         <input
@@ -95,6 +100,7 @@ function EditArticle(props) {
           className="form-control"
           id="createdDateEdit"
           name="created_date"
+          value={articleDetails.created_date}
           onChange={handleCreatedDateChange}
         />
         <label htmlFor="Author">Author</label>
@@ -103,6 +109,7 @@ function EditArticle(props) {
           className="form-control"
           id="authorEdit"
           name="author"
+          value={articleDetails.author}
           onChange={handleAuthorChange}
         />
         <input type="submit" value="Submit" />
