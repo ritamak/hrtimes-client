@@ -60,21 +60,23 @@ export default function EditProfile(props) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="InputUsername">First Name</label>
+              <label htmlFor="InputFirstName">First Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="InputUsername"
+                id="InputFirstName"
                 name="firstName"
+                value={user.firstName}
                 onChange={handleFirstName}
               />
               <div className="form-group">
-                <label htmlFor="InputUsername">Last Name</label>
+                <label htmlFor="InputLastName">Last Name</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="InputUsername"
+                  id="InputLastName"
                   name="lastName"
+                  value={user.lastName}
                   onChange={handleLastName}
                 />
               </div>
@@ -86,6 +88,7 @@ export default function EditProfile(props) {
                 className="form-control"
                 id="InputEmail"
                 name="email"
+                value={user.email}
                 onChange={handleEmail}
               />
               <small id="emailHelp" className="form-text text-muted">
@@ -93,21 +96,23 @@ export default function EditProfile(props) {
               </small>
             </div>
             <div className="form-group">
-              <label htmlFor="InputUsername">Country</label>
+              <label htmlFor="InputCountry">Country</label>
               <input
                 type="text"
                 className="form-control"
                 id="InputCountry"
                 name="country"
+                value={user.country}
                 onChange={handleCountry}
               />
               <div className="form-group">
-                <label htmlFor="InputUsername">City</label>
+                <label htmlFor="InputCity">City</label>
                 <input
                   type="text"
                   className="form-control"
                   id="InputCity"
                   name="city"
+                  value={user.city}
                   onChange={handleCity}
                 />
               </div>
