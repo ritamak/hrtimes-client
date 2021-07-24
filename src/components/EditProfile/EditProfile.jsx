@@ -1,11 +1,18 @@
 import React from "react";
 import Select from "react-select";
-
+import { Button } from "@material-ui/core";
 import { topStoriesTopics } from "../../data/data";
 
 export default function EditProfile(props) {
-  const { updateUser, onEditProfile, user, onTopicChange } = props;
-  const { interests, comments } = user;
+  const {
+    updateUser,
+    onEditProfile,
+    user,
+    onTopicChange,
+    onDeleteComment,
+    onDeleteArticle,
+  } = props;
+  const { interests, comments, articles } = user;
 
   const handleUserName = (event) => {
     let newUserName = event.target.value;
@@ -46,10 +53,40 @@ export default function EditProfile(props) {
       <>
         <div>
           <h1>Your info</h1>
-          <h5>your comments</h5>
-          {comments.map((el) => {
-            return <p>{el}</p>;
-          })}
+          {!comments.length ? "" : <h5>your comments</h5>}
+          {comments &&
+            comments.map((el) => {
+              return (
+                <>
+                  <p>{el.commentBody}</p>
+                  <Button
+                    variant="outlined"
+                    onClick={() => {
+                      onDeleteComment(el._id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </>
+              );
+            })}
+          {!articles.length ? "" : <h5>your articles</h5>}
+          {articles &&
+            articles.map((el) => {
+              return (
+                <>
+                  <p>{el.title}</p>
+                  <Button
+                    variant="outlined"
+                    onClick={() => {
+                      onDeleteArticle(el._id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </>
+              );
+            })}
           <form onSubmit={onEditProfile}>
             <div className="form-group">
               <label htmlFor="InputUsername">Username</label>

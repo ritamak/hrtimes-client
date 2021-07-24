@@ -39,21 +39,16 @@ function Profile(props) {
   return (
     <div>
       <h1>Welcome {user.username}</h1>
-
-      <Link to={`/${user._id}/edit`}>Edit your profile</Link>
-
-      <Link to={"/create"}>Create your article</Link>
-
-      <h1>Articles created by our users</h1>
+      <Link to={`/${user._id}/edit`}>Profile Info</Link>
+      <Link to={"/create"}>Create Article</Link>
+      {!articles.length ? "" : <h1>Articles created by our users</h1>}
       {articles &&
         articles.map((article, index) => (
           <div key={index}>
             <Link to={`/article/${article._id}`}>{article.title}</Link>
           </div>
         ))}
-
       <h1>Articles you may like</h1>
-
       {flatted.map((article, index) => (
         <div key={index}>
           <p>{article.title}</p>
