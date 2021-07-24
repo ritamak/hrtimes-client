@@ -19,7 +19,7 @@ function App(props) {
   const [myError, updateError] = useState(null);
   const [data, updateData] = useState([]);
   const [interests, updateInterests] = useState([]);
-  const [article, updateArticle] = useState([]);
+  const [articles, updateArticles] = useState([]);
   const [comments, updateComments] = useState([]);
 
   const handleTopicChange = (newInterests) => {
@@ -42,7 +42,7 @@ function App(props) {
         });
 
         updateComments(commentResponse.data);
-        console.log(commentResponse.data);
+
       } catch (err) {
         console.log("Comments fetch failed", err);
       }
@@ -56,8 +56,8 @@ function App(props) {
           withCredentials: true,
         });
 
-        updateArticle(articleResponse.data);
-        console.log(articleResponse.data);
+        updateArticles(articleResponse.data);
+
       } catch (err) {
         console.log("Articles fetch failed", err);
       }
@@ -221,7 +221,7 @@ function App(props) {
       let response = await axios.post(`${API_URL}/api/create`, newArticle, {
         withCredentials: true,
       });
-      updateArticle(response.data);
+      updateArticles(response.data);
       updateStatus(false);
 
       props.history.push("/profile");
@@ -230,25 +230,41 @@ function App(props) {
     }
   };
 
-  const handleEditArticle = (event, editedArticle) => {
+  const handleEditArticle = (event, article) => {
     event.preventDefault();
 
-    axios.patch(`${API_URL}/api/article/${editedArticle._id}/edit`, editedArticle, { withCredentials: true })
+    axios.patch(`${API_URL}/api/article/${article._id}/edit`, article, { withCredentials: true })
       .then(() => {
-        let updatedArticles = article.map((singleArticle) => {
-          if (singleArticle._id === editedArticle._id) {
-            singleArticle.section = editedArticle.section;
-            singleArticle.subsection = editedArticle.subsection;
-            singleArticle.title = editedArticle.title;
-            singleArticle.body = editedArticle.body;
-            singleArticle.created_date = editedArticle.created_date;
-            singleArticle.author = editedArticle.author;
+        let updatedArticles = articles.map((singleArticle) => {
+          if (singleArticle._id === article._id) {
+            singleArticle.section = article.section;
+            singleArticle.subsection = article.subsection;
+            singleArticle.title = article.title;
+            singleArticle.body = article.body;
+            singleArticle.created_date = article.created_date;
+            singleArticle.author = article.author;
           }
           return singleArticle;
         })
-        updateArticle(updatedArticles);
+        props.history.push(`/article/${article._id}`);
+
+        updateArticles(updatedArticles);
       }).catch((err) => {
         console.log('Edit failed!', err);
+      });
+  }
+
+  const handleDeleteArticle = (id) => {
+    axios.delete(`${API_URL}/api/article/${id}`, { withCredentials: true })
+      .then(() => {
+        let updatedArticles = articles.filter((article) => {
+          return article._id !== id;
+        })
+
+        updateArticles(updatedArticles);
+        props.history.push("/profile");
+      }).catch((err) => {
+        console.log('Delete failed!', err);
       });
   }
 
@@ -308,7 +324,7 @@ function App(props) {
                 <Profile
                   data={data}
                   user={user}
-                  article={article}
+                  articles={articles}
                   onDataChange={handleDataChange}
                   onLogOut={handleLogOut}
                   {...routerProps}
@@ -347,7 +363,7 @@ function App(props) {
                   user={user}
                   updateUser={updateUser}
                   interests={interests}
-                  article={article}
+                  articles={articles}
                 />
               </>
             );
@@ -362,7 +378,7 @@ function App(props) {
                 <Navbar onLogOut={handleLogOut} user={user} />
                 <CreateArticle
                   {...routeProps}
-                  article={article}
+                  articles={articles}
                   onCreateArticle={handleCreateArticle}
                 />
               </>
@@ -378,7 +394,8 @@ function App(props) {
                 <Navbar onLogOut={handleLogOut} user={user} />
                 <CreatedArticles
                   {...routeProps}
-                  article={article}
+                  articles={articles}
+                  onDeleteArticle={handleDeleteArticle}
                   onCreateComments={handleCreateComments}
                   comments={comments}
                   user={user}
@@ -389,12 +406,11 @@ function App(props) {
         />
         <Route
           exact
-          path="article/:id/edit"
+          path="/article/:id/edit"
           render={(routeProps) => {
             return (
               <EditArticle
                 {...routeProps}
-                article={article}
                 onEditArticle={handleEditArticle}
               />
             );

@@ -3,7 +3,7 @@ import { API_URL } from "../../config";
 import axios from "axios";
 
 function Profile(props) {
-  const { data, user, onDataChange, article } = props;
+  const { data, user, onDataChange, articles } = props;
   const { interests } = user;
 
   useEffect(() => {
@@ -31,9 +31,8 @@ function Profile(props) {
     }
     return 0;
   });
-  console.log(sorted);
-  console.log(article);
-  if (!data.length || !article.length) {
+
+  if (!data.length || !articles.length) {
     return <p>Loading</p>;
   }
 
@@ -45,18 +44,18 @@ function Profile(props) {
       <a href="/create">Create your article</a>
       <br></br>
       <h1>Articles created by our users</h1>
-      {article.map((el, index) => (
+      {articles.map((article, index) => (
         <div key={index}>
-          <a href={`/article/${el._id}`}>{el.title}</a>
+          <a href={`/article/${article._id}`}>{article.title}</a>
         </div>
       ))}
 
       <h1>Articles you may like</h1>
 
-      {flatted.map((el, index) => (
+      {flatted.map((article, index) => (
         <div key={index}>
-          <p>{el.title}</p>
-          <a href={el.url}>read article</a>
+          <p>{article.title}</p>
+          <a href={article.url}>read article</a>
         </div>
       ))}
     </div>
