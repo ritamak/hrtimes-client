@@ -31,10 +31,10 @@ function Profile(props) {
     }
     return 0;
   });
-  if (!data.length || !article.length || !user) {
+  if (!data.length || !user) {
     return <p>Loading</p>;
   }
-
+  console.log(article);
   return (
     <div>
       <h1>Welcome {user.firstName}</h1>
@@ -42,13 +42,12 @@ function Profile(props) {
 
       <a href="/create">Create your article</a>
       <br></br>
-      <h1>Articles created by our users</h1>
-      {article.map((el, index) => (
-        <div key={index}>
-          <a href={`/article/${el._id}`}>{el.title}</a>
-        </div>
-      ))}
-
+      {article &&
+        article.map((el, index) => (
+          <a href={`/article/${el._id}`} key={index}>
+            {el.title}
+          </a>
+        ))}
       <h1>Articles you may like</h1>
 
       {flatted.map((el, index) => (

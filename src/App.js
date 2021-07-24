@@ -221,7 +221,8 @@ function App(props) {
       let response = await axios.post(`${API_URL}/api/create`, newArticle, {
         withCredentials: true,
       });
-      updateArticle(response.data);
+      const { data } = response;
+      updateArticle([...article, data]);
       updateStatus(false);
 
       props.history.push("/profile");

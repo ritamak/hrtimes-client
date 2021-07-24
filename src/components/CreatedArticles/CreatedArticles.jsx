@@ -19,29 +19,33 @@ export default function CreatedArticles(props) {
     })();
   }, [id]);
 
-  if (!articleDetail || !user) {
+  if (!user) {
     return <p>Loading...</p>;
   }
   return (
     <>
-      <h1>Articles our users created</h1>
-      <p>{articleDetail.section}</p>
-      <p>{articleDetail.subsection}</p>
-      <p>{articleDetail.title}</p>
-      <p>{articleDetail.body}</p>
-      <p>{articleDetail.created_date}</p>
-      <p>{articleDetail.author}</p>
-      <h5>Comments</h5>
-      <form onSubmit={onCreateComments} autoComplete="off">
-        <TextField
-          id="outlined-basic"
-          label="comment the article here"
-          variant="outlined"
-          style={{ width: "80vw" }}
-          name="commentBody"
-        />
-        <input type="submit" value="Submit" />
-      </form>
+      {articleDetail && (
+        <>
+          <h1>Articles our users created</h1>
+          <p>{articleDetail.section}</p>
+          <p>{articleDetail.subsection}</p>
+          <p>{articleDetail.title}</p>
+          <p>{articleDetail.body}</p>
+          <p>{articleDetail.created_date}</p>
+          <p>{articleDetail.author}</p>
+          <h5>Comments</h5>
+          <form onSubmit={onCreateComments} autoComplete="off">
+            <TextField
+              id="outlined-basic"
+              label="comment the article here"
+              variant="outlined"
+              style={{ width: "80vw" }}
+              name="commentBody"
+            />
+            <input type="submit" value="Submit" />
+          </form>
+        </>
+      )}
     </>
   );
 }
