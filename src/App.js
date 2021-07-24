@@ -71,6 +71,7 @@ function App(props) {
         });
 
         updateUser(userResponse.data);
+        console.log(userResponse.data);
         updateStatus(false);
       } catch (err) {
         console.log("User fetch failed", err);
