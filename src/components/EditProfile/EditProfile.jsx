@@ -37,8 +37,6 @@ export default function EditProfile(props) {
     let newPassword = event.target.value;
     updateUser({ ...user, password: newPassword });
   };
-  console.log(user);
-  console.log(user.comments);
 
   if (!user) {
     return <p>Loading</p>;
@@ -50,7 +48,6 @@ export default function EditProfile(props) {
           <h1>Your info</h1>
           <h5>your comments</h5>
           {comments.map((el) => {
-            console.log(el);
             return <p>{el}</p>;
           })}
           <form onSubmit={onEditProfile}>

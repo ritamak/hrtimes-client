@@ -57,7 +57,6 @@ function App(props) {
         });
 
         updateArticle(articleResponse.data);
-        console.log(articleResponse.data);
       } catch (err) {
         console.log("Articles fetch failed", err);
       }
@@ -80,9 +79,7 @@ function App(props) {
     })();
   }, []);
 
-  useEffect(() => {
-
-  }, [data]);
+  useEffect(() => {}, [data]);
 
   const handleSignIn = async (event) => {
     event.preventDefault();
@@ -152,7 +149,7 @@ function App(props) {
 
   const handleEditProfile = async (event) => {
     event.preventDefault();
-    
+
     const {
       username,
       firstName,
@@ -178,10 +175,14 @@ function App(props) {
     };
 
     try {
-      let response = await axios.patch(`${API_URL}/api/${user._id}/edit`, updatedUser, {
-        withCredentials: true,
-      });
-      
+      let response = await axios.patch(
+        `${API_URL}/api/${user._id}/edit`,
+        updatedUser,
+        {
+          withCredentials: true,
+        }
+      );
+
       updateUser(response.data);
       updateStatus(false);
 
@@ -233,7 +234,12 @@ function App(props) {
   const handleEditArticle = (event, editedArticle) => {
     event.preventDefault();
 
-    axios.patch(`${API_URL}/api/article/${editedArticle._id}/edit`, editedArticle, { withCredentials: true })
+    axios
+      .patch(
+        `${API_URL}/api/article/${editedArticle._id}/edit`,
+        editedArticle,
+        { withCredentials: true }
+      )
       .then(() => {
         let updatedArticles = article.map((singleArticle) => {
           if (singleArticle._id === editedArticle._id) {
@@ -245,12 +251,13 @@ function App(props) {
             singleArticle.author = editedArticle.author;
           }
           return singleArticle;
-        })
+        });
         updateArticle(updatedArticles);
-      }).catch((err) => {
-        console.log('Edit failed!', err);
+      })
+      .catch((err) => {
+        console.log("Edit failed!", err);
       });
-  }
+  };
 
   const handleCreateComments = async (event) => {
     event.preventDefault();
@@ -260,17 +267,12 @@ function App(props) {
       authorId: user._id,
       author: user.username,
     };
-
-    console.log(commentBody.value);
-    console.log(newComment);
-    console.log(user.comments);
     try {
       let response = await axios.post(
         `${API_URL}/api/comments/create`,
         newComment,
         { withCredentials: true }
       );
-      console.log(response);
       updateComments(response.data);
       updateStatus(false);
       props.history.push("/profile");
@@ -401,7 +403,7 @@ function App(props) {
           }}
         />
       </Switch>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

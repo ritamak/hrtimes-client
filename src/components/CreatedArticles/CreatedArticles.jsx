@@ -13,7 +13,6 @@ export default function CreatedArticles(props) {
       try {
         let response = await axios.get(`${API_URL}/api/article/${id}`);
         updateArticleDetail(response.data);
-        console.log(response.data);
       } catch (err) {
         console.log("Article Details fetch failed", err);
       }
