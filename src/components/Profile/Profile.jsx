@@ -1,4 +1,5 @@
-import React, { useEffect, Link } from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { API_URL } from "../../config";
 import axios from "axios";
 
@@ -37,17 +38,17 @@ function Profile(props) {
 
   return (
     <div>
-      <h1>Welcome {user.firstName}</h1>
-      <a href={`/${user._id}/edit`}>Edit your profile</a>
+      <h1>Welcome {user.username}</h1>
 
-      <a href="/create">Create your article</a>
-      <br></br>
+      <Link to={`/${user._id}/edit`}>Edit your profile</Link>
+
+      <Link to={"/create"}>Create your article</Link>
 
       <h1>Articles created by our users</h1>
       {articles &&
         articles.map((article, index) => (
           <div key={index}>
-            <a href={`/article/${article._id}`}>{article.title}</a>
+            <Link to={`/article/${article._id}`}>{article.title}</Link>
           </div>
         ))}
 
