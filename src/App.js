@@ -95,9 +95,7 @@ function App(props) {
       let response = await axios.post(`${API_URL}/api/signin`, myUser, {
         withCredentials: true,
       });
-
       updateUser(response.data);
-
       props.history.push("/profile");
       updateStatus(false);
     } catch (error) {
@@ -138,9 +136,8 @@ function App(props) {
         withCredentials: true,
       });
       updateUser(response.data);
-      updateStatus(false);
-
       props.history.push("/profile");
+      updateStatus(false);
     } catch (err) {
       console.log("Signup failed", err);
       updateStatus(false);
@@ -225,7 +222,6 @@ function App(props) {
       const { data } = response;
       updateArticle([...article, data]);
       updateStatus(false);
-
       props.history.push("/profile");
     } catch (err) {
       console.log("Creating Article failed", err);
@@ -263,18 +259,22 @@ function App(props) {
   const handleCreateComments = async (event) => {
     event.preventDefault();
     const { commentBody } = event.target;
+
     let newComment = {
       commentBody: commentBody.value,
       authorId: user._id,
       author: user.username,
     };
+
     try {
       let response = await axios.post(
         `${API_URL}/api/comments/create`,
         newComment,
         { withCredentials: true }
       );
-      updateComments(response.data);
+      const { data } = response;
+
+      updateComments([...comments, data]);
       updateStatus(false);
       props.history.push("/profile");
     } catch (err) {
