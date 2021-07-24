@@ -31,8 +31,7 @@ function Profile(props) {
     }
     return 0;
   });
-
-  if (!data.length || !articles.length) {
+  if (!data.length || !articles.length || !user) {
     return <p>Loading</p>;
   }
 

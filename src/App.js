@@ -42,7 +42,6 @@ function App(props) {
         });
 
         updateComments(commentResponse.data);
-
       } catch (err) {
         console.log("Comments fetch failed", err);
       }
@@ -80,9 +79,7 @@ function App(props) {
     })();
   }, []);
 
-  useEffect(() => {
-
-  }, [data]);
+  useEffect(() => {}, [data]);
 
   const handleSignIn = async (event) => {
     event.preventDefault();
@@ -152,7 +149,7 @@ function App(props) {
 
   const handleEditProfile = async (event) => {
     event.preventDefault();
-    
+
     const {
       username,
       firstName,
@@ -178,10 +175,14 @@ function App(props) {
     };
 
     try {
-      let response = await axios.patch(`${API_URL}/api/${user._id}/edit`, updatedUser, {
-        withCredentials: true,
-      });
-      
+      let response = await axios.patch(
+        `${API_URL}/api/${user._id}/edit`,
+        updatedUser,
+        {
+          withCredentials: true,
+        }
+      );
+
       updateUser(response.data);
       updateStatus(false);
 
@@ -252,7 +253,7 @@ function App(props) {
       }).catch((err) => {
         console.log('Edit failed!', err);
       });
-  }
+  };
 
   const handleDeleteArticle = (id) => {
     axios.delete(`${API_URL}/api/article/${id}`, { withCredentials: true })
@@ -276,16 +277,12 @@ function App(props) {
       authorId: user._id,
       author: user.username,
     };
-
-    console.log(commentBody.value);
-    console.log(newComment);
     try {
       let response = await axios.post(
         `${API_URL}/api/comments/create`,
         newComment,
         { withCredentials: true }
       );
-      console.log(response);
       updateComments(response.data);
       updateStatus(false);
       props.history.push("/profile");
@@ -391,7 +388,6 @@ function App(props) {
           render={(routeProps) => {
             return (
               <>
-                <Navbar onLogOut={handleLogOut} user={user} />
                 <CreatedArticles
                   {...routeProps}
                   articles={articles}
@@ -417,7 +413,7 @@ function App(props) {
           }}
         />
       </Switch>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

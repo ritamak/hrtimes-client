@@ -5,7 +5,7 @@ import { topStoriesTopics } from "../../data/data";
 
 export default function EditProfile(props) {
   const { updateUser, onEditProfile, user, onTopicChange } = props;
-  const { interests } = user;
+  const { interests, comments } = user;
 
   const handleUserName = (event) => {
     let newUserName = event.target.value;
@@ -46,6 +46,10 @@ export default function EditProfile(props) {
       <>
         <div>
           <h1>Your info</h1>
+          <h5>your comments</h5>
+          {comments.map((el) => {
+            return <p>{el}</p>;
+          })}
           <form onSubmit={onEditProfile}>
             <div className="form-group">
               <label htmlFor="InputUsername">Username</label>
