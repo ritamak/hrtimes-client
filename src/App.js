@@ -71,7 +71,7 @@ function App(props) {
         });
 
         updateUser(userResponse.data);
-        console.log(userResponse.data);
+
         updateStatus(false);
       } catch (err) {
         console.log("User fetch failed", err);
@@ -391,6 +391,7 @@ function App(props) {
           render={(routeProps) => {
             return (
               <>
+                <Navbar onLogOut={handleLogOut} user={user} />
                 <CreatedArticles
                   {...routeProps}
                   articles={articles}

@@ -47,9 +47,9 @@ export default function EditProfile(props) {
         <div>
           <h1>Your info</h1>
           <h5>your comments</h5>
-          {comments.map((el) => {
-            return <p>{el}</p>;
-          })}
+          {/* {comments.map((comment, index) => {
+            return <p key={index}>{comment}</p>;
+          })} */}
           <form onSubmit={onEditProfile}>
             <div className="form-group">
               <label htmlFor="InputUsername">Username</label>
