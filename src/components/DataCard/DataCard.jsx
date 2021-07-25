@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DataCard(section, url, title, subsection) {
+export default function DataCard({ section, title, abstract, url }) {
   const classes = useStyles();
 
   return (
@@ -29,7 +29,7 @@ export default function DataCard(section, url, title, subsection) {
             {title}
           </Typography>
           <Typography variant="body2" component="p">
-            {subsection}
+            {abstract}
           </Typography>
         </CardContent>
         <CardActions>
