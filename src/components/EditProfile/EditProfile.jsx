@@ -55,36 +55,36 @@ export default function EditProfile(props) {
           <h1>Your info</h1>
           {!comments.length ? "" : <h5>your comments</h5>}
           {comments &&
-            comments.map((el) => {
+            comments.map((comment, index) => {
               return (
-                <>
-                  <p>{el.commentBody}</p>
+                <div key={index}>
+                  <p>{comment.commentBody}</p>
                   <Button
                     variant="outlined"
                     onClick={() => {
-                      onDeleteComment(el._id);
+                      onDeleteComment(comment._id);
                     }}
                   >
                     Delete
                   </Button>
-                </>
+                </div>
               );
             })}
           {!articles.length ? "" : <h5>your articles</h5>}
           {articles &&
-            articles.map((el) => {
+            articles.map((article, index) => {
               return (
-                <>
-                  <p>{el.title}</p>
+                <div key={index}>
+                  <p>{article.title}</p>
                   <Button
                     variant="outlined"
                     onClick={() => {
-                      onDeleteArticle(el._id);
+                      onDeleteArticle(article._id);
                     }}
                   >
                     Delete
                   </Button>
-                </>
+                </div>
               );
             })}
           <form onSubmit={onEditProfile}>

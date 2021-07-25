@@ -70,7 +70,7 @@ function App(props) {
         });
 
         updateUser(userResponse.data);
-        console.log(userResponse.data);
+
         updateStatus(false);
       } catch (err) {
         console.log("User fetch failed", err);
@@ -219,7 +219,6 @@ function App(props) {
       title: title.value,
       body: body.value,
       created_date: created_date.value,
-      author: user.firstName + " " + user.lastName,
     };
 
     try {
@@ -280,19 +279,17 @@ function App(props) {
       });
   };
 
-  const handleCreateComments = async (event) => {
+  const handleCreateComments = async (event, articleId) => {
     event.preventDefault();
     const { commentBody } = event.target;
 
     let newComment = {
-      commentBody: commentBody.value,
-      authorId: user._id,
-      author: user.firstName + " " + user.lastName,
+      commentBody: commentBody.value
     };
 
     try {
       let response = await axios.post(
-        `${API_URL}/api/comments/create`,
+        `${API_URL}/api/article/${articleId}/comments/create`,
         newComment,
         { withCredentials: true }
       );
