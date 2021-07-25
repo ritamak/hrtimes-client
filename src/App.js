@@ -217,6 +217,18 @@ function App(props) {
     }
   };
 
+  const handleDeleteProfile = async (user) => {
+    axios
+      .delete(`${API_URL}/api/${user._id}`, { withCredentials: true })
+      .then(() => {
+        props.history.push("/");
+        updateUser(null)
+      })
+      .catch((err) => {
+        console.log("Delete failed!", err);
+      })
+  }
+
   const handleCreateArticle = async (event) => {
     event.preventDefault();
     const { section, subsection, title, body, created_date } = event.target;
@@ -364,7 +376,6 @@ function App(props) {
           }}
         />
         <Route
-          exact
           path={"/profile"}
           render={(routerProps) => {
             return (
@@ -387,7 +398,6 @@ function App(props) {
           }}
         />
         <Route
-          exact
           path="/signup"
           render={(routeProps) => {
             return (
@@ -409,6 +419,7 @@ function App(props) {
                 <Navbar onLogOut={handleLogOut} user={user} />
                 <EditProfile
                   onEditProfile={handleEditProfile}
+                  onDeleteProfile={handleDeleteProfile}
                   {...routeProps}
                   onTopicChange={handleTopicChange}
                   onUserChange={handleUserChange}

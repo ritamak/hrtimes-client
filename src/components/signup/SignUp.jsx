@@ -25,19 +25,19 @@ function SignUp(props) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="InputUsername">First Name</label>
+            <label htmlFor="InputFirstName">First Name</label>
             <input
               type="text"
               className="form-control"
-              id="InputUsername"
+              id="InputFirstName"
               name="firstName"
             />
             <div className="form-group">
-              <label htmlFor="InputUsername">Last Name</label>
+              <label htmlFor="InputLastName">Last Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="InputUsername"
+                id="InputLastName"
                 name="lastName"
               />
             </div>
@@ -55,7 +55,7 @@ function SignUp(props) {
             </small>
           </div>
           <div className="form-group">
-            <label htmlFor="InputUsername">Country</label>
+            <label htmlFor="InputCountry">Country</label>
             <input
               type="text"
               className="form-control"
@@ -63,7 +63,7 @@ function SignUp(props) {
               name="country"
             />
             <div className="form-group">
-              <label htmlFor="InputUsername">City</label>
+              <label htmlFor="InputCity">City</label>
               <input
                 type="text"
                 className="form-control"

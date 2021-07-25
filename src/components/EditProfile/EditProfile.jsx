@@ -11,6 +11,7 @@ export default function EditProfile(props) {
     onTopicChange,
     onDeleteComment,
     onDeleteArticle,
+    onDeleteProfile,
   } = props;
   const { interests, comments, articles } = user;
 
@@ -191,6 +192,14 @@ export default function EditProfile(props) {
               Submit
             </button>
           </form>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              onDeleteProfile(user);
+            }}
+          >
+            Delete
+          </Button>
         </div>
       </>
     </div>
