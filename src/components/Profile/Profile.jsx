@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../../config";
 import axios from "axios";
+import SortButton from "../SortButton/SortButton";
 
 function Profile(props) {
   const { data, user, onDataChange, articles } = props;
@@ -49,6 +50,7 @@ function Profile(props) {
           </div>
         ))}
       <h1>Articles you may like</h1>
+      <SortButton />
       {flatted.map((article, index) => (
         <div key={index}>
           <p>{article.title}</p>
