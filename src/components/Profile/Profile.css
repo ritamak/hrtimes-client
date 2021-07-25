@@ -9,3 +9,19 @@
 
 h1 {
 }
+
+.datacard {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background-color: green;
+  margin: 10px;
+}
+
+.articlecard {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background-color: green;
+  margin: 10px;
+}
