@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 
 function Navbar(props) {
-  const { user, onLogOut } = props;
+  const { user, onLogOut, onSearch } = props;
   return (
     <div>
       <AppBar position="static">
@@ -33,6 +33,7 @@ function Navbar(props) {
             <SearchIcon />
             <InputBase
               placeholder="Search…"
+              onChange={onSearch}
               inputProps={{ "aria-label": "search" }}
             />
           </div>

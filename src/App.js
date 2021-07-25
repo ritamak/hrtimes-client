@@ -21,6 +21,7 @@ function App(props) {
   const [interests, updateInterests] = useState([]);
   const [articles, updateArticles] = useState([]);
   const [comments, updateComments] = useState([]);
+  const [filteredData, updateFilteredData] = useState([]);
 
   const handleTopicChange = (newInterests) => {
     updateInterests(newInterests);
@@ -327,6 +328,22 @@ function App(props) {
       });
   };
 
+  const handleSearch = (event) => {
+    let searchedData = event.target.value;
+    console.log(searchedData);
+    let flatted = data.flat(Infinity);
+
+    let filteredData = flatted.filter((element) => {
+      console.log(data);
+      let result = element.title
+        .toLowerCase()
+        .includes(searchedData.toLowerCase());
+      console.log(result);
+      return result;
+    });
+    updateFilteredData(filteredData);
+  };
+
   if (fetchingUser) {
     return <p>Loading...</p>;
   }
@@ -353,7 +370,11 @@ function App(props) {
           render={(routerProps) => {
             return (
               <>
-                <Navbar onLogOut={handleLogOut} user={user} />
+                <Navbar
+                  onLogOut={handleLogOut}
+                  user={user}
+                  onSearch={handleSearch}
+                />
                 <Profile
                   data={data}
                   user={user}
@@ -444,7 +465,7 @@ function App(props) {
           render={(routeProps) => {
             return (
               <>
-                <Navbar onLogOut={handleLogOut} user={user} />
+                <Navbar onLogOut={handleLogOut} />
                 <EditArticle
                   {...routeProps}
                   onEditArticle={handleEditArticle}
