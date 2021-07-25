@@ -395,6 +395,7 @@ function App(props) {
               <SignUp
                 onSignUp={handleSignUp}
                 {...routeProps}
+                error={myError}
                 onTopicChange={handleTopicChange}
                 interests={interests}
               />

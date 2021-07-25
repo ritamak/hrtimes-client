@@ -46,9 +46,6 @@ function SignUp(props) {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Sign Up
-          </Typography>
           <form className={classes.form} noValidate onSubmit={onSignUp}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -164,16 +161,18 @@ function SignUp(props) {
               variant="contained"
               color="primary"
               className={classes.submit}
+              style={{ color: "white", background: "black" }}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/signin" variant="body2">
+                <Link href="/signin" variant="body2" style={{ color: "black" }}>
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
+            {props.error && <p className="error">{props.error}</p>}
           </form>
         </div>
         <Box mt={5}></Box>
