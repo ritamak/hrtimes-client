@@ -42,6 +42,7 @@ function App(props) {
         });
 
         updateComments(commentResponse.data);
+        console.log(commentResponse.data);
       } catch (err) {
         console.log("Comments fetch failed", err);
       }
@@ -154,6 +155,11 @@ function App(props) {
 
   const handleEditProfile = async (event) => {
     event.preventDefault();
+    let formData = new FormData();
+    formData.append("imageUrl", event.target.myImage.files[0]);
+
+    let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
+    console.log(imgResponse);
 
     const {
       username,
@@ -164,6 +170,7 @@ function App(props) {
       country,
       city,
       topics,
+      myImage,
     } = event.target;
 
     let values = interests.map((i) => i.value);
@@ -177,6 +184,7 @@ function App(props) {
       city: city.value,
       passwordHash: passwordHash.value,
       interests: values,
+      image: imgResponse.data.image,
     };
 
     try {
@@ -284,7 +292,7 @@ function App(props) {
     const { commentBody } = event.target;
 
     let newComment = {
-      commentBody: commentBody.value
+      commentBody: commentBody.value,
     };
 
     try {

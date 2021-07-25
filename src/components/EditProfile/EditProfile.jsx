@@ -185,6 +185,7 @@ export default function EditProfile(props) {
               classNamePrefix="select"
               multiValue={interests}
             />
+            <input type="file" name="myImage" accept="image/png, image/jpg" />
 
             <button type="submit" className="btn btn-primary">
               Submit
