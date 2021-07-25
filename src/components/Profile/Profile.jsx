@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../../config";
 import axios from "axios";
+import SortButton from "../SortButton/SortButton";
+import "./Profile.css";
+import ArticleCard from "../ArticleCard/ArticleCard";
+import DataCard from "../DataCard/DataCard";
 
 function Profile(props) {
   const { data, user, onDataChange, articles } = props;
@@ -38,23 +42,38 @@ function Profile(props) {
 
   return (
     <div>
-      <h1>Welcome {user.username}</h1>
-      <Link to={`/${user._id}/edit`}>Profile Info</Link>
-      <Link to={"/create"}>Create Article</Link>
+      <div className="welcome">
+        <h1>Hi {user.username.toUpperCase()}!</h1>
+      </div>
       {!articles.length ? "" : <h1>Articles created by our users</h1>}
-      {articles &&
-        articles.map((article, index) => (
-          <div key={index}>
-            <Link to={`/article/${article._id}`}>{article.title}</Link>
-          </div>
-        ))}
+      <div className="articleCard">
+        {articles &&
+          articles.map((article, index) => (
+            <div key={index}>
+              <ArticleCard
+                section={article.section}
+                title={article.title}
+                author={article.author}
+                id={article._id}
+              />
+            </div>
+          ))}
+      </div>
       <h1>Articles you may like</h1>
-      {flatted.map((article, index) => (
-        <div key={index}>
-          <p>{article.title}</p>
-          <a href={article.url}>read article</a>
-        </div>
-      ))}
+      <SortButton />
+      {flatted.map((article, index) => {
+        console.log(article);
+        return (
+          <div key={index} className="dataCard">
+            <DataCard
+              section={article.section}
+              title={article.title}
+              abstract={article.abstract}
+              url={article.url}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }

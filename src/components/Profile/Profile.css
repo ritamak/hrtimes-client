@@ -1,0 +1,27 @@
+.welcome {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+h1 {
+}
+
+.datacard {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background-color: green;
+  margin: 10px;
+}
+
+.articlecard {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background-color: green;
+  margin: 10px;
+}

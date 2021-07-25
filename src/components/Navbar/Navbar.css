@@ -1,0 +1,10 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+}
+
+.logOutButton {
+  display: flex;
+  align-content: flex-end;
+}

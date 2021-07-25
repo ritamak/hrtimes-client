@@ -1,0 +1,48 @@
+.homePageDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homePageImg {
+  margin-top: 5vh;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  width: 45vh;
+}
+
+.homePageBox {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1.5;
+  border: 5px 0px solid black;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-bottom: 10vh;
+  background-color: #7d7d7d;
+  color: white;
+}
+
+.homePageButtons {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  display: flex;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  width: 15vw;
+  justify-content: space-around;
+  text-decoration: none;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapperImage {
+  background: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
