@@ -106,6 +106,11 @@ function App(props) {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+    let formData = new FormData();
+    formData.append("imageUrl", event.target.myImage.files[0]);
+
+    let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
+    console.log(imgResponse);
 
     const {
       username,
@@ -116,7 +121,7 @@ function App(props) {
       country,
       city,
       topics,
-      image,
+      myImage,
     } = event.target;
 
     let values = interests.map((i) => i.value);
@@ -130,7 +135,7 @@ function App(props) {
       city: city.value,
       passwordHash: passwordHash.value,
       interests: values,
-      image: image.value,
+      image: imgResponse.data.image,
     };
 
     try {
