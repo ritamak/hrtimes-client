@@ -41,9 +41,6 @@ function SignIn(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5" className="signInText">
-          Sign In
-        </Typography>
         <form className={classes.form} onSubmit={onSignIn}>
           <TextField
             variant="outlined"
@@ -74,18 +71,19 @@ function SignIn(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
+            style={{ color: "white", background: "black" }}
           >
             Sign In
           </Button>
 
           <Grid container>
             <Grid item>
-              <Link href="/signup" variant="body2">
+              <Link href="/signup" variant="body2" style={{ color: "black" }}>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>
-          {props.error && <p>{props.error}</p>}
+          {props.error && <p className="error">{props.error}</p>}
         </form>
       </div>
       <Box mt={8}></Box>
