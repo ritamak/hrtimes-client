@@ -43,7 +43,6 @@ function App(props) {
         });
 
         updateComments(commentResponse.data);
-        console.log(commentResponse.data);
       } catch (err) {
         console.log("Comments fetch failed", err);
       }
