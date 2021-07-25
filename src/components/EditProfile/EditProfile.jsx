@@ -55,9 +55,9 @@ export default function EditProfile(props) {
           <h1>Your info</h1>
           {!comments.length ? "" : <h5>your comments</h5>}
           {comments &&
-            comments.map((comment) => {
+            comments.map((comment, index) => {
               return (
-                <>
+                <div key={index}>
                   <p>{comment.commentBody}</p>
                   <Button
                     variant="outlined"
@@ -67,14 +67,14 @@ export default function EditProfile(props) {
                   >
                     Delete
                   </Button>
-                </>
+                </div>
               );
             })}
           {!articles.length ? "" : <h5>your articles</h5>}
           {articles &&
-            articles.map((article) => {
+            articles.map((article, index) => {
               return (
-                <>
+                <div key={index}>
                   <p>{article.title}</p>
                   <Button
                     variant="outlined"
@@ -84,7 +84,7 @@ export default function EditProfile(props) {
                   >
                     Delete
                   </Button>
-                </>
+                </div>
               );
             })}
           <form onSubmit={onEditProfile}>
