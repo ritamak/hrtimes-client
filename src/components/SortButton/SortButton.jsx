@@ -2,9 +2,10 @@ import React from "react";
 import { FormControl, Select, InputLabel } from "@material-ui/core";
 
 export default function SortButton() {
+  const onSort = () => {};
   return (
     <div>
-      <FormControl variant="outlined">
+      <FormControl variant="outlined" onSubmit={onSort}>
         <InputLabel htmlFor="outlined-age-native-simple">sort by:</InputLabel>
         <Select
           native
