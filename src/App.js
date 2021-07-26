@@ -44,11 +44,17 @@ function App(props) {
         let articleResponse = await axios.get(`${API_URL}/api/articles`, {
           withCredentials: true,
         });
+        let userResponse = await axios.get(`${API_URL}/api/profile`, {
+          withCredentials: true,
+        });
 
-        updateArticles(articleResponse.data);
         updateComments(commentResponse.data);
+        updateArticles(articleResponse.data);
+        updateUser(userResponse.data);
+        updateStatus(false);
       } catch (err) {
-        console.log("Articles & Comments fetch failed", err);
+        console.log("Fetching user data failed", err);
+        updateStatus(false);
       }
     })();
   }, []);
@@ -237,7 +243,7 @@ function App(props) {
       });
 
       const { data } = response;
-      updateArticles([...articles, data]);
+      updateArticles([data, ...articles]);
       updateStatus(false);
       props.history.push("/profile");
     } catch (err) {
@@ -305,7 +311,7 @@ function App(props) {
       );
       const { data } = response;
 
-      updateComments([...comments, data]);
+      updateComments([data, ...comments]);
       updateStatus(false);
       props.history.push("/profile");
     } catch (err) {
@@ -378,9 +384,6 @@ function App(props) {
                   data={data}
                   user={user}
                   articles={articles}
-                  fetchingUser={fetchingUser}
-                  updateUser={updateUser}
-                  updateStatus={updateStatus}
                   onDataChange={handleDataChange}
                   onLogOut={handleLogOut}
                   {...routerProps}
@@ -421,6 +424,7 @@ function App(props) {
                   interests={interests}
                   articles={articles}
                   fetchingUser={fetchingUser}
+                  comments={comments}
                   onDeleteComment={handleDeleteComment}
                   onDeleteArticle={handleDeleteArticle}
                 />
