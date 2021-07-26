@@ -345,6 +345,9 @@ function App(props) {
     updateFilteredData(filteredData);
   };
 
+  if (fetchingUser) {
+    return <p>Loading...</p>;
+  }
   return (
     <div>
       <Switch>
@@ -433,7 +436,6 @@ function App(props) {
               <>
                 <Navbar onLogOut={handleLogOut} user={user} />
                 <CreateArticle
-                  user={user}
                   {...routeProps}
                   articles={articles}
                   onCreateArticle={handleCreateArticle}

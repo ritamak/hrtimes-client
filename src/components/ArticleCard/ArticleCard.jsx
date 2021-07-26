@@ -28,7 +28,7 @@ export default function ArticleCard({ section, title, author, id }) {
           {title}
         </Typography>
         <Typography variant="body2" component="p">
-          {author}
+          {author.username}
         </Typography>
       </CardContent>
       <CardActions>

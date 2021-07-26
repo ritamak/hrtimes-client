@@ -2,7 +2,7 @@ import React from "react";
 import "./CreateArticle.css";
 
 export default function CreateArticle(props) {
-  const { onCreateArticle, user } = props;
+  const { onCreateArticle } = props;
   return (
     <div className="createArticle">
       <form onSubmit={onCreateArticle}>

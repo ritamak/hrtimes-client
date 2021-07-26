@@ -6,6 +6,7 @@ import SortButton from "../SortButton/SortButton";
 import "./Profile.css";
 import ArticleCard from "../ArticleCard/ArticleCard";
 import DataCard from "../DataCard/DataCard";
+import Container from "@material-ui/core/Container";
 
 function Profile(props) {
   const { data, user, onDataChange, articles } = props;
@@ -42,38 +43,40 @@ function Profile(props) {
 
   return (
     <div>
-      <div className="welcome">
-        <h1>Hi {user.username.toUpperCase()}!</h1>
-      </div>
-      {!articles.length ? "" : <h1>Articles created by our users</h1>}
-      <div className="articleCard">
-        {articles &&
-          articles.map((article, index) => (
-            <div key={index}>
-              <ArticleCard
+      <Container component="main" maxWidth="xs">
+        <div className="welcome">
+          <h1>Hi {user.username.toUpperCase()}!</h1>
+        </div>
+        {!articles.length ? "" : <h1>Articles created by our users</h1>}
+        <div className="articleCard">
+          {articles &&
+            articles.map((article, index) => (
+              <div key={index}>
+                <ArticleCard
+                  section={article.section}
+                  title={article.title}
+                  author={article.author}
+                  id={article._id}
+                />
+              </div>
+            ))}
+        </div>
+        <h1>Articles you may like</h1>
+        <SortButton />
+        {flatted.map((article, index) => {
+          console.log(article);
+          return (
+            <div key={index} className="dataCard">
+              <DataCard
                 section={article.section}
                 title={article.title}
-                author={article.author}
-                id={article._id}
+                abstract={article.abstract}
+                url={article.url}
               />
             </div>
-          ))}
-      </div>
-      <h1>Articles you may like</h1>
-      <SortButton />
-      {flatted.map((article, index) => {
-        console.log(article);
-        return (
-          <div key={index} className="dataCard">
-            <DataCard
-              section={article.section}
-              title={article.title}
-              abstract={article.abstract}
-              url={article.url}
-            />
-          </div>
-        );
-      })}
+          );
+        })}
+      </Container>
     </div>
   );
 }

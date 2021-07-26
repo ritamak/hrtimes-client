@@ -91,41 +91,44 @@ export default function EditProfile(props) {
     <div>
       <>
         <div>
-          <h1>Your info</h1>
-          {!comments.length ? "" : <h5>your comments</h5>}
-          {comments &&
-            comments.map((comment, index) => {
-              return (
-                <div key={index}>
-                  <p>{comment.commentBody}</p>
-                  <Button
-                    variant="outlined"
-                    onClick={() => {
-                      onDeleteComment(comment._id);
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </div>
-              );
-            })}
-          {!articles.length ? "" : <h5>your articles</h5>}
-          {articles &&
-            articles.map((article, index) => {
-              return (
-                <div key={index}>
-                  <p>{article.title}</p>
-                  <Button
-                    variant="outlined"
-                    onClick={() => {
-                      onDeleteArticle(article._id);
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </div>
-              );
-            })}
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <h1>Your info</h1>
+            {!comments.length ? "" : <h5>your comments</h5>}
+            {comments &&
+              comments.map((comment, index) => {
+                return (
+                  <div key={index}>
+                    <p>{comment.commentBody}</p>
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        onDeleteComment(comment._id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                );
+              })}
+            {!articles.length ? "" : <h5>your articles</h5>}
+            {articles &&
+              articles.map((article, index) => {
+                return (
+                  <div key={index}>
+                    <p>{article.title}</p>
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        onDeleteArticle(article._id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                );
+              })}
+          </Container>
           {!form ? (
             <Container component="main" maxWidth="xs">
               <CssBaseline />
