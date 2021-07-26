@@ -29,15 +29,22 @@ function Profile(props) {
   }, []);
 
   let flatted = data.flat(Infinity);
-  let sorted = flatted.sort(function (a, b) {
-    if (a.section > b.section) {
-      return 1;
-    }
-    if (b.section > a.section) {
-      return -1;
-    }
-    return 0;
-  });
+
+  const sortBy = (event) => {
+    event.preventDefault();
+    const sorted = flatted.sort(function (a, b) {
+      let option = event.target.name;
+      if (a.option > b.option) {
+        return 1;
+      }
+      if (b.option > a.option) {
+        return -1;
+      }
+      return 0;
+    });
+    onDataChange(sorted);
+  };
+
   if (!data.length || !user) {
     return <p>Loading</p>;
   }
@@ -66,7 +73,7 @@ function Profile(props) {
         <h3>you may like:</h3>
         <Grid container justifyContent="flex-end">
           <Grid item>
-            <SortButton justifyContent="flex-end" />
+            <SortButton justifyContent="flex-end" param={sortBy} />
           </Grid>
         </Grid>
         <br></br>
@@ -79,6 +86,7 @@ function Profile(props) {
                 title={article.title}
                 abstract={article.abstract}
                 url={article.url}
+                image={article?.multimedia?.url}
               />
             </div>
           );
