@@ -63,7 +63,7 @@ function Profile(props) {
               </div>
             ))}
         </div>
-        <h3>Articles you may like</h3>
+        <h3>you may like:</h3>
         <Grid container justifyContent="flex-end">
           <Grid item>
             <SortButton justifyContent="flex-end" />
