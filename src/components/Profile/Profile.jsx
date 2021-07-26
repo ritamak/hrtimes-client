@@ -78,7 +78,7 @@ function Profile(props) {
         </Grid>
         <br></br>
         {flatted.map((article, index) => {
-          console.log(article);
+          console.log(article.multimedia);
           return (
             <div key={index} className="dataCard">
               <DataCard
@@ -86,7 +86,7 @@ function Profile(props) {
                 title={article.title}
                 abstract={article.abstract}
                 url={article.url}
-                image={article?.multimedia?.url}
+                image={article.multimedia ? article?.multimedia[0]?.url : null}
               />
             </div>
           );
