@@ -53,22 +53,22 @@ function App(props) {
     })();
   }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       let userResponse = await axios.get(`${API_URL}/api/profile`, {
-  //         withCredentials: true,
-  //       });
+  useEffect(() => {
+    (async () => {
+      try {
+        let userResponse = await axios.get(`${API_URL}/api/profile`, {
+          withCredentials: true,
+        });
 
-  //       updateUser(userResponse.data);
+        updateUser(userResponse.data);
 
-  //       updateStatus(false);
-  //     } catch (err) {
-  //       console.log("User fetch failed", err);
-  //       updateStatus(false);
-  //     }
-  //   })();
-  // }, []);
+        updateStatus(false);
+      } catch (err) {
+        console.log("User fetch failed", err);
+        updateStatus(false);
+      }
+    })();
+  }, []);
 
   useEffect(() => {}, [data]);
 
@@ -432,6 +432,7 @@ function App(props) {
               <>
                 <Navbar onLogOut={handleLogOut} user={user} />
                 <CreateArticle
+                  user={user}
                   {...routeProps}
                   articles={articles}
                   onCreateArticle={handleCreateArticle}

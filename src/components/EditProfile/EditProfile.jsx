@@ -126,7 +126,11 @@ export default function EditProfile(props) {
               );
             })}
           {!form ? (
-            <Button onClick={handleForm}>Edit Profile</Button>
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+
+              <Button onClick={handleForm}>Edit Profile</Button>
+            </Container>
           ) : (
             <>
               <Container component="main" maxWidth="xs">
