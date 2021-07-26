@@ -51,26 +51,34 @@ function Profile(props) {
 
   return (
     <div>
+      <div className="welcome">
+        <h1>Hi {user.username.toUpperCase()}!</h1>
+      </div>
+      {!articles.length ? "" : <h3>by our users:</h3>}
+      <hr style={{ width: "100%" }}></hr>
+      <Grid container className="data">
+        <br></br>
+        {articles &&
+          articles.map((article, index) => (
+            <Grid
+              container
+              item
+              key={index}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              className="gridItem"
+            >
+              <ArticleCard
+                section={article.section}
+                title={article.title}
+                author={article.author}
+              />
+            </Grid>
+          ))}
+      </Grid>
       <Container component="main" maxWidth="xs">
-        <div className="welcome">
-          <h1>Hi {user.username.toUpperCase()}!</h1>
-        </div>
-        {!articles.length ? "" : <h3>by our users:</h3>}
-        <hr style={{ width: "100%" }}></hr>
-        <div>
-          <br></br>
-          {articles &&
-            articles.map((article, index) => (
-              <div key={index} className="data">
-                <ArticleCard
-                  section={article.section}
-                  title={article.title}
-                  author={article.author}
-                  id={article._id}
-                />
-              </div>
-            ))}
-        </div>
         <h3>you may like:</h3>
         <hr style={{ width: "100%" }}></hr>
 
