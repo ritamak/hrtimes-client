@@ -212,12 +212,12 @@ function App(props) {
       .delete(`${API_URL}/api/${user._id}`, { withCredentials: true })
       .then(() => {
         props.history.push("/");
-        updateUser(null)
+        updateUser(null);
       })
       .catch((err) => {
         console.log("Delete failed!", err);
-      })
-  }
+      });
+  };
 
   const handleCreateArticle = async (event) => {
     event.preventDefault();

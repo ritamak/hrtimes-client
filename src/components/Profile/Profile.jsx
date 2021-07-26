@@ -8,15 +8,7 @@ import ArticleCard from "../ArticleCard/ArticleCard";
 import DataCard from "../DataCard/DataCard";
 
 function Profile(props) {
-  const {
-    data,
-    user,
-    onDataChange,
-    articles,
-    fetchingUser,
-    updateStatus,
-    updateUser,
-  } = props;
+  const { data, user, onDataChange, articles } = props;
   const { interests } = user;
 
   useEffect(() => {
@@ -32,21 +24,6 @@ function Profile(props) {
       .catch((err) => {
         console.log(err);
       });
-
-    (async () => {
-      try {
-        let userResponse = await axios.get(`${API_URL}/api/profile`, {
-          withCredentials: true,
-        });
-
-        updateUser(userResponse.data);
-
-        updateStatus(false);
-      } catch (err) {
-        console.log("User fetch failed", err);
-        updateStatus(false);
-      }
-    })();
   }, []);
 
   let flatted = data.flat(Infinity);
@@ -59,7 +36,7 @@ function Profile(props) {
     }
     return 0;
   });
-  if (!data.length || !user || fetchingUser) {
+  if (!data.length || !user) {
     return <p>Loading</p>;
   }
 
@@ -85,6 +62,7 @@ function Profile(props) {
       <h1>Articles you may like</h1>
       <SortButton />
       {flatted.map((article, index) => {
+        console.log(article);
         return (
           <div key={index} className="dataCard">
             <DataCard

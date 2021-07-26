@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import { Button } from "@material-ui/core";
 import { topStoriesTopics } from "../../data/data";
+import { Link } from "react-router-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import { Input } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 export default function EditProfile(props) {
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+
+  const classes = useStyles();
+
   const {
     updateUser,
     onEditProfile,
@@ -14,6 +45,12 @@ export default function EditProfile(props) {
     onDeleteProfile,
   } = props;
   const { interests, comments, articles } = user;
+  const [form, updateForm] = useState(false);
+
+  const handleForm = (event) => {
+    event.preventDefault();
+    updateForm(true);
+  };
 
   const handleUserName = (event) => {
     let newUserName = event.target.value;
@@ -88,118 +125,167 @@ export default function EditProfile(props) {
                 </div>
               );
             })}
-          <form onSubmit={onEditProfile}>
-            <div className="form-group">
-              <label htmlFor="InputUsername">Username</label>
-              <input
-                type="text"
-                className="form-control"
-                id="InputUsername"
-                name="username"
-                value={user.username}
-                onChange={handleUserName}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="InputFirstName">First Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="InputFirstName"
-                name="firstName"
-                value={user.firstName}
-                onChange={handleFirstName}
-              />
-              <div className="form-group">
-                <label htmlFor="InputLastName">Last Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="InputLastName"
-                  name="lastName"
-                  value={user.lastName}
-                  onChange={handleLastName}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="InputEmail">Email address</label>
-              <input
-                type="email"
-                className="form-control"
-                id="InputEmail"
-                name="email"
-                value={user.email}
-                onChange={handleEmail}
-              />
-              <small id="emailHelp" className="form-text text-muted">
-                We'll never share your email with anyone else.
-              </small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="InputCountry">Country</label>
-              <input
-                type="text"
-                className="form-control"
-                id="InputCountry"
-                name="country"
-                value={user.country}
-                onChange={handleCountry}
-              />
-              <div className="form-group">
-                <label htmlFor="InputCity">City</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="InputCity"
-                  name="city"
-                  value={user.city}
-                  onChange={handleCity}
-                />
-              </div>
-            </div>
+          {!form ? (
+            <Button onClick={handleForm}>Edit Profile</Button>
+          ) : (
+            <>
+              <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                  <form
+                    className={classes.form}
+                    noValidate
+                    onSubmit={onEditProfile}
+                  >
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          autoComplete="uname"
+                          name="username"
+                          variant="outlined"
+                          required
+                          fullWidth
+                          id="userName"
+                          label="Username"
+                          autoFocus
+                          value={user.username}
+                          onChange={handleUserName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          autoComplete="fname"
+                          name="firstName"
+                          variant="outlined"
+                          required
+                          fullWidth
+                          id="firstName"
+                          label="First Name"
+                          autoFocus
+                          value={user.firstName}
+                          onChange={handleFirstName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          variant="outlined"
+                          required
+                          fullWidth
+                          id="lastName"
+                          label="Last Name"
+                          name="lastName"
+                          autoComplete="lname"
+                          value={user.lastName}
+                          onChange={handleLastName}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          variant="outlined"
+                          required
+                          fullWidth
+                          id="email"
+                          label="Email Address"
+                          name="email"
+                          autoComplete="email"
+                          value={user.email}
+                          onChange={handleEmail}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          autoComplete="country"
+                          name="country"
+                          variant="outlined"
+                          required
+                          fullWidth
+                          id="country"
+                          label="country"
+                          autoFocus
+                          value={user.country}
+                          onChange={handleCountry}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          autoComplete="city"
+                          name="city"
+                          variant="outlined"
+                          required
+                          fullWidth
+                          id="city"
+                          label="city"
+                          autoFocus
+                          value={user.city}
+                          onChange={handleCity}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          variant="outlined"
+                          required
+                          fullWidth
+                          name="passwordHash"
+                          label="Password"
+                          type="password"
+                          id="password"
+                          autoComplete="current-password"
+                          placeholder="re-enter your password"
+                          onChange={handlePassword}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Select
+                          style={{ width: "100%" }}
+                          onChange={onTopicChange}
+                          closeMenuOnSelect={false}
+                          defaultValue={[]}
+                          label="selet interests"
+                          isMulti
+                          name="topics"
+                          options={topStoriesTopics}
+                          className="basic-multi-select"
+                          classNamePrefix="select"
+                          multiValue={interests}
+                        />
+                      </Grid>
+                      <Grid>
+                        <FormHelperText>Upload your photo</FormHelperText>
+                        <Input
+                          type="file"
+                          name="myImage"
+                          accept="image/png, image/jpg"
+                        />
+                      </Grid>
+                    </Grid>
 
-            <div className="form-group">
-              <label htmlFor="InputPassword">Password</label>
-              <input
-                name="passwordHash"
-                type="password"
-                className="form-control"
-                id="InputPassword"
-                placeholder="re-enter your password"
-                onChange={handlePassword}
-              />
-              <small id="emailHelp" className="form-text text-muted">
-                Re-enter your password even if you don't want to change it
-              </small>
-            </div>
-
-            <h1>Interests</h1>
-            <Select
-              onChange={onTopicChange}
-              closeMenuOnSelect={false}
-              defaultValue={[]}
-              isMulti
-              name="topics"
-              options={topStoriesTopics}
-              className="basic-multi-select"
-              classNamePrefix="select"
-              multiValue={interests}
-            />
-            <input type="file" name="myImage" accept="image/png, image/jpg" />
-
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </form>
-          <Button
-            variant="outlined"
-            onClick={() => {
-              onDeleteProfile(user);
-            }}
-          >
-            Delete
-          </Button>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className={classes.submit}
+                      style={{ color: "white", background: "black" }}
+                    >
+                      Edit Done
+                    </Button>
+                    <Grid container justifyContent="flex-end">
+                      <Button
+                        variant="outlined"
+                        onClick={() => {
+                          onDeleteProfile(user);
+                        }}
+                      >
+                        Delete Account
+                      </Button>
+                    </Grid>
+                    {props.error && <p className="error">{props.error}</p>}
+                  </form>
+                </div>
+                <Box mt={5}></Box>
+              </Container>
+            </>
+          )}
         </div>
       </>
     </div>
