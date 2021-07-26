@@ -29,6 +29,9 @@ export default function CreateArticle(props) {
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    body: {
+      height: "300px",
+    },
   }));
   const classes = useStyles();
   return (
@@ -70,8 +73,9 @@ export default function CreateArticle(props) {
                   name="title"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} style={{ width: "300px" }}>
                 <TextField
+                  className={classes.body}
                   variant="outlined"
                   required
                   fullWidth
@@ -93,18 +97,17 @@ export default function CreateArticle(props) {
                 />
               </Grid>
             </Grid>
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              style={{ color: "white", background: "black" }}
-            >
-              Create
-            </Button>
-
+            <Grid container justifyContent="center">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                style={{ color: "white", background: "black" }}
+              >
+                Create
+              </Button>
+            </Grid>
             {props.error && <p className="error">{props.error}</p>}
           </form>
         </div>

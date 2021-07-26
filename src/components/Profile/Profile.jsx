@@ -40,6 +40,7 @@ function Profile(props) {
   if (!data.length || !user) {
     return <p>Loading</p>;
   }
+  console.log(flatted);
 
   return (
     <div>
