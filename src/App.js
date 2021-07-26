@@ -10,7 +10,7 @@ import EditProfile from "./components/EditProfile/EditProfile";
 import Footer from "./components/Footer/Footer";
 import CreateArticle from "./components/CreateArticle/CreateArticle";
 import EditArticle from "./components/EditArticle/EditArticle";
-import CreatedArticles from "./components/CreatedArticles/CreatedArticles";
+import ArticleDetails from "./components/ArticleDetails/ArticleDetails";
 import Navbar from "./components/Navbar/Navbar";
 
 function App(props) {
@@ -41,44 +41,34 @@ function App(props) {
         let commentResponse = await axios.get(`${API_URL}/api/comments`, {
           withCredentials: true,
         });
-
-        updateComments(commentResponse.data);
-      } catch (err) {
-        console.log("Comments fetch failed", err);
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      try {
         let articleResponse = await axios.get(`${API_URL}/api/articles`, {
           withCredentials: true,
         });
 
         updateArticles(articleResponse.data);
+        updateComments(commentResponse.data);
       } catch (err) {
-        console.log("Articles fetch failed", err);
+        console.log("Articles & Comments fetch failed", err);
       }
     })();
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        let userResponse = await axios.get(`${API_URL}/api/profile`, {
-          withCredentials: true,
-        });
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       let userResponse = await axios.get(`${API_URL}/api/profile`, {
+  //         withCredentials: true,
+  //       });
 
-        updateUser(userResponse.data);
+  //       updateUser(userResponse.data);
 
-        updateStatus(false);
-      } catch (err) {
-        console.log("User fetch failed", err);
-        updateStatus(false);
-      }
-    })();
-  }, []);
+  //       updateStatus(false);
+  //     } catch (err) {
+  //       console.log("User fetch failed", err);
+  //       updateStatus(false);
+  //     }
+  //   })();
+  // }, []);
 
   useEffect(() => {}, [data]);
 
@@ -355,10 +345,6 @@ function App(props) {
     updateFilteredData(filteredData);
   };
 
-  if (fetchingUser) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <div>
       <Switch>
@@ -389,6 +375,9 @@ function App(props) {
                   data={data}
                   user={user}
                   articles={articles}
+                  fetchingUser={fetchingUser}
+                  updateUser={updateUser}
+                  updateStatus={updateStatus}
                   onDataChange={handleDataChange}
                   onLogOut={handleLogOut}
                   {...routerProps}
@@ -458,12 +447,11 @@ function App(props) {
             return (
               <>
                 <Navbar onLogOut={handleLogOut} user={user} />
-                <CreatedArticles
+                <ArticleDetails
                   {...routeProps}
                   articles={articles}
                   onDeleteArticle={handleDeleteArticle}
                   onCreateComments={handleCreateComments}
-                  comments={comments}
                   user={user}
                 />
               </>

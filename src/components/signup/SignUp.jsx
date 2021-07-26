@@ -1,12 +1,12 @@
 import React from "react";
 import Select from "react-select";
+import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { Input } from "@material-ui/core";
@@ -167,8 +167,13 @@ function SignUp(props) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/signin" variant="body2" style={{ color: "black" }}>
-                  Already have an account? Sign in
+                <Link
+                  className="form-link"
+                  to="/signin"
+                  variant="body2"
+                  style={{ color: "black" }}
+                >
+                  Already have an account? Sign in!
                 </Link>
               </Grid>
             </Grid>

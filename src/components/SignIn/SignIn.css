@@ -11,3 +11,11 @@
   text-decoration: underline;
   color: #9c0000;
 }
+
+.form-link {
+  text-decoration: none;
+}
+
+.form-link:hover {
+  text-decoration: underline;
+}
