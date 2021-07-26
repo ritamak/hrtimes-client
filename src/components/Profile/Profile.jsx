@@ -7,6 +7,7 @@ import "./Profile.css";
 import ArticleCard from "../ArticleCard/ArticleCard";
 import DataCard from "../DataCard/DataCard";
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
 
 function Profile(props) {
   const { data, user, onDataChange, articles } = props;
@@ -48,11 +49,11 @@ function Profile(props) {
         <div className="welcome">
           <h1>Hi {user.username.toUpperCase()}!</h1>
         </div>
-        {!articles.length ? "" : <h1>Articles created by our users</h1>}
-        <div className="articleCard">
+        {!articles.length ? "" : <h3>by our users:</h3>}
+        <div>
           {articles &&
             articles.map((article, index) => (
-              <div key={index}>
+              <div key={index} className="data">
                 <ArticleCard
                   section={article.section}
                   title={article.title}
@@ -62,8 +63,13 @@ function Profile(props) {
               </div>
             ))}
         </div>
-        <h1>Articles you may like</h1>
-        <SortButton />
+        <h3>Articles you may like</h3>
+        <Grid container justifyContent="flex-end">
+          <Grid item>
+            <SortButton justifyContent="flex-end" />
+          </Grid>
+        </Grid>
+        <br></br>
         {flatted.map((article, index) => {
           console.log(article);
           return (

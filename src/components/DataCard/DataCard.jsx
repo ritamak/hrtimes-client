@@ -35,23 +35,35 @@ export default function DataCard({ section, title, abstract, image, url }) {
             />
           )}
 
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+          <CardContent style={{ backgroundColor: "#737373" }}>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              style={{ fontWeight: "bold" }}
+            >
               {title}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              style={{ color: "white" }}
+            >
               {abstract}
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Link to={url}>
+          <Link href={url}>
             <Button size="small" color="primary">
-              Share
+              Read
             </Button>
           </Link>
         </CardActions>
       </Card>
+      <br></br>
+      <br></br>
     </div>
   );
 }

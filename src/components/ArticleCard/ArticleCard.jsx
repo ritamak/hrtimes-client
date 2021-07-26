@@ -13,31 +13,39 @@ const useStyles = makeStyles({
     fontSize: 14,
     marginBottom: 10,
   },
+  card: {
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
+  },
 });
 
 export default function ArticleCard({ section, title, author, id }) {
   const classes = useStyles();
 
   return (
-    <Card style={{ width: "30%" }}>
-      <CardContent>
-        <Typography className={classes.section} color="textSecondary">
-          {section}
-        </Typography>
-        <Typography variant="h5" component="h2">
-          {title}
-        </Typography>
-        <Typography variant="body2" component="p">
-          {author.username}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Link to={`/article/${id}`}>
-          <Button size="small">
-            <ArrowForwardOutlinedIcon />
-          </Button>
-        </Link>
-      </CardActions>
-    </Card>
+    <div className={classes.card}>
+      <Card style={{ backgroundColor: "#ababab" }}>
+        <CardContent>
+          <Typography className={classes.section} color="textSecondary">
+            {section}
+          </Typography>
+          <Typography variant="h5" component="h2" style={{ color: "white" }}>
+            {title}
+          </Typography>
+          <Typography variant="body2" component="p" style={{ color: "black" }}>
+            {author.username}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Link to={`/article/${id}`}>
+            <Button size="small">
+              <ArrowForwardOutlinedIcon />
+            </Button>
+          </Link>
+        </CardActions>
+      </Card>
+      <br></br>
+    </div>
   );
 }
