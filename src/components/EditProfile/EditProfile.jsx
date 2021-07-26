@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Select from "react-select";
 import { Button } from "@material-ui/core";
 import { topStoriesTopics } from "../../data/data";
 
-export default function EditProfile(props) {
+function EditProfile(props) {
   const {
     updateUser,
     onEditProfile,
@@ -14,6 +14,7 @@ export default function EditProfile(props) {
     onDeleteProfile,
     fetchingUser,
   } = props;
+
   const { interests, comments, articles } = user;
 
   const handleUserName = (event) => {
@@ -47,7 +48,7 @@ export default function EditProfile(props) {
     updateUser({ ...user, password: newPassword });
   };
 
-  if (!user || fetchingUser) {
+  if (fetchingUser) {
     return <p>Loading</p>;
   }
   return (
@@ -206,3 +207,5 @@ export default function EditProfile(props) {
     </div>
   );
 }
+
+export default EditProfile;
