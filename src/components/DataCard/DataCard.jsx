@@ -12,9 +12,6 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
   media: {
     height: 140,
   },
@@ -24,8 +21,8 @@ export default function DataCard({ section, title, abstract, image, url }) {
   const classes = useStyles();
 
   return (
-    <div>
-      <Card className={classes.root}>
+    <div style={{ width: "100%" }}>
+      <Card>
         <CardActionArea>
           {image && (
             <CardMedia

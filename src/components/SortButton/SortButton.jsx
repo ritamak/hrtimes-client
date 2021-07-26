@@ -10,7 +10,7 @@ export default function SortButton({ sortBy }) {
     sortBy(event);
   };
   return (
-    <FormControl>
+    <FormControl style={{ width: "200px" }}>
       <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
       <Select
         labelId="demo-simple-select-label"
