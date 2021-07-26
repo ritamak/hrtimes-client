@@ -12,6 +12,7 @@ export default function EditProfile(props) {
     onDeleteComment,
     onDeleteArticle,
     onDeleteProfile,
+    fetchingUser,
   } = props;
   const { interests, comments, articles } = user;
 
@@ -46,7 +47,7 @@ export default function EditProfile(props) {
     updateUser({ ...user, password: newPassword });
   };
 
-  if (!user) {
+  if (!user || fetchingUser) {
     return <p>Loading</p>;
   }
   return (

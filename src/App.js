@@ -417,6 +417,7 @@ function App(props) {
                   updateUser={updateUser}
                   interests={interests}
                   articles={articles}
+                  fetchingUser={fetchingUser}
                   onDeleteComment={handleDeleteComment}
                   onDeleteArticle={handleDeleteArticle}
                 />
