@@ -55,11 +55,11 @@ export default function DataCard({ section, title, abstract, image, url }) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Link href={url}>
+          <a href={url}>
             <Button size="small" color="primary">
               Read
             </Button>
-          </Link>
+          </a>
         </CardActions>
       </Card>
       <br></br>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
 import CreateComment from "../CreateComment/CreateComment";
+import UserArticleCard from "../UserArticleCard/UserArticleCard";
 
 export default function ArticleDetails(props) {
   const [articleDetail, updateArticleDetail] = useState(null);
@@ -29,15 +30,17 @@ export default function ArticleDetails(props) {
   return (
     <>
       {articleDetail && (
-        <>
-          <p>{articleDetail.section}</p>
-          <p>{articleDetail.subsection}</p>
-          <p>{articleDetail.title}</p>
-          <p>{articleDetail.body}</p>
-          <p>{articleDetail.created_date}</p>
-          <p>{articleDetail.author.username}</p>
+        <div className="articleDetail">
+          <UserArticleCard
+            section={articleDetail.section}
+            subsection={articleDetail.subsection}
+            title={articleDetail.title}
+            body={articleDetail.body}
+            created_date={articleDetail.created_date}
+            username={articleDetail.author.username}
+          />
           <CreateComment articleId={id} onCreateComments={onCreateComments} />
-        </>
+        </div>
       )}
       {commentDetails &&
         commentDetails.map((comment, index) => (

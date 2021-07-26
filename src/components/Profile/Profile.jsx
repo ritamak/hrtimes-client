@@ -57,7 +57,9 @@ function Profile(props) {
           <h1>Hi {user.username.toUpperCase()}!</h1>
         </div>
         {!articles.length ? "" : <h3>by our users:</h3>}
+        <hr style={{ width: "100%" }}></hr>
         <div>
+          <br></br>
           {articles &&
             articles.map((article, index) => (
               <div key={index} className="data">
@@ -71,6 +73,8 @@ function Profile(props) {
             ))}
         </div>
         <h3>you may like:</h3>
+        <hr style={{ width: "100%" }}></hr>
+
         <Grid container justifyContent="flex-end">
           <Grid item>
             <SortButton justifyContent="flex-end" param={sortBy} />
