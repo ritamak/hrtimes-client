@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormControl, Select, InputLabel } from "@material-ui/core";
+import MenuItem from "@material-ui/core/MenuItem";
 
-export default function SortButton(prop) {
+export default function SortButton({ sortBy }) {
+  const [name, setName] = React.useState("");
+
+  const handleChange = (event) => {
+    setName(event.target.value);
+    sortBy(event);
+  };
   return (
-    <div>
-      <FormControl variant="outlined">
-        <InputLabel htmlFor="outlined-age-native-simple">sort by:</InputLabel>
-        <Select native label="sort" onChange={prop.param}>
-          <option aria-label="None" value="" />
-          <option value="section" name="section">
-            section
-          </option>
-          <option value="subsection" name="subsection">
-            subsection
-          </option>
-          <option value="published_date" name="published_date">
-            published date
-          </option>
-        </Select>
-      </FormControl>
-    </div>
+    <FormControl>
+      <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={name}
+        onChange={handleChange}
+      >
+        <MenuItem value="section">Section</MenuItem>
+        <MenuItem value="updated_date">Updated Date</MenuItem>
+        <MenuItem value="published_date">Published Date</MenuItem>
+      </Select>
+    </FormControl>
   );
 }

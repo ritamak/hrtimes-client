@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, setState } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
 import SortButton from "../SortButton/SortButton";
@@ -32,12 +31,13 @@ function Profile(props) {
 
   const sortBy = (event) => {
     event.preventDefault();
-    const sorted = flatted.sort(function (a, b) {
-      let option = event.target.name;
-      if (a.option > b.option) {
+    let option = event.target.value;
+    const clonedData = JSON.parse(JSON.stringify(flatted));
+    const sorted = clonedData.sort(function (a, b) {
+      if (a[option] > b[option]) {
         return 1;
       }
-      if (b.option > a.option) {
+      if (b[option] > a[option]) {
         return -1;
       }
       return 0;
@@ -48,7 +48,6 @@ function Profile(props) {
   if (!data.length || !user) {
     return <p>Loading</p>;
   }
-  console.log(flatted);
 
   return (
     <div>
@@ -77,12 +76,14 @@ function Profile(props) {
 
         <Grid container justifyContent="flex-end">
           <Grid item>
-            <SortButton justifyContent="flex-end" param={sortBy} />
+            <SortButton justifyContent="flex-end" sortBy={sortBy} />
           </Grid>
         </Grid>
         <br></br>
         {flatted.map((article, index) => {
-          console.log(article.multimedia);
+          if (index === 0) {
+            console.log(article, "ARTIGO");
+          }
           return (
             <div key={index} className="dataCard">
               <DataCard
