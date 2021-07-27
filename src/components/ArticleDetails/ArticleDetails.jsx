@@ -37,7 +37,7 @@ export default function ArticleDetails(props) {
             title={articleDetail.title}
             body={articleDetail.body}
             created_date={articleDetail.created_date}
-            username={articleDetail.author.username}
+            author={articleDetail.author}
             image={articleDetail.image}
           />
           <CreateComment articleId={id} onCreateComments={onCreateComments} />

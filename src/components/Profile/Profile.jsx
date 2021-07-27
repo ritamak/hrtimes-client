@@ -92,7 +92,6 @@ function Profile(props) {
         <br></br>
         {articles &&
           articles.map((article, index) => {
-            console.log(article.author.username);
             return (
               <Grid
                 container
@@ -109,7 +108,7 @@ function Profile(props) {
                   title={article.title}
                   id={article._id}
                   image={article.image}
-                  username={article.author.username}
+                  author={article.author}
                 />
               </Grid>
             );
