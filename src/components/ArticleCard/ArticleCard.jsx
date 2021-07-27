@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   root: {
@@ -30,8 +31,8 @@ export default function UserArticleCard({
 
   return (
     <div>
-      <div className="card">
-        <Card>
+      <Grid className="cardWrappers">
+        <Card className="card">
           <CardActionArea>
             {image && (
               <CardMedia
@@ -93,7 +94,7 @@ export default function UserArticleCard({
           </CardActionArea>
         </Card>
         <br></br>
-      </div>
+      </Grid>
     </div>
   );
 }

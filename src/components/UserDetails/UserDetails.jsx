@@ -35,15 +35,35 @@ function UserDetails(props) {
         <button>Follow</button>
       </div>
       <p>
-        {userDetails.firstName} + {userDetails.lastName}
+        {userDetails.firstName} {userDetails.lastName}
       </p>
       <p>{userDetails.email}</p>
       <p>{userDetails.country}</p>
       <p>{userDetails.city}</p>
-      {/* <p>{userDetails.interests}</p>
-      <p>{userDetails.articles}</p>
-      <p>{userDetails.comments}</p>
-      <p>{userDetails.following}</p> */}
+      <>
+        {userDetails.interests.map((interest) => {
+          console.log(interest);
+          return <p>{interest}</p>;
+        })}
+      </>
+      <>
+        {userDetails.articles.map((article) => {
+          console.log(article);
+          return <p>{article}</p>;
+        })}
+      </>
+      <>
+        {userDetails.comments.map((comment) => {
+          console.log(comment);
+          return <p>{comment}</p>;
+        })}
+      </>
+      <>
+        {userDetails.following.map((user) => {
+          console.log(user);
+          return <p>{user}</p>;
+        })}
+      </>
     </div>
   );
 }

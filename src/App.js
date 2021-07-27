@@ -470,6 +470,7 @@ function App(props) {
           render={(routeProps) => {
             return (
               <>
+                <Navbar user={user} onLogOut={handleLogOut} />
                 <EditArticle
                   {...routeProps}
                   onEditArticle={handleEditArticle}
