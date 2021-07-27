@@ -6,3 +6,29 @@
   justify-content: center;
   font-size: 2rem;
 }
+
+.data {
+  display: flex;
+  flex-flow: row wrap;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.gridItem {
+  justify-content: center;
+  align-items: center;
+}
+
+.gridItemTwo {
+  justify-content: center;
+  align-items: center;
+}
+
+.dataArticles {
+  display: flex;
+  flex-flow: row wrap;
+
+  justify-content: center;
+  align-items: center;
+}

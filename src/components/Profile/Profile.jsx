@@ -5,10 +5,10 @@ import SortButton from "../SortButton/SortButton";
 import "./Profile.css";
 import ArticleCard from "../ArticleCard/ArticleCard";
 import DataCard from "../DataCard/DataCard";
-import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
 function Profile(props) {
+<<<<<<< HEAD
   const {
     data,
     user,
@@ -18,6 +18,10 @@ function Profile(props) {
     updateComments,
     updateArticles,
   } = props;
+=======
+  const { data, user, onDataChange, articles, updateComments, updateArticles } =
+    props;
+>>>>>>> 5a23c44a6470352757b286a989f82253eaf85e9a
   const { interests } = user;
 
   useEffect(() => {
@@ -50,6 +54,23 @@ function Profile(props) {
     })();
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        let commentResponse = await axios.get(`${API_URL}/api/comments`, {
+          withCredentials: true,
+        });
+        let articleResponse = await axios.get(`${API_URL}/api/articles`, {
+          withCredentials: true,
+        });
+        updateComments(commentResponse.data);
+        updateArticles(articleResponse.data);
+      } catch (err) {
+        console.log("Fetching data failed", err);
+      }
+    })();
+  }, []);
+
   let flatted = data.flat(Infinity);
 
   const sortBy = (event) => {
@@ -74,38 +95,56 @@ function Profile(props) {
 
   return (
     <div>
-      <Container component="main" maxWidth="xs">
-        <div className="welcome">
-          <h1>Hi {user.username.toUpperCase()}!</h1>
-        </div>
-        {!articles.length ? "" : <h3>by our users:</h3>}
-        <hr style={{ width: "100%" }}></hr>
-        <div>
-          <br></br>
-          {articles &&
-            articles.map((article, index) => (
-              <div key={index} className="data">
-                <ArticleCard
-                  section={article.section}
-                  title={article.title}
-                  author={article.author}
-                  id={article._id}
-                />
-              </div>
-            ))}
-        </div>
-        <h3>you may like:</h3>
-        <hr style={{ width: "100%" }}></hr>
+      <div className="welcome">
+        <h1>Hi {user.username.toUpperCase()}!</h1>
+      </div>
+      {!articles.length ? "" : <h3>by our users:</h3>}
+      <hr style={{ width: "100%" }}></hr>
+      <Grid container className="data">
+        <br></br>
+        {articles &&
+          articles.map((article, index) => (
+            <Grid
+              container
+              item
+              key={index}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              className="gridItem"
+            >
+              <ArticleCard
+                section={article.section}
+                title={article.title}
+                author={article.author}
+                id={article._id}
+              />
+            </Grid>
+          ))}
+      </Grid>
 
+      <h3>you may like:</h3>
+      <hr style={{ width: "100%" }}></hr>
+
+      <Grid container className="dataArticles">
+        <br></br>
         <Grid container justifyContent="flex-end">
           <Grid item>
             <SortButton justifyContent="flex-end" sortBy={sortBy} />
           </Grid>
         </Grid>
-        <br></br>
         {flatted.map((article, index) => {
           return (
-            <div key={index} className="dataCard">
+            <Grid
+              container
+              key={index}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              className="gridItemTwo"
+            >
               <DataCard
                 section={article.section}
                 title={article.title}
@@ -113,10 +152,10 @@ function Profile(props) {
                 url={article.url}
                 image={article.multimedia ? article?.multimedia[0]?.url : null}
               />
-            </div>
+            </Grid>
           );
         })}
-      </Container>
+      </Grid>
     </div>
   );
 }

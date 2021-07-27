@@ -362,6 +362,9 @@ function App(props) {
                   onDataChange={handleDataChange}
                   onLogOut={handleLogOut}
                   {...routerProps}
+                  comments={comments}
+                  updateComments={updateComments}
+                  updateArticles={updateArticles}
                 />
               </>
             );
@@ -400,7 +403,10 @@ function App(props) {
                   articles={articles}
                   fetchingUser={fetchingUser}
                   comments={comments}
+                  updateComments={updateComments}
+                  updateArticles={updateArticles}
                   onDeleteComment={handleDeleteComment}
+                  updateStatus={updateStatus}
                   onDeleteArticle={handleDeleteArticle}
                 />
               </>
