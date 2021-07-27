@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { Button } from "@material-ui/core";
 import { topStoriesTopics } from "../../data/data";
-import { Link } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -92,7 +91,7 @@ export default function EditProfile(props) {
     <div>
       <>
         <div>
-          <Container component="main" maxWidth="xs">
+          <Grid container xs={12} sm={6} md={4} lg={3} className="gridItemTwo">
             <CssBaseline />
             <h1>Your info</h1>
             {!comments.length ? "" : <h5>your comments</h5>}
@@ -129,7 +128,7 @@ export default function EditProfile(props) {
                   </div>
                 );
               })}
-          </Container>
+          </Grid>
           {!form ? (
             <Container component="main" maxWidth="xs">
               <CssBaseline />

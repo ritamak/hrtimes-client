@@ -5,7 +5,6 @@ import SortButton from "../SortButton/SortButton";
 import "./Profile.css";
 import ArticleCard from "../ArticleCard/ArticleCard";
 import DataCard from "../DataCard/DataCard";
-import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
 function Profile(props) {
@@ -78,22 +77,31 @@ function Profile(props) {
             </Grid>
           ))}
       </Grid>
-      <Container component="main" maxWidth="xs">
-        <h3>you may like:</h3>
-        <hr style={{ width: "100%" }}></hr>
 
+      <h3>you may like:</h3>
+      <hr style={{ width: "100%" }}></hr>
+
+      <Grid container className="dataArticles">
+        <br></br>
         <Grid container justifyContent="flex-end">
           <Grid item>
             <SortButton justifyContent="flex-end" sortBy={sortBy} />
           </Grid>
         </Grid>
-        <br></br>
         {flatted.map((article, index) => {
           if (index === 0) {
             console.log(article, "ARTIGO");
           }
           return (
-            <div key={index} className="dataCard">
+            <Grid
+              container
+              key={index}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              className="gridItemTwo"
+            >
               <DataCard
                 section={article.section}
                 title={article.title}
@@ -101,10 +109,10 @@ function Profile(props) {
                 url={article.url}
                 image={article.multimedia ? article?.multimedia[0]?.url : null}
               />
-            </div>
+            </Grid>
           );
         })}
-      </Container>
+      </Grid>
     </div>
   );
 }

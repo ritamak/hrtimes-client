@@ -10,10 +10,25 @@
 .data {
   display: flex;
   flex-flow: row wrap;
-  background-color: blue;
+
+  justify-content: center;
+  align-items: center;
 }
 
 .gridItem {
+  justify-content: center;
+  align-items: center;
+}
+
+.gridItemTwo {
+  justify-content: center;
+  align-items: center;
+}
+
+.dataArticles {
+  display: flex;
+  flex-flow: row wrap;
+
   justify-content: center;
   align-items: center;
 }
