@@ -1,0 +1,23 @@
+.wrapper {
+  justify-content: center;
+  align-items: center;
+  background-color: pink;
+}
+.comments {
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  margin: 2px solid blue;
+  height: 450px;
+  margin: 15px;
+}
+
+.articles {
+  justify-content: center;
+  align-items: center;
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+}
