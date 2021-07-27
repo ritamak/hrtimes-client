@@ -1,3 +1,6 @@
+.profile {
+  padding: 30px;
+}
 .welcome {
   display: flex;
   flex-direction: row;
@@ -5,6 +8,14 @@
   text-align: center;
   justify-content: center;
   font-size: 2rem;
+  color: black;
+  text-shadow: 5px 5px 10px black;
+  font-family: "Times New Roman", Times, serif;
+}
+
+h3 {
+  color: black;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .dataCards {
@@ -29,5 +40,4 @@
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
 }

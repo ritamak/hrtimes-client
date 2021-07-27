@@ -13,6 +13,12 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import axios from "axios";
 import { API_URL } from "../../config";
 import { Link } from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import SettingsIcon from "@material-ui/icons/Settings";
+import Paper from "@material-ui/core/Paper";
+import "./EditProfile.css";
 
 export default function EditProfile(props) {
   const useStyles = makeStyles((theme) => ({
@@ -112,71 +118,85 @@ export default function EditProfile(props) {
     return <p>Loading</p>;
   }
   return (
-    <div>
-      <>
-        <h1>Your info</h1>
-
+    <>
+      <Grid classname="bigWrapper">
         <Grid container className="wrapper">
-          <CssBaseline />
-          {!comments.length ? "" : <h5>your comments</h5>}
-          {comments &&
-            comments.map((comment, index) => {
-              return (
-                <Grid
-                  container
-                  key={index}
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                  className="comments"
-                >
-                  <p>{comment.commentBody}</p>
-                  <Button
-                    variant="outlined"
-                    onClick={() => {
-                      onDeleteComment(comment._id);
-                    }}
+          <Grid className="commentsWrapper">
+            {!comments.length ? "" : <h3>your comments:</h3>}
+            {comments &&
+              comments.map((comment, index) => {
+                return (
+                  <Grid
+                    container
+                    className="comments"
+                    key={index}
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    lg={3}
                   >
-                    Delete
-                  </Button>
-                </Grid>
-              );
-            })}
-          {!articles.length ? "" : <h5>your articles</h5>}
-          {articles &&
-            articles.map((article, index) => {
-              return (
-                <Grid
-                  container
-                  key={index}
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                  className="articles"
-                >
-                  <p>{article.title}</p>
-                  <Button
-                    variant="outlined"
-                    onClick={() => {
-                      onDeleteArticle(article._id);
-                    }}
-                  >
-                    Delete
-                  </Button>
-                  <Link to={`/article/${article._id}/edit`}>
-                    <Button>Edit Article</Button>
-                  </Link>
-                </Grid>
-              );
-            })}
+                    <Paper elevation={3}>
+                      <p>{comment.commentBody}</p>
+                    </Paper>
+                    <Tooltip title="Delete">
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          onDeleteComment(comment._id);
+                        }}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                );
+              })}
+          </Grid>
+          <Grid className="articles">
+            {!articles.length ? "" : <h3>your articles</h3>}
+            {articles &&
+              articles.map((article, index) => {
+                return (
+                  <Grid container key={index} xs={12} sm={6} md={4} lg={3}>
+                    <Paper elevation={3}>
+                      <p>{article.title}</p>
+                    </Paper>
+                    <Tooltip title="Delete">
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          onDeleteArticle(article._id);
+                        }}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+
+                    <Tooltip title="Edit">
+                      <Link to={`/article/${article._id}/edit`}>
+                        <IconButton aria-label="edit">
+                          <SettingsIcon />
+                        </IconButton>
+                      </Link>
+                    </Tooltip>
+                  </Grid>
+                );
+              })}
+          </Grid>
         </Grid>
         {!form ? (
           <Container component="main" maxWidth="xs">
             <CssBaseline />
-
-            <Button onClick={handleForm}>Edit Profile</Button>
+            <Grid className="editProfileButton">
+              <Button
+                size="large"
+                style={{ backgroundColor: "black", color: "white" }}
+                className="editButton"
+                onClick={handleForm}
+              >
+                Edit Profile
+              </Button>
+            </Grid>
           </Container>
         ) : (
           <>
@@ -318,7 +338,7 @@ export default function EditProfile(props) {
                     className={classes.submit}
                     style={{ color: "white", background: "black" }}
                   >
-                    Edit Done
+                    Done
                   </Button>
                   <Grid container justifyContent="flex-end">
                     <Button
@@ -337,7 +357,7 @@ export default function EditProfile(props) {
             </Container>
           </>
         )}
-      </>
-    </div>
+      </Grid>
+    </>
   );
 }

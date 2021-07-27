@@ -63,12 +63,7 @@ export default function UserArticleCard({
             {section}
           </Typography>
 
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            style={{ color: "black" }}
-          >
+          <Typography variant="body2" component="h2" style={{ color: "black" }}>
             {body}
           </Typography>
           <br></br>

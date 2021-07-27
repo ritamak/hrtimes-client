@@ -13,6 +13,7 @@ import EditArticle from "./components/EditArticle/EditArticle";
 import ArticleDetails from "./components/ArticleDetails/ArticleDetails";
 import Navbar from "./components/Navbar/Navbar";
 import UserDetails from "./components/UserDetails/UserDetails";
+import "./App.css";
 
 function App(props) {
   const [user, updateUser] = useState(null);

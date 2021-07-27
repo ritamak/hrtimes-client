@@ -29,10 +29,8 @@ const useStyles = makeStyles({
 
 export default function UserArticleCard({
   section,
-  subsection,
   title,
   body,
-  created_date,
   username,
   image,
   id,
@@ -41,9 +39,9 @@ export default function UserArticleCard({
 
   return (
     <div>
-      <Grid className="cardWrappers">
+      <Grid className={`cardWrappers`}>
         <Link to={`/article/${id}`} className={classes.link}>
-          <Card className="card">
+          <Card elevation={2} className="card">
             <CardActionArea>
               {image && (
                 <CardMedia
@@ -54,13 +52,17 @@ export default function UserArticleCard({
               )}
               <CardContent
                 className={classes.cards}
-                style={{ backgroundColor: "#404040" }}
+                style={{ backgroundColor: "#e6e6e6" }}
               >
                 <Typography
                   gutterBottom
                   variant="h5"
                   component="h2"
-                  style={{ fontWeight: "bold", color: "white" }}
+                  style={{
+                    fontWeight: "bold",
+                    color: "black",
+                    fontSize: "20px",
+                  }}
                 >
                   {title}
                 </Typography>
@@ -68,17 +70,13 @@ export default function UserArticleCard({
                   gutterBottom
                   variant="h5"
                   component="h2"
-                  style={{ fontWeight: "bold", color: "white" }}
+                  style={{
+                    fontWeight: "bold",
+                    color: "black",
+                    fontSize: "10px",
+                  }}
                 >
                   {section}
-                </Typography>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="h2"
-                  style={{ fontWeight: "bold", color: "white" }}
-                >
-                  {subsection}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -92,15 +90,11 @@ export default function UserArticleCard({
                   gutterBottom
                   variant="h5"
                   component="h2"
-                  style={{ fontWeight: "bold" }}
-                >
-                  {created_date}
-                </Typography>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="h2"
-                  style={{ fontWeight: "bold", color: "white" }}
+                  style={{
+                    fontWeight: "bold",
+                    color: "black",
+                    fontSize: "15px",
+                  }}
                 >
                   {username}
                 </Typography>
