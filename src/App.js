@@ -38,39 +38,14 @@ function App(props) {
   useEffect(() => {
     (async () => {
       try {
-        let commentResponse = await axios.get(`${API_URL}/api/comments`, {
-          withCredentials: true,
-        });
-        let articleResponse = await axios.get(`${API_URL}/api/articles`, {
-          withCredentials: true,
-        });
         let userResponse = await axios.get(`${API_URL}/api/profile`, {
           withCredentials: true,
         });
 
-        updateComments(commentResponse.data);
-        updateArticles(articleResponse.data);
         updateUser(userResponse.data);
         updateStatus(false);
       } catch (err) {
         console.log("Fetching user data failed", err);
-        updateStatus(false);
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        let userResponse = await axios.get(`${API_URL}/api/profile`, {
-          withCredentials: true,
-        });
-
-        updateUser(userResponse.data);
-
-        updateStatus(false);
-      } catch (err) {
-        console.log("User fetch failed", err);
         updateStatus(false);
       }
     })();

@@ -9,7 +9,15 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
 function Profile(props) {
-  const { data, user, onDataChange, articles } = props;
+  const {
+    data,
+    user,
+    onDataChange,
+    articles,
+    comments,
+    updateComments,
+    updateArticles,
+  } = props;
   const { interests } = user;
 
   useEffect(() => {
@@ -25,6 +33,21 @@ function Profile(props) {
       .catch((err) => {
         console.log(err);
       });
+    (async () => {
+      try {
+        let commentResponse = await axios.get(`${API_URL}/api/comments`, {
+          withCredentials: true,
+        });
+        let articleResponse = await axios.get(`${API_URL}/api/articles`, {
+          withCredentials: true,
+        });
+
+        updateComments(commentResponse.data);
+        updateArticles(articleResponse.data);
+      } catch (err) {
+        console.log("Fetching user data failed", err);
+      }
+    })();
   }, []);
 
   let flatted = data.flat(Infinity);
@@ -81,9 +104,6 @@ function Profile(props) {
         </Grid>
         <br></br>
         {flatted.map((article, index) => {
-          if (index === 0) {
-            console.log(article, "ARTIGO");
-          }
           return (
             <div key={index} className="dataCard">
               <DataCard
