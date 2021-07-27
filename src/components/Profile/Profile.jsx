@@ -82,13 +82,15 @@ function Profile(props) {
   }
 
   return (
-    <div>
+    <>
       <div className="welcome">
         <h1>Hi {user.username.toUpperCase()}!</h1>
       </div>
+
       {!articles.length ? "" : <h3>by our users:</h3>}
       <hr style={{ width: "100%" }}></hr>
-      <Grid container className="data">
+
+      <Grid container className="dataArticles">
         <br></br>
         {articles &&
           articles.map((article, index) => {
@@ -148,7 +150,7 @@ function Profile(props) {
           );
         })}
       </Grid>
-    </div>
+    </>
   );
 }
 

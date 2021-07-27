@@ -5,6 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   root: {
@@ -28,10 +29,9 @@ export default function UserArticleCard({
   const classes = useStyles();
 
   return (
-<<<<<<< HEAD
     <div>
-      <div className="card">
-        <Card>
+      <Grid className="cardWrappers">
+        <Card className="card">
           <CardActionArea>
             {image && (
               <CardMedia
@@ -93,30 +93,7 @@ export default function UserArticleCard({
           </CardActionArea>
         </Card>
         <br></br>
-      </div>
-=======
-    <div className="cardContainer">
-      <Card style={{ backgroundColor: "#ababab" }} className="card">
-        <CardContent>
-          <Typography className={classes.section} color="textSecondary">
-            {section}
-          </Typography>
-          <Typography variant="h5" component="h2" style={{ color: "black" }}>
-            {title}
-          </Typography>
-          <Typography variant="body2" component="p">
-            <Link to={`/users/${author._id}`}>{author.username}</Link>
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Link to={`/article/${id}`}>
-            <Button size="small">
-              <ArrowForwardOutlinedIcon />
-            </Button>
-          </Link>
-        </CardActions>
-      </Card>
->>>>>>> e6793f0835ca300a10ab131ede997236c226e147
+      </Grid>
     </div>
   );
 }

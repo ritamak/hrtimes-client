@@ -9,10 +9,17 @@ import "./DataCard.css";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
+import ArrowForwardOutlinedIcon from "@material-ui/icons/ArrowForwardOutlined";
 
 const useStyles = makeStyles({
   media: {
-    height: 140,
+    height: 150,
+  },
+  cards: {
+    height: 320,
+  },
+  link: {
+    textDecoration: "none",
   },
 });
 
@@ -22,43 +29,50 @@ export default function DataCard({ section, title, abstract, image, url }) {
   return (
     <div>
       <Grid className="cardWrappers">
-        <Card className="card">
-          <CardActionArea>
-            {image && (
-              <CardMedia
-                className={classes.media}
-                image={image}
-                title={section}
-              />
-            )}
+        <a href={url} className={classes.link}>
+          <Card className="cardTwo">
+            <CardActionArea>
+              {image && (
+                <CardMedia
+                  className={classes.media}
+                  image={image}
+                  title={section}
+                />
+              )}
 
-            <CardContent style={{ backgroundColor: "#737373" }}>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                style={{ fontWeight: "bold" }}
+              <CardContent
+                className={classes.cards}
+                style={{ backgroundColor: "#737373" }}
               >
-                {title}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                style={{ color: "white" }}
-              >
-                {abstract}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <a href={url}>
-              <Button size="small" color="primary">
-                Read
-              </Button>
-            </a>
-          </CardActions>
-        </Card>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                  style={{ fontWeight: "bold" }}
+                >
+                  {title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                  style={{ color: "white" }}
+                >
+                  {abstract}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <Grid container justifyContent="flex-end">
+              <CardActions>
+                <a href={url}>
+                  <Button size="small">
+                    <ArrowForwardOutlinedIcon />
+                  </Button>
+                </a>
+              </CardActions>
+            </Grid>
+          </Card>
+        </a>
       </Grid>
       <br></br>
       <br></br>

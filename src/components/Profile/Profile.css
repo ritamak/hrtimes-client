@@ -7,10 +7,9 @@
   font-size: 2rem;
 }
 
-.data {
+.dataCards {
   display: flex;
   flex-flow: row wrap;
-
   justify-content: center;
   align-items: center;
 }
@@ -28,7 +27,7 @@
 .dataArticles {
   display: flex;
   flex-flow: row wrap;
-
   justify-content: center;
   align-items: center;
+  background-color: #f0f0f0;
 }
