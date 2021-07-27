@@ -30,7 +30,7 @@ export default function ArticleCard({ section, title, author, id }) {
             {title}
           </Typography>
           <Typography variant="body2" component="p">
-            {author.username}
+            <Link to={`/users/${author._id}`}>{author.username}</Link>
           </Typography>
         </CardContent>
         <CardActions>
@@ -41,7 +41,6 @@ export default function ArticleCard({ section, title, author, id }) {
           </Link>
         </CardActions>
       </Card>
-      <br></br>
     </div>
   );
 }

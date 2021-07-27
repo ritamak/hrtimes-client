@@ -12,6 +12,7 @@ import CreateArticle from "./components/CreateArticle/CreateArticle";
 import EditArticle from "./components/EditArticle/EditArticle";
 import ArticleDetails from "./components/ArticleDetails/ArticleDetails";
 import Navbar from "./components/Navbar/Navbar";
+import UserDetails from "./components/UserDetails/UserDetails";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -453,10 +454,24 @@ function App(props) {
           render={(routeProps) => {
             return (
               <>
-                <Navbar onLogOut={handleLogOut} />
+                <Navbar user={user} onLogOut={handleLogOut} />
                 <EditArticle
                   {...routeProps}
                   onEditArticle={handleEditArticle}
+                />
+              </>
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/users/:id"
+          render={(routeProps) => {
+            return (
+              <>
+                <Navbar user={user} onLogOut={handleLogOut} />
+                <UserDetails
+                  {...routeProps}
                 />
               </>
             );
