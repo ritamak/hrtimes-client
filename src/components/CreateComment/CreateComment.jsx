@@ -1,12 +1,13 @@
 import React from "react";
 import { TextField, Button } from "@material-ui/core";
+import "./CreateComment.css";
 
 function CreateComment(props) {
   const { onCreateComments, articleId } = props;
 
   return (
-    <div>
-      <h5>Comments</h5>
+    <div id="createCommentDiv">
+      <h5>Review article</h5>
       <form
         onSubmit={(event) => {
           onCreateComments(event, articleId);
@@ -14,10 +15,15 @@ function CreateComment(props) {
         autoComplete="off"
       >
         <TextField
-          id="outlined-basic"
+          id="outlined"
           label="comment the article here"
           variant="outlined"
           name="commentBody"
+          multiline
+          rows={1}
+          fullWidth
+          rowsMax={Infinity}
+          item
         />
         <Button type="submit" variant="contained" color="primary">
           Submit

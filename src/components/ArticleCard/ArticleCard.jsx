@@ -6,13 +6,12 @@ import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
+import "./ArticleCard.css";
+import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
   media: {
-    height: 140,
+    height: 500,
   },
 });
 
@@ -29,71 +28,70 @@ export default function UserArticleCard({
   const classes = useStyles();
 
   return (
-    <div>
-      <Grid className="cardWrappers">
-        <Card className="card">
-          <CardActionArea>
-            {image && (
-              <CardMedia
-                className={classes.media}
-                image={image}
-                title={section}
-              />
-            )}
-            <CardContent style={{ backgroundColor: "#737373" }}>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                style={{ fontWeight: "bold" }}
-              >
-                {title}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                style={{ fontWeight: "bold" }}
-              >
-                {section}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                style={{ fontWeight: "bold" }}
-              >
-                {subsection}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                style={{ color: "white" }}
-              >
-                {body}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                style={{ fontWeight: "bold" }}
-              >
-                {created_date}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                style={{ fontWeight: "bold" }}
-              >
-                {username}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-        <br></br>
-      </Grid>
-    </div>
+    <>
+      <Paper elevation={3} className="cardDetailsWrapper">
+        <Grid>
+          {image && (
+            <CardMedia
+              className={classes.media}
+              image={image}
+              title={section}
+            />
+          )}
+          <Typography
+            gutterBottom
+            variant="h1"
+            component="h2"
+            style={{ fontWeight: "bold" }}
+          >
+            {title}
+          </Typography>
+          <Typography
+            gutterBottom
+            variant="h2"
+            component="h2"
+            style={{ fontWeight: "bold" }}
+          >
+            {subsection}
+          </Typography>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            style={{ fontWeight: "bold" }}
+          >
+            {section}
+          </Typography>
+
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            style={{ color: "black" }}
+          >
+            {body}
+          </Typography>
+          <br></br>
+          <Typography
+            gutterBottom
+            variant="h4"
+            component="h2"
+            style={{ fontWeight: "bold" }}
+          >
+            {username}
+          </Typography>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            style={{ fontWeight: "bold" }}
+          >
+            {created_date}
+          </Typography>
+
+          <br></br>
+        </Grid>
+      </Paper>
+    </>
   );
 }

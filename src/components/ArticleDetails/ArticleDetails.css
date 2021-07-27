@@ -1,0 +1,23 @@
+.articleDetail {
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.commentsWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.commentsBox {
+  justify-content: center;
+  align-items: center;
+}
+.createComments {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
