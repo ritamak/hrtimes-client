@@ -233,8 +233,14 @@ function App(props) {
     }
   };
 
-  const handleEditArticle = (event, article) => {
+  const handleEditArticle = async (event, article) => {
     event.preventDefault();
+
+    let formData = new FormData();
+    formData.append("imageUrl", event.target.myImage.files[0]);
+
+    let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
+    console.log(imgResponse);
 
     axios
       .patch(`${API_URL}/api/article/${article._id}/edit`, article, {
@@ -242,6 +248,8 @@ function App(props) {
       })
       .then(() => {
         let updatedArticles = articles.map((singleArticle) => {
+          console.log(singleArticle);
+          console.log(article);
           if (singleArticle._id === article._id) {
             singleArticle.section = article.section;
             singleArticle.subsection = article.subsection;
@@ -249,6 +257,7 @@ function App(props) {
             singleArticle.body = article.body;
             singleArticle.created_date = article.created_date;
             singleArticle.author = article.author;
+            singleArticle.image = article.imgResponse.data.image;
           }
           return singleArticle;
         });
@@ -460,7 +469,6 @@ function App(props) {
           render={(routeProps) => {
             return (
               <>
-                <Navbar onLogOut={handleLogOut} />
                 <EditArticle
                   {...routeProps}
                   onEditArticle={handleEditArticle}

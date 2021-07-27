@@ -1,7 +1,6 @@
 import React from "react";
 import "./CreateArticle.css";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -21,7 +20,7 @@ export default function CreateArticle(props) {
       alignItems: "center",
     },
     form: {
-      width: "100%", // Fix IE 11 issue.
+      width: "100%",
       marginTop: theme.spacing(3),
     },
     submit: {

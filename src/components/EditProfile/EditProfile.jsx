@@ -12,6 +12,7 @@ import Container from "@material-ui/core/Container";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import axios from "axios";
 import { API_URL } from "../../config";
+import { Link } from "react-router-dom";
 
 export default function EditProfile(props) {
   const useStyles = makeStyles((theme) => ({
@@ -164,6 +165,9 @@ export default function EditProfile(props) {
                   >
                     Delete
                   </Button>
+                  <Link to={`/article/${article._id}/edit`}>
+                    <Button>Edit Article</Button>
+                  </Link>
                 </Grid>
               );
             })}

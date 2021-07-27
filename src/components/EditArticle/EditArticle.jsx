@@ -1,9 +1,34 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../config";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import { Input } from "@material-ui/core";
 
 function EditArticle(props) {
   const [articleDetails, updateDetails] = useState(null);
+
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    form: {
+      width: "100%",
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+  const classes = useStyles();
 
   useEffect(() => {
     (async () => {
@@ -13,7 +38,7 @@ function EditArticle(props) {
 
         updateDetails(response.data);
       } catch (error) {
-        console.log("Todo fetch failed", error);
+        console.log("Article fetch failed", error);
       }
     })();
   }, []);
@@ -55,66 +80,102 @@ function EditArticle(props) {
   const { onEditArticle } = props;
 
   return (
-    <div className="editArticle">
-      <form
-        onSubmit={(event) => {
-          onEditArticle(event, articleDetails);
-        }}
-      >
-        <label htmlFor="Section">Section</label>
-        <input
-          type="text"
-          className="form-control"
-          id="sectionEdit"
-          name="section"
-          value={articleDetails.section}
-          onChange={handleSectionChange}
-        />
-        <label htmlFor="SubSection">Sub-Section</label>
-        <input
-          type="text"
-          className="form-control"
-          id="subSectionEdit"
-          name="subsection"
-          value={articleDetails.subsection}
-          onChange={handleSubSectionChange}
-        />
-        <label htmlFor="Title">Title</label>
-        <input
-          type="text"
-          className="form-control"
-          id="titleEdit"
-          name="title"
-          value={articleDetails.title}
-          onChange={handleTitleChange}
-        />
-        <label>
-          Your article:
-          <textarea name="body" onChange={handleBodyChange}>
-            {articleDetails.body}
-          </textarea>
-        </label>
-        <label htmlFor="Created_Date">Created Date</label>
-        <input
-          type="text"
-          className="form-control"
-          id="createdDateEdit"
-          name="created_date"
-          value={articleDetails.created_date}
-          onChange={handleCreatedDateChange}
-        />
-        <label htmlFor="Author">Author</label>
-        <input
-          type="text"
-          className="form-control"
-          id="authorEdit"
-          name="author"
-          value={articleDetails.author}
-          onChange={handleAuthorChange}
-        />
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
+    <>
+      <Container component="main" maxWidth="s">
+        <div className={classes.paper}>
+          <h2>Create your article:</h2>
+          <form className={classes.form} noValidate onSubmit={onEditArticle}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="section"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Section"
+                  autoFocus
+                  value={articleDetails.section}
+                  onChange={handleSectionChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="subsection"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Sub-section"
+                  autoFocus
+                  value={articleDetails.subsection}
+                  onChange={handleSubSectionChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Title"
+                  name="title"
+                  value={articleDetails.title}
+                  onChange={handleTitleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="created_date"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Created date"
+                  autoFocus
+                  value={articleDetails.created_date}
+                  onChange={handleCreatedDateChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.body}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Body Content"
+                  name="body"
+                  multiline
+                  rows={6}
+                  rowsMax={Infinity}
+                  onChange={handleBodyChange}
+                  value={articleDetails.body}
+                />
+              </Grid>
+            </Grid>
+            <Grid>
+              <FormHelperText>Upload article image</FormHelperText>
+              <Grid item>
+                <Input
+                  type="file"
+                  name="myImage"
+                  accept="image/png, image/jpg"
+                />
+              </Grid>
+            </Grid>
+            <Grid container justifyContent="center">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                style={{ color: "white", background: "black" }}
+              >
+                Upload
+              </Button>
+            </Grid>
+            {props.error && <p className="error">{props.error}</p>}
+          </form>
+        </div>
+        <Box mt={5}></Box>
+      </Container>
+    </>
   );
 }
 
