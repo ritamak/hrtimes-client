@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
 import CreateComment from "../CreateComment/CreateComment";
-import UserArticleCard from "../UserArticleCard/UserArticleCard";
+import ArticleCard from "../ArticleCard/ArticleCard";
 
 export default function ArticleDetails(props) {
   const [articleDetail, updateArticleDetail] = useState(null);
   const [commentDetails, updateCommentDetails] = useState([]);
   const { id } = props.match.params;
-  const { user, onDeleteArticle, onCreateComments } = props;
+  const { user, onCreateComments } = props;
 
   useEffect(() => {
     (async () => {
@@ -31,13 +31,14 @@ export default function ArticleDetails(props) {
     <>
       {articleDetail && (
         <div className="articleDetail">
-          <UserArticleCard
+          <ArticleCard
             section={articleDetail.section}
             subsection={articleDetail.subsection}
             title={articleDetail.title}
             body={articleDetail.body}
             created_date={articleDetail.created_date}
             username={articleDetail.author.username}
+            image={articleDetail.image}
           />
           <CreateComment articleId={id} onCreateComments={onCreateComments} />
         </div>

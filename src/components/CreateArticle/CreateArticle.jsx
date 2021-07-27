@@ -32,8 +32,8 @@ export default function CreateArticle(props) {
   return (
     <>
       <Container component="main" maxWidth="s">
-        <CssBaseline />
         <div className={classes.paper}>
+          <h2>Create your article:</h2>
           <form className={classes.form} noValidate onSubmit={onCreateArticle}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -43,7 +43,7 @@ export default function CreateArticle(props) {
                   required
                   fullWidth
                   id="section"
-                  label="section"
+                  label="Section"
                   autoFocus
                 />
               </Grid>
@@ -54,7 +54,7 @@ export default function CreateArticle(props) {
                   required
                   fullWidth
                   id="subsection"
-                  label="Sub Section"
+                  label="Sub-section"
                   autoFocus
                 />
               </Grid>
@@ -63,21 +63,8 @@ export default function CreateArticle(props) {
                   variant="outlined"
                   required
                   fullWidth
-                  id="title"
-                  label="title"
+                  label="Title"
                   name="title"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  className={classes.body}
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="body"
-                  label="body"
-                  name="body"
-                  autoComplete="email"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -86,15 +73,33 @@ export default function CreateArticle(props) {
                   variant="outlined"
                   required
                   fullWidth
-                  id="created_date"
-                  label="created date"
+                  label="Created date"
                   autoFocus
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.body}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Body Content"
+                  name="body"
+                  multiline
+                  rows={6}
+                  rowsMax={Infinity}
                 />
               </Grid>
             </Grid>
             <Grid>
-              <FormHelperText>Upload your photo</FormHelperText>
-              <Input type="file" name="myImage" accept="image/png, image/jpg" />
+              <FormHelperText>Upload article image</FormHelperText>
+              <Grid item>
+                <Input
+                  type="file"
+                  name="myImage"
+                  accept="image/png, image/jpg"
+                />
+              </Grid>
             </Grid>
             <Grid container justifyContent="center">
               <Button
@@ -104,7 +109,7 @@ export default function CreateArticle(props) {
                 className={classes.submit}
                 style={{ color: "white", background: "black" }}
               >
-                Create
+                Upload
               </Button>
             </Grid>
             {props.error && <p className="error">{props.error}</p>}

@@ -33,8 +33,8 @@ export default function UserArticleCard({
 
   return (
     <div>
-      <div>
-        <Card className={classes.root}>
+      <div className="card">
+        <Card>
           <CardActionArea>
             {image && (
               <CardMedia

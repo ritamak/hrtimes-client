@@ -76,26 +76,29 @@ function Profile(props) {
       <Grid container className="data">
         <br></br>
         {articles &&
-          articles.map((article, index) => (
-            <Grid
-              container
-              item
-              key={index}
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-              className="gridItem"
-            >
-              <UserArticleCard
-                section={article.section}
-                title={article.title}
-                author={article.author}
-                id={article._id}
-                image={article.image}
-              />
-            </Grid>
-          ))}
+          articles.map((article, index) => {
+            console.log(article.author.username);
+            return (
+              <Grid
+                container
+                item
+                key={index}
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                className="gridItem"
+              >
+                <UserArticleCard
+                  section={article.section}
+                  title={article.title}
+                  id={article._id}
+                  image={article.image}
+                  username={article.author.username}
+                />
+              </Grid>
+            );
+          })}
       </Grid>
 
       <h3>you may like:</h3>
