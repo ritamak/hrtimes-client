@@ -233,7 +233,7 @@ function App(props) {
     }
   };
 
-  const handleEditArticle = async (event, article) => {
+  const handleEditArticle = async (event, id) => {
     event.preventDefault();
 
     let formData = new FormData();
@@ -242,32 +242,32 @@ function App(props) {
     let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
     console.log(imgResponse);
 
-    axios
-      .patch(`${API_URL}/api/article/${article._id}/edit`, article, {
-        withCredentials: true,
-      })
-      .then(() => {
-        let updatedArticles = articles.map((singleArticle) => {
-          console.log(singleArticle);
-          console.log(article);
-          if (singleArticle._id === article._id) {
-            singleArticle.section = article.section;
-            singleArticle.subsection = article.subsection;
-            singleArticle.title = article.title;
-            singleArticle.body = article.body;
-            singleArticle.created_date = article.created_date;
-            singleArticle.author = article.author;
-            singleArticle.image = article.imgResponse.data.image;
-          }
-          return singleArticle;
-        });
-        props.history.push(`/article/${article._id}`);
+    const { section, subsection, title, body, created_date, author, myImage } =
+      event.target;
 
-        updateArticles(updatedArticles);
-      })
-      .catch((err) => {
-        console.log("Edit failed!", err);
-      });
+    let updatedArticle = {
+      section: section.value,
+      subsection: subsection.value,
+      title: title.value,
+      body: body.value,
+      created_date: created_date.value,
+      image: imgResponse.data.image,
+    };
+    try {
+      let response = await axios.patch(
+        `${API_URL}/api/article/${id}/edit`,
+        updatedArticle,
+        {
+          withCredentials: true,
+        }
+      );
+
+      props.history.push(`/article/${id}`);
+      updateArticles(response.data);
+    } catch (err) {
+      console.log("Edited failed", err);
+      updateStatus(false);
+    }
   };
 
   const handleDeleteArticle = (id) => {

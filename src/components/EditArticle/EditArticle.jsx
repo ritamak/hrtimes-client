@@ -12,6 +12,7 @@ import { Input } from "@material-ui/core";
 
 function EditArticle(props) {
   const [articleDetails, updateDetails] = useState(null);
+  const { id } = props.match.params;
 
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -84,7 +85,13 @@ function EditArticle(props) {
       <Container component="main" maxWidth="s">
         <div className={classes.paper}>
           <h2>Create your article:</h2>
-          <form className={classes.form} noValidate onSubmit={onEditArticle}>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={(event) => {
+              onEditArticle(event, id);
+            }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
