@@ -202,7 +202,13 @@ function App(props) {
 
   const handleCreateArticle = async (event) => {
     event.preventDefault();
-    const { section, subsection, title, body, created_date } = event.target;
+    const { section, subsection, title, body, created_date, myImage } =
+      event.target;
+
+    let formData = new FormData();
+    formData.append("imageUrl", event.target.myImage.files[0]);
+    let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
+    console.log(imgResponse);
 
     let newArticle = {
       section: section.value,
@@ -210,6 +216,7 @@ function App(props) {
       title: title.value,
       body: body.value,
       created_date: created_date.value,
+      image: imgResponse.data.image,
     };
 
     try {

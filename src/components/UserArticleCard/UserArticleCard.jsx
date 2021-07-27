@@ -5,6 +5,10 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import ArrowForwardOutlinedIcon from "@material-ui/icons/ArrowForwardOutlined";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -22,6 +26,8 @@ export default function UserArticleCard({
   body,
   created_date,
   username,
+  image,
+  id,
 }) {
   const classes = useStyles();
 
@@ -30,6 +36,13 @@ export default function UserArticleCard({
       <div>
         <Card className={classes.root}>
           <CardActionArea>
+            {image && (
+              <CardMedia
+                className={classes.media}
+                image={image}
+                title={section}
+              />
+            )}
             <CardContent style={{ backgroundColor: "#737373" }}>
               <Typography
                 gutterBottom
@@ -81,7 +94,13 @@ export default function UserArticleCard({
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions></CardActions>
+          <CardActions>
+            <Link to={`/article/${id}`}>
+              <Button size="small">
+                <ArrowForwardOutlinedIcon />
+              </Button>
+            </Link>
+          </CardActions>{" "}
         </Card>
         <br></br>
       </div>

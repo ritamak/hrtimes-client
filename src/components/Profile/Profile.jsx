@@ -1,9 +1,9 @@
-import React, { useEffect, setState } from "react";
+import React, { useEffect } from "react";
 import { API_URL } from "../../config";
 import axios from "axios";
 import SortButton from "../SortButton/SortButton";
 import "./Profile.css";
-import ArticleCard from "../ArticleCard/ArticleCard";
+import UserArticleCard from "../UserArticleCard/UserArticleCard";
 import DataCard from "../DataCard/DataCard";
 import Grid from "@material-ui/core/Grid";
 
@@ -87,11 +87,12 @@ function Profile(props) {
               lg={3}
               className="gridItem"
             >
-              <ArticleCard
+              <UserArticleCard
                 section={article.section}
                 title={article.title}
                 author={article.author}
                 id={article._id}
+                image={article.image}
               />
             </Grid>
           ))}

@@ -7,6 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import { Input } from "@material-ui/core";
 
 export default function CreateArticle(props) {
   const { onCreateArticle } = props;
@@ -18,19 +20,12 @@ export default function CreateArticle(props) {
       flexDirection: "column",
       alignItems: "center",
     },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
     form: {
       width: "100%", // Fix IE 11 issue.
       marginTop: theme.spacing(3),
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
-    },
-    body: {
-      height: "300px",
     },
   }));
   const classes = useStyles();
@@ -73,7 +68,7 @@ export default function CreateArticle(props) {
                   name="title"
                 />
               </Grid>
-              <Grid item xs={12} style={{ width: "300px" }}>
+              <Grid item xs={12}>
                 <TextField
                   className={classes.body}
                   variant="outlined"
@@ -96,6 +91,10 @@ export default function CreateArticle(props) {
                   autoFocus
                 />
               </Grid>
+            </Grid>
+            <Grid>
+              <FormHelperText>Upload your photo</FormHelperText>
+              <Input type="file" name="myImage" accept="image/png, image/jpg" />
             </Grid>
             <Grid container justifyContent="center">
               <Button
