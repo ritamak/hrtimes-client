@@ -8,14 +8,18 @@
   text-align: center;
   justify-content: center;
   font-size: 2rem;
-  color: black;
-  border: 1px solid black;
+  color: white;
+  /* border: 1px solid black; */
   box-shadow: 0 0 40px #241919 !important;
   border-radius: 25px !important;
 }
 
+.welcome h1 {
+  color: white;
+}
+
 h3 {
-  color: black;
+  color: white;
 }
 
 .dataCards {
@@ -40,9 +44,9 @@ h3 {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  background-color: #7d7d7d;
-
-  border: 1px solid black;
+  background-color: #7d7d7d44;
+  box-shadow: 0 0 40px #241919 !important;
+  /* border: 1px solid black; */
   border-radius: 25px !important;
   padding: 10px;
 }

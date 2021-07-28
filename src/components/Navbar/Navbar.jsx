@@ -12,7 +12,7 @@ import Grid from "@material-ui/core/Grid";
 function Navbar(props) {
   const { user, onLogOut } = props;
   return (
-    <AppBar position="static" style={{ background: "#000000" }}>
+    <AppBar position="static">
       <Toolbar>
         <Grid container spacing={24}>
           <Grid item xs={9}>
@@ -59,12 +59,13 @@ export default Navbar;
  <AppBar position="static" style={{ background: "#000000" }}>
       <Toolbar>
         <IconButton edge="start">
-          <Link to={"/profile"} style={{ marginRight: "0px" }}>
+          <Link to={"/profile"}>
             <Button>
               <Avatar alt="profile" src={user.image} />
             </Button>
           </Link>
         </IconButton>
+<<<<<<< HEAD
         <Link to={`/create`} style={{ color: "#ffffff" }}>
           <CreateIcon /> CREATE ARTICLE
         </Link>
@@ -78,6 +79,23 @@ export default Navbar;
           className="logOutButton"
         >
           <ExitToApp classname="logOutButton" /> LogOut
+=======
+        <Link to={`/create`}>
+          <Button>
+            <CreateIcon />
+            Create Article
+          </Button>
+        </Link>
+        <Link to={`/${user._id}/edit`}>
+          <Button>
+            <i class="fas fa-user-edit fa-lg"></i>
+            Edit Profile
+          </Button>
+        </Link>
+        <Button onClick={onLogOut}>
+          Logout
+          <ExitToApp />
+>>>>>>> 7df419d2c98d2164898dd2134cae96e72b85bc5a
         </Button>
       </Toolbar>
     </AppBar>

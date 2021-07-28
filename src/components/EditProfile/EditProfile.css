@@ -23,7 +23,7 @@ h1 {
   flex-direction: column;
   width: 60%;
   height: 345px;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   margin-bottom: 10px;
 }
 .comments {
@@ -39,12 +39,8 @@ h1 {
   height: 345px;
 
   flex-direction: column;
-  border: 2px solid black;
-
-  border-radius: 25px !important;
-  width: 60% !important;
-  box-shadow: 0 0 20px #241919 !important;
-  margin-bottom: 20px;
+  width: 60%;
+  /* border: 2px solid black; */
 }
 
 .editProfileButton {

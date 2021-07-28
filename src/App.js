@@ -24,7 +24,6 @@ function App(props) {
   const [articles, updateArticles] = useState([]);
   const [comments, updateComments] = useState([]);
   const [filteredData, updateFilteredData] = useState([]);
-  const [follow, updateFollow] = useState([]);
 
   const handleTopicChange = (newInterests) => {
     updateInterests(newInterests);
@@ -545,7 +544,14 @@ function App(props) {
             return (
               <>
                 <Navbar user={user} onLogOut={handleLogOut} />
-                <UserDetails onFollowUser={handleFollowUser} {...routeProps} />
+                <UserDetails
+                  user={user}
+                  fetchingUser={fetchingUser}
+                  updateUser={updateUser}
+                  updateStatus={updateStatus}
+                  onFollowUser={handleFollowUser}
+                  {...routeProps}
+                />
               </>
             );
           }}

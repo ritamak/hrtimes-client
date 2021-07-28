@@ -1,5 +1,24 @@
-.navbar {
-  display: flex;
-  flex-direction: row;
-  background-color: black;
+.MuiAppBar-root {
+  background-color: #1d3557 !important;
+}
+
+.MuiAppBar-root div {
+  justify-content: space-between;
+}
+
+.MuiAppBar-root a {
+  text-decoration: none;
+}
+
+button span {
+  font-weight: bold;
+  color: azure;
+}
+
+button i {
+  margin: 0 5px;
+}
+
+button svg {
+  margin: 0 5px;
 }
