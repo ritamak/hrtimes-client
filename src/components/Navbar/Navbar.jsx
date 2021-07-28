@@ -5,27 +5,33 @@ import "./Navbar.css";
 
 import { AppBar, Toolbar, Button, IconButton, Avatar } from "@material-ui/core";
 import CreateIcon from "@material-ui/icons/Create";
-import MoreVertOutlinedIcon from "@material-ui/icons/MoreVertOutlined";
 
 function Navbar(props) {
   const { user, onLogOut } = props;
   return (
-    <AppBar position="static" style={{ background: "#000000" }}>
+    <AppBar position="static">
       <Toolbar>
         <IconButton edge="start">
-          <Link to={"/profile"} style={{ marginRight: "0px" }}>
+          <Link to={"/profile"}>
             <Button>
               <Avatar alt="profile" src={user.image} />
             </Button>
           </Link>
         </IconButton>
-        <Link to={`/create`} style={{ color: "#ffffff" }}>
-          <CreateIcon />
+        <Link to={`/create`}>
+          <Button>
+            <CreateIcon />
+            Create Article
+          </Button>
         </Link>
-        <Link to={`/${user._id}/edit`} style={{ color: "#ffffff" }}>
-          <MoreVertOutlinedIcon />
+        <Link to={`/${user._id}/edit`}>
+          <Button>
+            <i class="fas fa-user-edit fa-lg"></i>
+            Edit Profile
+          </Button>
         </Link>
-        <Button onClick={onLogOut} color="inherit">
+        <Button onClick={onLogOut}>
+          Logout
           <ExitToApp />
         </Button>
       </Toolbar>
