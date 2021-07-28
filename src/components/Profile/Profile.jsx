@@ -25,21 +25,6 @@ function Profile(props) {
       .catch((err) => {
         console.log(err);
       });
-    (async () => {
-      try {
-        let commentResponse = await axios.get(`${API_URL}/api/comments`, {
-          withCredentials: true,
-        });
-        let articleResponse = await axios.get(`${API_URL}/api/articles`, {
-          withCredentials: true,
-        });
-
-        updateComments(commentResponse.data);
-        updateArticles(articleResponse.data);
-      } catch (err) {
-        console.log("Fetching user data failed", err);
-      }
-    })();
   }, []);
 
   useEffect(() => {

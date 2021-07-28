@@ -343,15 +343,15 @@ function App(props) {
     updateFilteredData(filteredData);
   };
 
-  const handleFollowUser = async (id) => {
-    try {
-      let followResponse = await axios.post(`${API_URL}/api/users/${id}`, { withCredentials: true });
+  const handleFollowUser = (id) => {
+    axios.post(`${API_URL}/api/users/${id}`, {}, { withCredentials: true })
+      .then ((response) => {
 
-      props.history.push("/profile");
-      updateUser(followResponse);
-    } catch (error) {
-      console.log("User not followed!", error);
-    }
+        props.history.push("/profile");
+        updateUser(response.data);
+      }).catch ((error) => {
+          console.log("User not followed!", error);
+      })
   }
 
   if (fetchingUser) {
@@ -497,7 +497,7 @@ function App(props) {
             return (
               <>
                 <Navbar user={user} onLogOut={handleLogOut} />
-                <UserDetails {...routeProps} onFollowUser={handleFollowUser}/>
+                <UserDetails onFollowUser={handleFollowUser} {...routeProps}/>
               </>
             );
           }}
