@@ -31,6 +31,7 @@ export default function UserArticleCard({
   section,
   title,
   body,
+  created_date,
   author,
   image,
   id,
