@@ -243,7 +243,6 @@ function App(props) {
     formData.append("imageUrl", event.target.myImage.files[0]);
 
     let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
-    console.log(imgResponse);
 
     const { section, subsection, title, body, created_date, author, myImage } =
       event.target;
@@ -344,6 +343,17 @@ function App(props) {
     });
     updateFilteredData(filteredData);
   };
+
+  const handleFollowUser = async (id) => {
+    try {
+      let followResponse = await axios.post(`${API_URL}/api/users/${id}`, { withCredentials: true });
+
+      props.history.push("/profile");
+      updateUser(followResponse);
+    } catch (error) {
+      console.log("User not followed!", error);
+    }
+  }
 
   if (fetchingUser) {
     return <p>Loading...</p>;
@@ -488,7 +498,7 @@ function App(props) {
             return (
               <>
                 <Navbar user={user} onLogOut={handleLogOut} />
-                <UserDetails {...routeProps} />
+                <UserDetails {...routeProps} onFollowUser={handleFollowUser}/>
               </>
             );
           }}
