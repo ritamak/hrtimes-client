@@ -42,7 +42,7 @@ export default function DataCard({ section, title, abstract, image, url }) {
 
               <CardContent
                 className={classes.cards}
-                style={{ backgroundColor: "#737373" }}
+                style={{ backgroundColor: "#e6e6e6" }}
               >
                 <Typography
                   gutterBottom
@@ -56,13 +56,17 @@ export default function DataCard({ section, title, abstract, image, url }) {
                   variant="body2"
                   color="textSecondary"
                   component="p"
-                  style={{ color: "white" }}
+                  style={{ color: "black" }}
                 >
                   {abstract}
                 </Typography>
               </CardContent>
             </CardActionArea>
-            <Grid container justifyContent="flex-end">
+            <Grid
+              container
+              justifyContent="flex-end"
+              style={{ backgroundColor: "white" }}
+            >
               <CardActions>
                 <a href={url}>
                   <Button size="small">

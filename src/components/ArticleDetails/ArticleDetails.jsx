@@ -3,6 +3,9 @@ import { API_URL } from "../../config";
 import axios from "axios";
 import CreateComment from "../CreateComment/CreateComment";
 import ArticleCard from "../ArticleCard/ArticleCard";
+import Grid from "@material-ui/core/Grid";
+import CommentBox from "../CommentBox/CommentBox";
+import "./ArticleDetails.css";
 
 export default function ArticleDetails(props) {
   const [articleDetail, updateArticleDetail] = useState(null);
@@ -30,7 +33,7 @@ export default function ArticleDetails(props) {
   return (
     <>
       {articleDetail && (
-        <div className="articleDetail">
+        <Grid container className="articleDetail">
           <ArticleCard
             section={articleDetail.section}
             subsection={articleDetail.subsection}
@@ -40,16 +43,23 @@ export default function ArticleDetails(props) {
             author={articleDetail.author}
             image={articleDetail.image}
           />
-          <CreateComment articleId={id} onCreateComments={onCreateComments} />
-        </div>
+        </Grid>
       )}
-      {commentDetails &&
-        commentDetails.map((comment, index) => (
-          <div key={index}>
-            <p>{comment.author.username}</p>
-            <h5>{comment.commentBody}</h5>
-          </div>
-        ))}
+      <Grid container className="commentsWrapper">
+        {commentDetails &&
+          commentDetails.map((comment, index) => {
+            console.log(comment);
+            return (
+              <CommentBox
+                image={comment.author.image}
+                commentBody={comment.commentBody}
+                author={comment.author.username}
+                key={index}
+              />
+            );
+          })}
+        <CreateComment articleId={id} onCreateComments={onCreateComments} />
+      </Grid>
     </>
   );
 }

@@ -17,8 +17,8 @@
   text-align: center;
   font-size: 2rem;
   line-height: 1.5;
-  border: 5px 0px solid black;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  border: 2px 0px solid black;
+  font-family: "Times New Roman", Times, serif;
   margin-bottom: 10vh;
   background-color: #7d7d7d;
   color: white;
@@ -28,7 +28,7 @@
   margin-top: 5px;
   margin-bottom: 15px;
   display: flex;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Times New Roman", Times, serif;
   width: 15vw;
   justify-content: space-around;
   text-decoration: none;

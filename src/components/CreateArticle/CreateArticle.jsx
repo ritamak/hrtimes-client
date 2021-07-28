@@ -29,10 +29,10 @@ export default function CreateArticle(props) {
   }));
   const classes = useStyles();
   return (
-    <>
+    <div className="createArticlePage">
       <Container component="main" maxWidth="s">
         <div className={classes.paper}>
-          <h2>Create your article:</h2>
+          <h1>Create your article:</h1>
           <form className={classes.form} noValidate onSubmit={onCreateArticle}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -91,7 +91,9 @@ export default function CreateArticle(props) {
               </Grid>
             </Grid>
             <Grid>
-              <FormHelperText>Upload article image</FormHelperText>
+              <FormHelperText style={{ color: "white", fontWeight: "bold" }}>
+                Upload article image
+              </FormHelperText>
               <Grid item>
                 <Input
                   type="file"
@@ -106,7 +108,6 @@ export default function CreateArticle(props) {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                style={{ color: "white", background: "black" }}
               >
                 Upload
               </Button>
@@ -116,6 +117,6 @@ export default function CreateArticle(props) {
         </div>
         <Box mt={5}></Box>
       </Container>
-    </>
+    </div>
   );
 }

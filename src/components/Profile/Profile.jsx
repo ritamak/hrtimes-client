@@ -82,7 +82,7 @@ function Profile(props) {
   }
 
   return (
-    <>
+    <div className="profile">
       <div className="welcome">
         <h1>Hi {user.username.toUpperCase()}!</h1>
       </div>
@@ -149,7 +149,7 @@ function Profile(props) {
           );
         })}
       </Grid>
-    </>
+    </div>
   );
 }
 

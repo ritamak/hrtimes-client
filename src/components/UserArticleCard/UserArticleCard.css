@@ -2,10 +2,17 @@
   width: 275px;
   height: 450px;
   margin: 15px;
-  border: 5px solid black;
+  border: 2px solid black;
   transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 40px #241919 !important;
+  padding: 20px !important;
+  border-radius: 25px !important;
 }
 
 .card:hover {
   transform: scale(1.1);
+}
+
+.MuiPaper-elevation1 {
+  box-shadow: 0 0 40px #241919;
 }
