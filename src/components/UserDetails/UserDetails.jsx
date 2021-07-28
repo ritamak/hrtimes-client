@@ -7,6 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 const useStyles = makeStyles({
   media: {
@@ -17,7 +19,7 @@ const useStyles = makeStyles({
 function UserDetails(props) {
   const [userDetails, updateUserDetails] = useState(null);
   const id = props.match.params.id;
-  const { onFollowUser } = props;
+  const { onFollowUser, fetchingUser, updateStatus, user, updateUser } = props;
 
   const classes = useStyles();
 
@@ -28,30 +30,47 @@ function UserDetails(props) {
           `${API_URL}/api/users/${id}`,
           { withCredentials: true }
         );
+        let userResponse = await axios.get(`${API_URL}/api/profile`, {
+          withCredentials: true,
+        });
 
+        updateUser(userResponse.data);
+        updateStatus(false);
         updateUserDetails(userDetailsResponse.data);
       } catch (error) {
-        console.log(error);
+        console.log("Fetching user data failed", error);
+        updateStatus(false);
       }
     })();
   }, []);
 
-  if (!userDetails) {
+  if (!userDetails || fetchingUser) {
     return <p>Loading...</p>;
   }
 
   return (
     <>
       <h1>User Details</h1>
-      <button
-        onClick={() => {
-          onFollowUser(id);
-        }}
-      >
-        Follow
-      </button>
+
       <Paper elevation={3} className="cardDetailsWrapper">
         <Grid>
+          <div>
+            {user.following.includes(userDetails._id) ||
+            user._id === userDetails._id ? (
+              ""
+            ) : (
+              <Button
+                onClick={() => {
+                  onFollowUser(id);
+                }}
+                color="primary"
+                variant="contained"
+              >
+                <PersonAddIcon />
+                Follow
+              </Button>
+            )}
+          </div>
           {userDetails.image && (
             <CardMedia className={classes.media} image={userDetails.image} />
           )}
