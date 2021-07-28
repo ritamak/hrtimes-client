@@ -7,7 +7,7 @@ function CreateComment(props) {
 
   return (
     <div id="createCommentDiv">
-      <h5>Review article</h5>
+      <h1>Review article</h1>
       <form
         onSubmit={(event) => {
           onCreateComments(event, articleId);

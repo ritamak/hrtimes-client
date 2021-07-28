@@ -43,6 +43,13 @@ function UserDetails(props) {
   return (
     <>
       <h1>User Details</h1>
+      <button
+        onClick={() => {
+          onFollowUser(id);
+        }}
+      >
+        Follow
+      </button>
       <Paper elevation={3} className="cardDetailsWrapper">
         <Grid>
           {userDetails.image && (
