@@ -49,19 +49,19 @@ function UserDetails(props) {
       <>
         {userDetails.articles.map((article) => {
           console.log(article);
-          return <p>{article}</p>;
+          return <p>{article.title}</p>;
         })}
       </>
       <>
         {userDetails.comments.map((comment) => {
           console.log(comment);
-          return <p>{comment}</p>;
+          return <p>{comment.commentBody}</p>;
         })}
       </>
       <>
         {userDetails.following.map((user) => {
           console.log(user);
-          return <p>{user}</p>;
+          return <p>{user.username}</p>;
         })}
       </>
     </div>
