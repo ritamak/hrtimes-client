@@ -31,7 +31,12 @@ export default function UserArticleCard({
   section,
   title,
   body,
+<<<<<<< HEAD
   username,
+=======
+  created_date,
+  author,
+>>>>>>> 01157fdcadb4f6d755d67c0d7e85136c2424e337
   image,
   id,
 }) {
@@ -96,7 +101,7 @@ export default function UserArticleCard({
                     fontSize: "15px",
                   }}
                 >
-                  {username}
+                  <Link to={`/users/${author._id}`}>{author.username}</Link>
                 </Typography>
               </CardContent>
             </CardActionArea>
