@@ -74,7 +74,7 @@ export default function UserArticleCard({
             component="h2"
             style={{ fontWeight: "bold" }}
           >
-            {username}
+            <Link to={`/users/${author._id}`}>{author.username}</Link>
           </Typography>
           <Typography
             gutterBottom
