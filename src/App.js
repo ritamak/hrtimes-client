@@ -129,12 +129,6 @@ function App(props) {
 
   const handleEditProfile = async (event) => {
     event.preventDefault();
-    let formData = new FormData();
-    formData.append("imageUrl", event.target.myImage.files[0]);
-
-    let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
-    console.log(imgResponse);
-
     const {
       username,
       firstName,
@@ -149,34 +143,65 @@ function App(props) {
 
     let values = interests.map((i) => i.value);
 
-    let updatedUser = {
-      username: username.value,
-      firstName: firstName.value,
-      lastName: lastName.value,
-      email: email.value,
-      country: country.value,
-      city: city.value,
-      passwordHash: passwordHash.value,
-      interests: values,
-      image: imgResponse.data.image,
-    };
-
-    try {
-      let response = await axios.patch(
-        `${API_URL}/api/${user._id}/edit`,
-        updatedUser,
-        {
+    if (!myImage.files?.length) {
+      let updatedUser = {
+        username: username.value,
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        country: country.value,
+        city: city.value,
+        passwordHash: passwordHash.value,
+        interests: values,
+      };
+      axios
+        .patch(`${API_URL}/api/${user._id}/edit`, updatedUser, {
           withCredentials: true,
-        }
-      );
+        })
+        .then((response) => {
+          updateUser(response.data);
+          updateStatus(false);
+          props.history.push("/profile");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      let formData = new FormData();
+      formData.append("imageUrl", event.target.myImage.files[0]);
 
-      updateUser(response.data);
-      updateStatus(false);
+      let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
+      console.log(imgResponse);
 
-      props.history.push("/profile");
-    } catch (err) {
-      console.log("Edited failed", err);
-      updateStatus(false);
+      let updatedUser = {
+        username: username.value,
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        country: country.value,
+        city: city.value,
+        passwordHash: passwordHash.value,
+        interests: values,
+        image: imgResponse.data.image,
+      };
+
+      try {
+        let response = await axios.patch(
+          `${API_URL}/api/${user._id}/edit`,
+          updatedUser,
+          {
+            withCredentials: true,
+          }
+        );
+
+        updateUser(response.data);
+        updateStatus(false);
+
+        props.history.push("/profile");
+      } catch (err) {
+        console.log("Edited failed", err);
+        updateStatus(false);
+      }
     }
   };
 
@@ -239,36 +264,57 @@ function App(props) {
   const handleEditArticle = async (event, id) => {
     event.preventDefault();
 
-    let formData = new FormData();
-    formData.append("imageUrl", event.target.myImage.files[0]);
-
-    let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
-
-    const { section, subsection, title, body, created_date, author, myImage } =
+    const { section, subsection, title, body, created_date, myImage } =
       event.target;
 
-    let updatedArticle = {
-      section: section.value,
-      subsection: subsection.value,
-      title: title.value,
-      body: body.value,
-      created_date: created_date.value,
-      image: imgResponse.data.image,
-    };
-    try {
-      let response = await axios.patch(
-        `${API_URL}/api/article/${id}/edit`,
-        updatedArticle,
-        {
-          withCredentials: true,
-        }
-      );
+    if (!myImage.files?.length) {
+      let updatedArticle = {
+        section: section.value,
+        subsection: subsection.value,
+        title: title.value,
+        body: body.value,
+        created_date: created_date.value,
+      };
 
-      props.history.push(`/article/${id}`);
-      updateArticles(response.data);
-    } catch (err) {
-      console.log("Edited failed", err);
-      updateStatus(false);
+      axios
+        .patch(`${API_URL}/api/article/${id}/edit`, updatedArticle, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          updateArticles(response.data);
+          props.history.push(`/article/${id}`);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      let formData = new FormData();
+      formData.append("imageUrl", event.target.myImage.files[0]);
+
+      let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
+
+      let updatedArticle = {
+        section: section.value,
+        subsection: subsection.value,
+        title: title.value,
+        body: body.value,
+        created_date: created_date.value,
+        image: imgResponse.data.image,
+      };
+
+      try {
+        let response = await axios.patch(
+          `${API_URL}/api/article/${id}/edit`,
+          updatedArticle,
+          {
+            withCredentials: true,
+          }
+        );
+
+        props.history.push(`/article/${id}`);
+        updateArticles(response.data);
+      } catch (err) {
+        console.log("Edited failed", err);
+        updateStatus(false);
+      }
     }
   };
 
@@ -345,15 +391,16 @@ function App(props) {
   };
 
   const handleFollowUser = (id) => {
-    axios.post(`${API_URL}/api/users/${id}`, {}, { withCredentials: true })
-      .then ((response) => {
-
+    axios
+      .post(`${API_URL}/api/users/${id}`, {}, { withCredentials: true })
+      .then((response) => {
         props.history.push("/profile");
         updateUser(response.data);
-      }).catch ((error) => {
-          console.log("User not followed!", error);
       })
-  }
+      .catch((error) => {
+        console.log("User not followed!", error);
+      });
+  };
 
   if (fetchingUser) {
     return <p>Loading...</p>;
@@ -498,7 +545,7 @@ function App(props) {
             return (
               <>
                 <Navbar user={user} onLogOut={handleLogOut} />
-                <UserDetails onFollowUser={handleFollowUser} {...routeProps}/>
+                <UserDetails onFollowUser={handleFollowUser} {...routeProps} />
               </>
             );
           }}

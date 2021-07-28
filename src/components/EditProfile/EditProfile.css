@@ -16,7 +16,7 @@ h1 {
   justify-content: center;
 }
 
-.commentsWrapper {
+.commentsWrapperTwo {
   align-items: center;
   background-color: white;
   display: flex;
@@ -39,8 +39,12 @@ h1 {
   height: 345px;
 
   flex-direction: column;
-  width: 60%;
   border: 2px solid black;
+
+  border-radius: 25px !important;
+  width: 60% !important;
+  box-shadow: 0 0 20px #241919 !important;
+  margin-bottom: 20px;
 }
 
 .editProfileButton {
@@ -50,7 +54,7 @@ h1 {
 }
 
 .editButton {
-  margin: 20px;
+  margin: 20px !important;
   transition: all 0.2s ease-in-out;
 }
 

@@ -84,7 +84,7 @@ function EditArticle(props) {
     <>
       <Container component="main" maxWidth="s">
         <div className={classes.paper}>
-          <h2>Create your article:</h2>
+          <h1>Edit your article:</h1>
           <form
             className={classes.form}
             noValidate
