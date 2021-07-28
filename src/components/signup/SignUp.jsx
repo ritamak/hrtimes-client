@@ -11,9 +11,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { topStoriesTopics } from "../../data/data";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import GoogleButton from "../GoogleButton/GoogleButton";
 
 function SignUp(props) {
-  const { onSignUp, interests, onTopicChange } = props;
+  const {
+    onSignUp,
+    interests,
+    onTopicChange,
+    onGoogleSuccess,
+    onGoogleFailure,
+  } = props;
 
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -160,6 +167,7 @@ function SignUp(props) {
             >
               Sign Up
             </Button>
+
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link
@@ -172,6 +180,11 @@ function SignUp(props) {
                 </Link>
               </Grid>
             </Grid>
+            <GoogleButton
+              onSuccess={onGoogleSuccess}
+              onFailure={onGoogleFailure}
+            />
+
             {props.error && <p className="error">{props.error}</p>}
           </form>
         </div>

@@ -401,6 +401,32 @@ function App(props) {
       });
   };
 
+  const handleGoogleSuccess = (data) => {
+    updateStatus(true);
+    const { givenName, familyName, email, imageUrl, googleId } =
+      data.profileObj;
+    let newUser = {
+      firstName: givenName,
+      lastName: familyName,
+      email,
+      image: imageUrl,
+      googleId,
+    };
+
+    axios
+      .post(`${API_URL}/api/google/info`, newUser, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        updateUser(response.data.data);
+        updateError(null);
+        updateStatus(false);
+      });
+  };
+
+  const handleGoogleFailure = (err) => {
+    console.log(err);
+  };
   if (fetchingUser) {
     return <p>Loading...</p>;
   }
@@ -415,6 +441,8 @@ function App(props) {
               <SignIn
                 error={myError}
                 onSignIn={handleSignIn}
+                onGoogleSuccess={handleGoogleSuccess}
+                onGoogleFailure={handleGoogleFailure}
                 {...routerProps}
               />
             );
@@ -455,6 +483,8 @@ function App(props) {
                 error={myError}
                 onTopicChange={handleTopicChange}
                 interests={interests}
+                onGoogleSuccess={handleGoogleSuccess}
+                onGoogleFailure={handleGoogleFailure}
               />
             );
           }}

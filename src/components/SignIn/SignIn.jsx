@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import GoogleButton from "../GoogleButton/GoogleButton";
 
 import "./SignIn.css";
 
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SignIn(props) {
   const classes = useStyles();
-  const { onSignIn } = props;
+  const { onSignIn, onGoogleSuccess, onGoogleFailure } = props;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -58,6 +59,10 @@ function SignIn(props) {
             type="password"
             id="password"
             autoComplete="current-password"
+          />
+          <GoogleButton
+            onSuccess={onGoogleSuccess}
+            onFailure={onGoogleFailure}
           />
 
           <Button
