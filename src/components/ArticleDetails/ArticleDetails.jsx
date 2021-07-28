@@ -40,8 +40,9 @@ export default function ArticleDetails(props) {
             title={articleDetail.title}
             body={articleDetail.body}
             created_date={articleDetail.created_date}
-            author={articleDetail.author}
+            authorId={articleDetail.author._id}
             image={articleDetail.image}
+            author={articleDetail.author.username}
           />
         </Grid>
       )}

@@ -25,6 +25,7 @@ export default function UserArticleCard({
   author,
   image,
   id,
+  authorId,
 }) {
   const classes = useStyles();
 
@@ -74,7 +75,7 @@ export default function UserArticleCard({
             component="h2"
             style={{ fontWeight: "bold" }}
           >
-            {username}
+            {author}
           </Typography>
           <Typography
             gutterBottom
@@ -84,7 +85,18 @@ export default function UserArticleCard({
           >
             {created_date}
           </Typography>
-
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            style={{
+              fontWeight: "bold",
+              color: "black",
+              fontSize: "15px",
+            }}
+          >
+            <Link to={`/users/${authorId}`}>{author}</Link>
+          </Typography>
           <br></br>
         </Grid>
       </Paper>
