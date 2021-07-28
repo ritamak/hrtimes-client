@@ -1,10 +1,8 @@
 .signInText {
-  font-family: "Times New Roman", Times, serif;
 }
 
 .error {
   text-align: center;
-  font-family: Times, "Times New Roman", Times, serif;
   padding: 5px;
   font-weight: bold;
   text-transform: lowercase;

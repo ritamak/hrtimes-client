@@ -24,6 +24,7 @@ function App(props) {
   const [articles, updateArticles] = useState([]);
   const [comments, updateComments] = useState([]);
   const [filteredData, updateFilteredData] = useState([]);
+  const [follow, updateFollow] = useState([]);
 
   const handleTopicChange = (newInterests) => {
     updateInterests(newInterests);

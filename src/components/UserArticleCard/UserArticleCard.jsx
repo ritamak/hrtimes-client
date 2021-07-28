@@ -35,6 +35,7 @@ export default function UserArticleCard({
   author,
   image,
   id,
+  username,
 }) {
   const classes = useStyles();
 
@@ -86,18 +87,6 @@ export default function UserArticleCard({
                   style={{ color: "white" }}
                 >
                   {body}
-                </Typography>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="h2"
-                  style={{
-                    fontWeight: "bold",
-                    color: "black",
-                    fontSize: "15px",
-                  }}
-                >
-                  <Link to={`/users/${author._id}`}>{author.username}</Link>
                 </Typography>
               </CardContent>
             </CardActionArea>

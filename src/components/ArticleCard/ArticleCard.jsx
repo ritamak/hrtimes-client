@@ -1,10 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import "./ArticleCard.css";
@@ -25,6 +22,7 @@ export default function UserArticleCard({
   author,
   image,
   id,
+  authorId,
 }) {
   const classes = useStyles();
 
@@ -74,7 +72,7 @@ export default function UserArticleCard({
             component="h2"
             style={{ fontWeight: "bold" }}
           >
-            <Link to={`/users/${author._id}`}>{author.username}</Link>
+            {author}
           </Typography>
           <Typography
             gutterBottom
@@ -84,7 +82,18 @@ export default function UserArticleCard({
           >
             {created_date}
           </Typography>
-
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            style={{
+              fontWeight: "bold",
+              color: "black",
+              fontSize: "15px",
+            }}
+          >
+            <Link to={`/users/${authorId}`}>{author}</Link>
+          </Typography>
           <br></br>
         </Grid>
       </Paper>

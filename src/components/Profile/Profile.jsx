@@ -71,7 +71,7 @@ function Profile(props) {
       <div className="welcome">
         <h1>Hi {user.username.toUpperCase()}!</h1>
       </div>
-
+      <br></br>
       {!articles.length ? "" : <h3>by our users:</h3>}
       <hr style={{ width: "100%" }}></hr>
 
