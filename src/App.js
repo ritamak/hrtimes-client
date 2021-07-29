@@ -456,7 +456,7 @@ function App(props) {
     return <Loading />;
   }
   return (
-    <div>
+    <div className="mainPageContainer">
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route

@@ -8,11 +8,11 @@ function HomePage() {
   return (
     <div className="homePageDiv">
       <div className="wrapperImage">
-        <img src="/media/title.png" alt="logo" className="homePageImg" />
+        <img src="/media/title.png" alt="logo" className="homePageLogo" />
       </div>
       <hr className="homePageLine" />
 
-      <Grid container spacing={0}>
+      <Grid container spacing={0} className="homePageIntroContainer">
         <Grid item xs={12} sm={10} md={8} lg={5} className="homePageIntroBox">
           <p className="homePageIntro">
             Gather all topics of your interest.<br></br>
@@ -34,7 +34,7 @@ function HomePage() {
             </Link>
           </p>
         </Grid>
-        <Grid item xs={12} sm={10} md={8} lg={5} className="wrapper">
+        <Grid item xs={12} sm={10} md={8} lg={5} className="homePageImg">
           <img src="/media/landing.jpg" alt="newspaper"></img>
         </Grid>
       </Grid>
