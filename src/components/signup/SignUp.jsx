@@ -156,7 +156,10 @@ function SignUp(props) {
                 />
               </Grid>
             </Grid>
-
+            <GoogleButton
+              onSuccess={onGoogleSuccess}
+              onFailure={onGoogleFailure}
+            />
             <Button
               type="submit"
               fullWidth
