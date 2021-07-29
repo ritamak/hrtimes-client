@@ -30,7 +30,11 @@ export default function CreateArticle(props) {
   const classes = useStyles();
   return (
     <div className="createArticlePage">
-      <Container component="main" maxWidth="s">
+      <Container
+        component="main"
+        maxWidth="s"
+        className="createArticleContainer"
+      >
         <div className={classes.paper}>
           <h1>Create your article:</h1>
           <form className={classes.form} noValidate onSubmit={onCreateArticle}>

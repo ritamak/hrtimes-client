@@ -6,6 +6,7 @@ import ArticleCard from "../ArticleCard/ArticleCard";
 import Grid from "@material-ui/core/Grid";
 import CommentBox from "../CommentBox/CommentBox";
 import "./ArticleDetails.css";
+import Loading from "../Loading/index";
 
 export default function ArticleDetails(props) {
   const [articleDetail, updateArticleDetail] = useState(null);
@@ -122,7 +123,7 @@ export default function ArticleDetails(props) {
   };
 
   if (!user || !articleDetail || !commentDetails) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
   return (
     <>

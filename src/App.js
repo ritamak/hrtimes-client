@@ -15,6 +15,7 @@ import Navbar from "./components/Navbar/Navbar";
 import UserDetails from "./components/UserDetails/UserDetails";
 import "./App.css";
 import NotFound from "./components/NotFound/NotFound";
+import Loading from "./components/Loading/index";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -452,7 +453,7 @@ function App(props) {
   };
 
   if (fetchingUser) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
   return (
     <div className="mainPageContainer">

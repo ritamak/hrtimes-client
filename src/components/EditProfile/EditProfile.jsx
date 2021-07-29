@@ -19,6 +19,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Paper from "@material-ui/core/Paper";
 import "./EditProfile.css";
+import UserDetails from "../UserDetails/UserDetails";
+import Typography from "@material-ui/core/Typography";
+import CardMedia from "@material-ui/core/CardMedia";
+import Loading from "../Loading/index";
 
 export default function EditProfile(props) {
   const useStyles = makeStyles((theme) => ({
@@ -58,6 +62,8 @@ export default function EditProfile(props) {
     comments,
     articles,
   } = props;
+
+  const { following } = user;
 
   useEffect(() => {
     (async () => {
@@ -115,10 +121,271 @@ export default function EditProfile(props) {
   };
 
   if (fetchingUser) {
-    return <p>Loading</p>;
+    return <Loading />;
   }
   return (
     <>
+      <>
+        <h1>User Details</h1>
+        <Grid className="userInfo">
+          <Paper elevation={3} className="userInfoCardWrapper">
+            <Grid className="firstGridOfUserInfo">
+              <h1>Account</h1>
+              <CardMedia className={classes.media} image={user.image} />
+              <Typography
+                gutterBottom
+                variant="h5"
+                style={{ fontWeight: "bold" }}
+              >
+                Username: {user.username}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                style={{ fontWeight: "bold" }}
+              >
+                First name: {user.firstName}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h2"
+                style={{ fontWeight: "bold" }}
+              >
+                Last name: {user.lastName}
+              </Typography>
+              <Typography variant="h5" style={{ fontWeight: "bold" }}>
+                Email: {user.email}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                style={{ fontWeight: "bold" }}
+              >
+                Country: {user.country}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                style={{ fontWeight: "bold" }}
+              >
+                City: {user.city}
+              </Typography>
+            </Grid>
+            <Grid className="secondGridOfUserInfo">
+              {!interests.length > 0 && <h1>Your interests</h1>}
+
+              {user.interests.map((interest, index) => {
+                return (
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                    key={index}
+                    style={{ fontWeight: "bold" }}
+                  >
+                    {interest}
+                  </Typography>
+                );
+              })}
+              {following.length > 0 && <h1>Following</h1>}
+              {user.following.map((user, index) => {
+                return (
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                    key={index}
+                    style={{ fontWeight: "bold" }}
+                  >
+                    {user.username}
+                  </Typography>
+                );
+              })}
+            </Grid>
+          </Paper>
+        </Grid>
+      </>
+      {!form ? (
+        <Container component="main" maxWidth="xs">
+          {!interests ? (
+            <h1>Add your interests, country and city to your profile info</h1>
+          ) : (
+            ""
+          )}
+          <CssBaseline />
+          <Grid className="editProfileButton">
+            <Button
+              size="large"
+              style={{ backgroundColor: "black", color: "white" }}
+              className="editButton"
+              onClick={handleForm}
+            >
+              Edit Profile
+            </Button>
+          </Grid>
+        </Container>
+      ) : (
+        <>
+          <Container component="main" maxWidth="xs" className="editProfileForm">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <form
+                className={classes.form}
+                noValidate
+                onSubmit={onEditProfile}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="uname"
+                      name="username"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="userName"
+                      label="Username"
+                      autoFocus
+                      value={user.username}
+                      onChange={handleUserName}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="fname"
+                      name="firstName"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="firstName"
+                      label="First Name"
+                      autoFocus
+                      value={user.firstName}
+                      onChange={handleFirstName}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="lastName"
+                      label="Last Name"
+                      name="lastName"
+                      autoComplete="lname"
+                      value={user.lastName}
+                      onChange={handleLastName}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                      value={user.email}
+                      onChange={handleEmail}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="country"
+                      name="country"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="country"
+                      label="country"
+                      autoFocus
+                      value={user.country}
+                      onChange={handleCountry}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="city"
+                      name="city"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="city"
+                      label="city"
+                      autoFocus
+                      value={user.city}
+                      onChange={handleCity}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="passwordHash"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      placeholder="re-enter your password"
+                      onChange={handlePassword}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Select
+                      style={{ width: "100%" }}
+                      onChange={onTopicChange}
+                      closeMenuOnSelect={false}
+                      defaultValue={[]}
+                      label="selet interests"
+                      isMulti
+                      name="topics"
+                      options={topStoriesTopics}
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                      multiValue={interests}
+                    />
+                  </Grid>
+                  <Grid>
+                    <FormHelperText>Upload your photo</FormHelperText>
+                    <Input
+                      type="file"
+                      name="myImage"
+                      accept="image/png, image/jpg"
+                    />
+                  </Grid>
+                </Grid>
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  style={{ color: "white", background: "black" }}
+                >
+                  Done
+                </Button>
+                <Grid container justifyContent="flex-end">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                      onDeleteProfile(user);
+                    }}
+                  >
+                    Delete Account
+                  </Button>
+                </Grid>
+                {props.error && <p className="error">{props.error}</p>}
+              </form>
+            </div>
+            <Box mt={5}></Box>
+          </Container>
+        </>
+      )}
+
       <Grid classname="bigWrapper">
         <Grid container className="wrapper">
           {comments.length > 0 && (
@@ -188,187 +455,6 @@ export default function EditProfile(props) {
             </Grid>
           )}
         </Grid>
-        {!form ? (
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <Grid className="editProfileButton">
-              {!interests.length ? (
-                <h1>
-                  Add your interests, country and city to your profile info
-                </h1>
-              ) : (
-                ""
-              )}
-
-              <Button
-                size="large"
-                style={{ backgroundColor: "black", color: "white" }}
-                className="editButton"
-                onClick={handleForm}
-              >
-                Edit Profile
-              </Button>
-            </Grid>
-          </Container>
-        ) : (
-          <>
-            <Container component="main" maxWidth="xs">
-              <CssBaseline />
-              <div className={classes.paper}>
-                <form
-                  className={classes.form}
-                  noValidate
-                  onSubmit={onEditProfile}
-                >
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        autoComplete="uname"
-                        name="username"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="userName"
-                        label="Username"
-                        autoFocus
-                        value={user.username}
-                        onChange={handleUserName}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        autoComplete="fname"
-                        name="firstName"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="firstName"
-                        label="First Name"
-                        autoFocus
-                        value={user.firstName}
-                        onChange={handleFirstName}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="lastName"
-                        label="Last Name"
-                        name="lastName"
-                        autoComplete="lname"
-                        value={user.lastName}
-                        onChange={handleLastName}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        value={user.email}
-                        onChange={handleEmail}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        autoComplete="country"
-                        name="country"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="country"
-                        label="country"
-                        autoFocus
-                        value={user.country}
-                        onChange={handleCountry}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        autoComplete="city"
-                        name="city"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="city"
-                        label="city"
-                        autoFocus
-                        value={user.city}
-                        onChange={handleCity}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="passwordHash"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        placeholder="re-enter your password"
-                        onChange={handlePassword}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Select
-                        style={{ width: "100%" }}
-                        onChange={onTopicChange}
-                        closeMenuOnSelect={false}
-                        defaultValue={[]}
-                        label="selet interests"
-                        isMulti
-                        name="topics"
-                        options={topStoriesTopics}
-                        className="basic-multi-select"
-                        classNamePrefix="select"
-                        multiValue={interests}
-                      />
-                    </Grid>
-                    <Grid>
-                      <FormHelperText>Upload your photo</FormHelperText>
-                      <Input
-                        type="file"
-                        name="myImage"
-                        accept="image/png, image/jpg"
-                      />
-                    </Grid>
-                  </Grid>
-
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    style={{ color: "white", background: "black" }}
-                  >
-                    Done
-                  </Button>
-                  <Grid container justifyContent="flex-end">
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        onDeleteProfile(user);
-                      }}
-                    >
-                      Delete Account
-                    </Button>
-                  </Grid>
-                  {props.error && <p className="error">{props.error}</p>}
-                </form>
-              </div>
-              <Box mt={5}></Box>
-            </Container>
-          </>
-        )}
       </Grid>
     </>
   );

@@ -12,6 +12,7 @@ import Container from "@material-ui/core/Container";
 import { topStoriesTopics } from "../../data/data";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import GoogleButton from "../GoogleButton/GoogleButton";
+import "./SignUp.css";
 
 function SignUp(props) {
   const {
@@ -45,7 +46,7 @@ function SignUp(props) {
 
   return (
     <>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" className="signUpContainer">
         <CssBaseline />
         <div className={classes.paper}>
           <form className={classes.form} noValidate onSubmit={onSignUp}>

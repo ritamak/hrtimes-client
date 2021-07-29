@@ -10,3 +10,10 @@
 h1 {
   color: black;
 }
+
+.createArticleContainer {
+  background-color: white;
+  border-radius: 25px !important;
+  box-shadow: 0 0 40px #241919 !important;
+  margin-top: 20px;
+}
