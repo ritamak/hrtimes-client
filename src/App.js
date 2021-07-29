@@ -389,12 +389,25 @@ function App(props) {
     });
     updateFilteredData(filteredData);
   };
+  
+  const handleFollowUser = (event, id) => {
+    event.preventDefault();
+    axios.post(`${API_URL}/api/users/${id}/follow`, {}, { withCredentials: true })
+      .then ((response) => {
 
-  const handleFollowUser = (id) => {
-    axios
-      .post(`${API_URL}/api/users/${id}`, {}, { withCredentials: true })
-      .then((response) => {
-        props.history.push("/profile");
+        props.history.push(`/users/${id}`);
+        updateUser(response.data);
+      }).catch ((error) => {
+          console.log("User not followed!", error);
+      })
+  }
+
+  const handleUnfollowUser = (event, id) => {
+    event.preventDefault();
+    axios.post(`${API_URL}/api/users/${id}/unfollow`, {}, { withCredentials: true })
+      .then ((response) => {
+
+        props.history.push(`/users/${id}`);
         updateUser(response.data);
       })
       .catch((error) => {
@@ -469,6 +482,7 @@ function App(props) {
                   onLogOut={handleLogOut}
                   {...routerProps}
                   comments={comments}
+                  updateUser={updateUser}
                   updateComments={updateComments}
                   updateArticles={updateArticles}
                 />
@@ -583,6 +597,7 @@ function App(props) {
                   updateUser={updateUser}
                   updateStatus={updateStatus}
                   onFollowUser={handleFollowUser}
+                  onUnfollowUser={handleUnfollowUser}
                   {...routeProps}
                 />
               </>

@@ -8,8 +8,15 @@ import DataCard from "../DataCard/DataCard";
 import Grid from "@material-ui/core/Grid";
 
 function Profile(props) {
-  const { data, user, onDataChange, articles, updateComments, updateArticles } =
-    props;
+  const {
+    data,
+    user,
+    onDataChange,
+    articles,
+    updateComments,
+    updateArticles,
+    updateUser,
+  } = props;
   const { interests } = user;
 
   useEffect(() => {
@@ -36,8 +43,13 @@ function Profile(props) {
         let articleResponse = await axios.get(`${API_URL}/api/articles`, {
           withCredentials: true,
         });
+        let userResponse = await axios.get(`${API_URL}/api/profile`, {
+          withCredentials: true,
+        });
+
         updateComments(commentResponse.data);
         updateArticles(articleResponse.data);
+        updateUser(userResponse.data);
       } catch (err) {
         console.log("Fetching data failed", err);
       }

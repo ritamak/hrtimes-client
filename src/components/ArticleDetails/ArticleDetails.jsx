@@ -25,9 +25,103 @@ export default function ArticleDetails(props) {
         console.log("Article Details fetch failed!", err);
       }
     })();
-  }, [id]);
+  }, []);
 
-  if (!user) {
+  const handleIncLikeArticle = (event, id) => {
+    event.preventDefault();
+    axios
+      .post(
+        `${API_URL}/api/article/${id}/incLike`,
+        {},
+        { withCredentials: true }
+      )
+      .then((response) => {
+        props.history.push(`/article/${id}`);
+        updateArticleDetail(response.data);
+      })
+      .catch((error) => {
+        console.log("Article not liked!", error);
+      });
+  };
+
+  const handleDecLikeArticle = (event, id) => {
+    event.preventDefault();
+    axios
+      .post(
+        `${API_URL}/api/article/${id}/decLike`,
+        {},
+        { withCredentials: true }
+      )
+      .then((response) => {
+        props.history.push(`/article/${id}`);
+        updateArticleDetail(response.data);
+      })
+      .catch((error) => {
+        console.log("Article not unliked!", error);
+      });
+  };
+
+  const handleIncDislikeArticle = (event, id) => {
+    event.preventDefault();
+    axios
+      .post(
+        `${API_URL}/api/article/${id}/incDislike`,
+        {},
+        { withCredentials: true }
+      )
+      .then((response) => {
+        props.history.push(`/article/${id}`);
+        updateArticleDetail(response.data);
+      })
+      .catch((error) => {
+        console.log("Article not disliked!", error);
+      });
+  };
+
+  const handleDecDislikeArticle = (event, id) => {
+    event.preventDefault();
+    axios
+      .post(
+        `${API_URL}/api/article/${id}/decDislike`,
+        {},
+        { withCredentials: true }
+      )
+      .then((response) => {
+        props.history.push(`/article/${id}`);
+        updateArticleDetail(response.data);
+      })
+      .catch((error) => {
+        console.log("Dislike couldn't be removed!", error);
+      });
+  };
+
+  const handleFavArticle = (event, id) => {
+    event.preventDefault();
+    axios
+      .post(`${API_URL}/api/article/${id}/fav`, {}, { withCredentials: true })
+      .then((response) => {
+        props.history.push(`/article/${id}`);
+        updateArticleDetail(response.data);
+      })
+      .catch((error) => {
+        console.log("Article not added to favorites!", error);
+      });
+  };
+
+  const handleUnfavArticle = (event, id) => {
+    event.preventDefault();
+    axios
+      .post(`${API_URL}/api/article/${id}/unfav`, {}, { withCredentials: true })
+      .then((response) => {
+        props.history.push(`/article/${id}`);
+        updateArticleDetail(response.data);
+      })
+      .catch((error) => {
+        console.log("Article not removed from favorites!", error);
+      });
+  };
+
+  if (!user || !articleDetail || !commentDetails) {
     return <p>Loading...</p>;
   }
   return (
@@ -43,6 +137,17 @@ export default function ArticleDetails(props) {
             authorId={articleDetail.author._id}
             image={articleDetail.image}
             author={articleDetail.author.username}
+            articleId={id}
+            likes={articleDetail.likes}
+            dislikes={articleDetail.dislikes}
+            favorites={articleDetail.favorites}
+            userId={user._id}
+            onIncLikeArticle={handleIncLikeArticle}
+            onDecLikeArticle={handleDecLikeArticle}
+            onIncDislikeArticle={handleIncDislikeArticle}
+            onDecDislikeArticle={handleDecDislikeArticle}
+            onFavArticle={handleFavArticle}
+            onUnfavArticle={handleUnfavArticle}
           />
         </Grid>
       )}
