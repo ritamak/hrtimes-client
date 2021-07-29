@@ -87,37 +87,39 @@ function Profile(props) {
       {!articles.length ? "" : <h3>by our users:</h3>}
       <hr style={{ width: "100%" }}></hr>
 
-      <Grid container className="dataArticles">
-        <br></br>
-        {articles &&
-          articles.map((article, index) => {
-            return (
-              <Grid
-                container
-                item
-                key={index}
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                className="gridItem"
-              >
-                <UserArticleCard
-                  section={article.section}
-                  title={article.title}
-                  id={article._id}
-                  image={article.image}
-                  author={article.author}
-                />
-              </Grid>
-            );
-          })}
-      </Grid>
+      {articles.length > 0 && (
+        <Grid container className="dataArticles">
+          <br></br>
+          {articles &&
+            articles.map((article, index) => {
+              return (
+                <Grid
+                  container
+                  item
+                  key={index}
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  className="gridItem"
+                >
+                  <UserArticleCard
+                    section={article.section}
+                    title={article.title}
+                    id={article._id}
+                    image={article.image}
+                    author={article.author}
+                  />
+                </Grid>
+              );
+            })}
+        </Grid>
+      )}
 
       <h3>you may like:</h3>
       <hr style={{ width: "100%" }}></hr>
 
-      <Grid container className="dataArticles">
+      <Grid container className="dataArticlesTwo">
         <br></br>
         <Grid container justifyContent="flex-end">
           <Grid item>

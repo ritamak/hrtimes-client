@@ -151,21 +151,23 @@ export default function ArticleDetails(props) {
           />
         </Grid>
       )}
-      <Grid container className="commentsWrapper">
-        {commentDetails &&
-          commentDetails.map((comment, index) => {
-            console.log(comment);
-            return (
-              <CommentBox
-                image={comment.author.image}
-                commentBody={comment.commentBody}
-                author={comment.author.username}
-                key={index}
-              />
-            );
-          })}
-        <CreateComment articleId={id} onCreateComments={onCreateComments} />
-      </Grid>
+      {commentDetails && (
+        <Grid container className="commentsWrapper">
+          {commentDetails &&
+            commentDetails.map((comment, index) => {
+              console.log(comment);
+              return (
+                <CommentBox
+                  image={comment.author.image}
+                  commentBody={comment.commentBody}
+                  author={comment.author.username}
+                  key={index}
+                />
+              );
+            })}
+          <CreateComment articleId={id} onCreateComments={onCreateComments} />
+        </Grid>
+      )}
     </>
   );
 }

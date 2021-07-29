@@ -121,68 +121,72 @@ export default function EditProfile(props) {
     <>
       <Grid classname="bigWrapper">
         <Grid container className="wrapper">
-          <Grid className="commentsWrapper">
-            {!comments.length ? "" : <h3>your comments:</h3>}
-            {comments &&
-              comments.map((comment, index) => {
-                return (
-                  <Grid
-                    container
-                    className="comments"
-                    key={index}
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    lg={3}
-                  >
-                    <Paper elevation={3}>
-                      <p>{comment.commentBody}</p>
-                    </Paper>
-                    <Tooltip title="Delete">
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => {
-                          onDeleteComment(comment._id);
-                        }}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </Grid>
-                );
-              })}
-          </Grid>
-          <Grid className="articles">
-            {!articles.length ? "" : <h3>your articles</h3>}
-            {articles &&
-              articles.map((article, index) => {
-                return (
-                  <Grid container key={index} xs={12} sm={6} md={4} lg={3}>
-                    <Paper elevation={3}>
-                      <p>{article.title}</p>
-                    </Paper>
-                    <Tooltip title="Delete">
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => {
-                          onDeleteArticle(article._id);
-                        }}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </Tooltip>
-
-                    <Tooltip title="Edit">
-                      <Link to={`/article/${article._id}/edit`}>
-                        <IconButton aria-label="edit">
-                          <SettingsIcon />
+          {comments.length > 0 && (
+            <Grid className="commentsWrapperTwo">
+              {!comments.length ? "" : <h3>your comments:</h3>}
+              {comments.length &&
+                comments.map((comment, index) => {
+                  return (
+                    <Grid
+                      container
+                      className="comments"
+                      key={index}
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      lg={3}
+                    >
+                      <Paper elevation={3}>
+                        <p>{comment.commentBody}</p>
+                      </Paper>
+                      <Tooltip title="Delete">
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => {
+                            onDeleteComment(comment._id);
+                          }}
+                        >
+                          <DeleteIcon />
                         </IconButton>
-                      </Link>
-                    </Tooltip>
-                  </Grid>
-                );
-              })}
-          </Grid>
+                      </Tooltip>
+                    </Grid>
+                  );
+                })}
+            </Grid>
+          )}
+          {articles.length > 0 && (
+            <Grid className="articles">
+              {!articles.length ? "" : <h3>your articles</h3>}
+              {articles.length > 0 &&
+                articles.map((article, index) => {
+                  return (
+                    <Grid container key={index} xs={12} sm={6} md={4} lg={3}>
+                      <Paper elevation={3}>
+                        <p>{article.title}</p>
+                      </Paper>
+                      <Tooltip title="Delete">
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => {
+                            onDeleteArticle(article._id);
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+
+                      <Tooltip title="Edit">
+                        <Link to={`/article/${article._id}/edit`}>
+                          <IconButton aria-label="edit">
+                            <SettingsIcon />
+                          </IconButton>
+                        </Link>
+                      </Tooltip>
+                    </Grid>
+                  );
+                })}
+            </Grid>
+          )}
         </Grid>
         {!form ? (
           <Container component="main" maxWidth="xs">
