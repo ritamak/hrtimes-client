@@ -394,7 +394,6 @@ function App(props) {
     axios.post(`${API_URL}/api/users/${id}/follow`, {}, { withCredentials: true })
       .then ((response) => {
 
-<<<<<<< HEAD
         props.history.push(`/users/${id}`);
         updateUser(response.data);
       }).catch ((error) => {
@@ -408,13 +407,6 @@ function App(props) {
       .then ((response) => {
 
         props.history.push(`/users/${id}`);
-=======
-  const handleFollowUser = (id) => {
-    axios
-      .post(`${API_URL}/api/users/${id}`, {}, { withCredentials: true })
-      .then((response) => {
-        props.history.push("/profile");
->>>>>>> 7fe3315e57c937c41a4cd595eda644c3492f211c
         updateUser(response.data);
       })
       .catch((error) => {
