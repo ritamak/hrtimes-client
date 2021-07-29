@@ -7,6 +7,8 @@ import UserArticleCard from "../UserArticleCard/UserArticleCard";
 import DataCard from "../DataCard/DataCard";
 import Grid from "@material-ui/core/Grid";
 import Loading from "../Loading/index";
+import ScrollToTop from "react-scroll-up";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 function Profile(props) {
   const {
@@ -153,6 +155,9 @@ function Profile(props) {
           );
         })}
       </Grid>
+      <ScrollToTop showUnder={160}>
+        <ArrowUpwardIcon style={{ fontSize: 40, color: "white" }} />
+      </ScrollToTop>
     </div>
   );
 }

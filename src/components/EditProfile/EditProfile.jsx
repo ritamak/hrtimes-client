@@ -123,6 +123,7 @@ export default function EditProfile(props) {
   if (fetchingUser) {
     return <Loading />;
   }
+
   return (
     <>
       <>
@@ -189,7 +190,8 @@ export default function EditProfile(props) {
                 );
               })}
               {following.length > 0 && <h1>Following</h1>}
-              {user.following.map((user, index) => {
+              {user.following.map((people, index) => {
+                console.log(people.following);
                 return (
                   <Typography
                     gutterBottom
@@ -198,7 +200,7 @@ export default function EditProfile(props) {
                     key={index}
                     style={{ fontWeight: "bold" }}
                   >
-                    {user.username}
+                    {people.username}
                   </Typography>
                 );
               })}
