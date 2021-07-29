@@ -1,6 +1,5 @@
 import React from "react";
 import { BottomNavigation, Typography } from "@material-ui/core";
-import GitHubIcon from "@material-ui/icons/GitHub";
 import "./Footer.css";
 
 function Footer() {
@@ -8,7 +7,15 @@ function Footer() {
     <BottomNavigation>
       <div className="footer">
         <Typography>
-          Created by <GitHubIcon /> Rita & <GitHubIcon /> Halil!!!
+          Created by
+          <a href="https://github.com/ritamak">
+            <i class="fab fa-github"></i> Rita
+          </a>
+          &
+          <a href="https://github.com/halokaya67">
+            <i class="fab fa-github"></i> Halil Ibrahim
+          </a>
+          with huge effort...
         </Typography>
       </div>
     </BottomNavigation>

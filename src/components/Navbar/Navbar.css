@@ -10,11 +10,6 @@
   text-decoration: none;
 }
 
-button span {
-  font-weight: bold;
-  color: azure;
-}
-
 button i {
   margin: 0 5px;
 }
