@@ -398,10 +398,10 @@ function App(props) {
     event.preventDefault();
     axios
       .post(`${API_URL}/api/users/${id}/follow`, {}, { withCredentials: true })
-      .then(async (response) => {
+      .then( (response) => {
         
        updateUser(response.data);
-       // props.history.push(`/users/${id}`);
+ 
       })
       .catch((error) => {
         console.log("User not followed!", error);
@@ -416,10 +416,10 @@ function App(props) {
         {},
         { withCredentials: true }
       )
-      .then(async (response) => {
+      .then( (response) => {
        
         updateUser(response.data);
-        //props.history.push(`/users/${id}`);
+
       })
       .catch((error) => {
         console.log("User not followed!", error);
