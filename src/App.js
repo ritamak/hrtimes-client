@@ -14,8 +14,8 @@ import ArticleDetails from "./components/ArticleDetails/ArticleDetails";
 import Navbar from "./components/Navbar/Navbar";
 import UserDetails from "./components/UserDetails/UserDetails";
 import "./App.css";
-import NotFound from "./components/NotFound/NotFound";
 import Loading from "./components/Loading/index";
+import NotFound from "./components/NotFound/NotFound";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -39,6 +39,8 @@ function App(props) {
   const handleUserChange = (param) => {
     updateUser(param);
   };
+
+ 
 
   useEffect(() => {
     (async () => {
@@ -396,9 +398,10 @@ function App(props) {
     event.preventDefault();
     axios
       .post(`${API_URL}/api/users/${id}/follow`, {}, { withCredentials: true })
-      .then((response) => {
-        props.history.push(`/users/${id}`);
-        updateUser(response.data);
+      .then(async (response) => {
+        
+       updateUser(response.data);
+       // props.history.push(`/users/${id}`);
       })
       .catch((error) => {
         console.log("User not followed!", error);
@@ -413,9 +416,10 @@ function App(props) {
         {},
         { withCredentials: true }
       )
-      .then((response) => {
-        props.history.push(`/users/${id}`);
+      .then(async (response) => {
+       
         updateUser(response.data);
+        //props.history.push(`/users/${id}`);
       })
       .catch((error) => {
         console.log("User not followed!", error);
@@ -453,10 +457,10 @@ function App(props) {
   };
 
   if (fetchingUser) {
-    return <Loading />;
+   return <Loading />;;
   }
   return (
-    <div className="mainPageContainer">
+    <div  className="mainPageContainer">
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route

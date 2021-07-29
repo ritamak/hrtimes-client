@@ -57,7 +57,7 @@ function UserDetails(props) {
     user.following.map((followingUser) => {
       followingUsers.push(followingUser._id);
     });
-
+    console.log(followingUsers);
     return followingUsers.includes(userDetails._id);
   };
 
