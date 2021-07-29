@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 
 import "./HomePage.css";
 
@@ -7,41 +8,36 @@ function HomePage() {
   return (
     <div className="homePageDiv">
       <div className="wrapperImage">
-        <img
-          src="/media/title.png"
-          alt="logo"
-          className="homePageImg"
-          style={{ width: "20%" }}
-        />
-        <div className="homePageButtons">
-          <Link to="/signin" style={{ textDecoration: "none" }}>
-            <Button variant="outlined" style={{ backgroundColor: "white" }}>
-              Sign In
-            </Button>
-          </Link>
-
-          <Link to="/signup" style={{ textDecoration: "none" }}>
-            <Button variant="contained">Sign Up</Button>
-          </Link>
-        </div>
+        <img src="/media/title.png" alt="logo" className="homePageImg" />
       </div>
-      <hr style={{ width: "100%" }}></hr>
+      <hr className="homePageLine" />
 
-      <div className="wrapper">
-        <div className="homePageBox">
-          <p style={{ width: "45vw" }}>
+      <Grid container spacing={0}>
+        <Grid item xs={12} sm={10} md={8} lg={5} className="homePageIntroBox">
+          <p className="homePageIntro">
             Gather all topics of your interest.<br></br>
             You can easily choose the topics you are interested in and check
             them on your feed.<br></br>
             Join us and keep yourself posted!
           </p>
-          <img
-            src="/media/landing.jpg"
-            alt="newspaper"
-            style={{ width: "45vw" }}
-          ></img>
-        </div>
-      </div>
+          <Link className="signInLink" to="/signin">
+            <Button className="signInButton" variant="outlined">
+              <i class="fas fa-sign-in-alt"></i>
+              Sign In
+            </Button>
+          </Link>
+          <p className="signUpText">
+            You don't have an account?
+            <Link to="/signup" className="signUpLink">
+              {" "}
+              Sign Up!...
+            </Link>
+          </p>
+        </Grid>
+        <Grid item xs={12} sm={10} md={8} lg={5} className="wrapper">
+          <img src="/media/landing.jpg" alt="newspaper"></img>
+        </Grid>
+      </Grid>
     </div>
   );
 }

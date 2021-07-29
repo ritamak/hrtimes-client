@@ -1,2 +1,16 @@
-.footer {
+.MuiBottomNavigation-root {
+  background-color: rgba(255, 255, 255, 0) !important;
+  color: azure !important;
+}
+
+.MuiBottomNavigation-root p {
+  font-size: 20px !important;
+  font-weight: bold !important;
+  text-shadow: 0 0 10px black !important;
+}
+
+.MuiBottomNavigation-root a {
+  text-decoration: none !important;
+  color: aqua;
+  margin: 0 10px;
 }
