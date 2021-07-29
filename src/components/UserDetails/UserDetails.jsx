@@ -19,7 +19,14 @@ const useStyles = makeStyles({
 function UserDetails(props) {
   const [userDetails, updateUserDetails] = useState(null);
   const id = props.match.params.id;
-  const { onFollowUser, fetchingUser, updateStatus, user, updateUser } = props;
+  const {
+    onFollowUser,
+    fetchingUser,
+    updateStatus,
+    user,
+    updateUser,
+    onUnfollowUser,
+  } = props;
 
   const classes = useStyles();
 
@@ -55,13 +62,23 @@ function UserDetails(props) {
       <Paper elevation={3} className="cardDetailsWrapper">
         <Grid>
           <div>
-            {user.following.includes(userDetails._id) ||
-            user._id === userDetails._id ? (
+            {user._id === userDetails._id ? (
               ""
+            ) : user.following.includes(userDetails._id) ? (
+              <Button
+                onClick={(event) => {
+                  onUnfollowUser(event, id);
+                }}
+                color="primary"
+                variant="contained"
+              >
+                <i class="fas fa-user-times fa-lg"></i>
+                Unfollow
+              </Button>
             ) : (
               <Button
-                onClick={() => {
-                  onFollowUser(id);
+                onClick={(event) => {
+                  onFollowUser(event, id);
                 }}
                 color="primary"
                 variant="contained"
