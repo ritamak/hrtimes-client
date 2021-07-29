@@ -1,0 +1,29 @@
+.userDetailsWrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 50%;
+  height: 50%;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  padding: 30px;
+  /* border: 1px solid black; */
+  margin-top: 20px;
+}
+
+.userDetails {
+  width: 100%;
+
+  box-shadow: 0 0 40px #241919 !important;
+  border-radius: 25px !important;
+  padding: 30px;
+}
+
+.bigUserDetails {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  flex-direction: column;
+}

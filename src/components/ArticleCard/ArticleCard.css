@@ -17,3 +17,10 @@
   border-radius: 25px !important;
   margin-top: 20px;
 }
+
+.likes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

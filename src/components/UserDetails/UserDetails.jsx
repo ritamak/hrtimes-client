@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import Loading from "../Loading/index";
+import "./UserDetails.css";
 
 const useStyles = makeStyles({
   media: {
@@ -68,137 +69,142 @@ function UserDetails(props) {
   return (
     <>
       <h1>User Details</h1>
-
-      <Paper elevation={3} className="cardDetailsWrapper">
-        <Grid>
-          <div>
-            {user._id === userDetails._id ? (
-              ""
-            ) : handleFollowing() ? (
-              <Button
-                onClick={(event) => {
-                  onUnfollowUser(event, id);
-                }}
-                color="primary"
-                variant="contained"
-              >
-                <i class="fas fa-user-times fa-lg"></i>
-                Unfollow
-              </Button>
-            ) : (
-              <Button
-                onClick={(event) => {
-                  onFollowUser(event, id);
-                }}
-                color="primary"
-                variant="contained"
-              >
-                <PersonAddIcon />
-                Follow
-              </Button>
+      <Grid container className="bigUserDetails">
+        <Grid container className="userDetailsWrapper">
+          <Paper elevation={3} className="userDetails">
+            {userDetails.image && (
+              <CardMedia className={classes.media} image={userDetails.image} />
             )}
-          </div>
-          {userDetails.image && (
-            <CardMedia className={classes.media} image={userDetails.image} />
-          )}
-          <Typography
-            gutterBottom
-            variant="h1"
-            component="h2"
-            style={{ fontWeight: "bold" }}
-          >
-            {userDetails.username}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="h2"
-            component="h2"
-            style={{ fontWeight: "bold" }}
-          >
-            {userDetails.firstName}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="h2"
-            style={{ fontWeight: "bold" }}
-          >
-            {userDetails.lastName}
-          </Typography>
-          <Typography variant="body2" component="h2" style={{ color: "black" }}>
-            {userDetails.email}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="h2"
-            style={{ fontWeight: "bold" }}
-          >
-            {userDetails.country}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="h2"
-            style={{ fontWeight: "bold" }}
-          >
-            {userDetails.city}
-          </Typography>
-          {userDetails.interests.map((interest, index) => {
-            return (
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                key={index}
-                style={{ fontWeight: "bold" }}
-              >
-                {interest}
-              </Typography>
-            );
-          })}
-          {userDetails.articles.map((article, index) => {
-            return (
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                key={index}
-                style={{ fontWeight: "bold" }}
-              >
-                {article.title}
-              </Typography>
-            );
-          })}
-          {userDetails.comments.map((comment, index) => {
-            return (
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                style={{ fontWeight: "bold" }}
-              >
-                {comment.commentBody}
-              </Typography>
-            );
-          })}
-          {userDetails.following.map((user, index) => {
-            return (
-              <Typography
-                gutterBottom
-                variant="h4"
-                component="h2"
-                style={{ fontWeight: "bold" }}
-              >
-                {" "}
-                <Link key={index} to={`/users/${user._id}`}>
-                  {user.username}
-                </Link>
-              </Typography>
-            );
-          })}
+            <Typography
+              gutterBottom
+              variant="h1"
+              component="h2"
+              style={{ fontWeight: "bold" }}
+            >
+              {userDetails.username}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h2"
+              component="h2"
+              style={{ fontWeight: "bold" }}
+            >
+              {userDetails.firstName}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              style={{ fontWeight: "bold" }}
+            >
+              {userDetails.lastName}
+            </Typography>
+            <Typography
+              variant="body2"
+              component="h2"
+              style={{ color: "black" }}
+            >
+              {userDetails.email}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              style={{ fontWeight: "bold" }}
+            >
+              {userDetails.country}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              style={{ fontWeight: "bold" }}
+            >
+              {userDetails.city}
+            </Typography>
+            {userDetails.interests.map((interest, index) => {
+              return (
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                  key={index}
+                  style={{ fontWeight: "bold" }}
+                >
+                  {interest}
+                </Typography>
+              );
+            })}
+            {userDetails.articles.map((article, index) => {
+              return (
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                  key={index}
+                  style={{ fontWeight: "bold" }}
+                >
+                  {article.title}
+                </Typography>
+              );
+            })}
+            {userDetails.comments.map((comment, index) => {
+              return (
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                  style={{ fontWeight: "bold" }}
+                >
+                  {comment.commentBody}
+                </Typography>
+              );
+            })}
+            {userDetails.following.map((user, index) => {
+              return (
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  component="h2"
+                  style={{ fontWeight: "bold" }}
+                >
+                  {" "}
+                  <Link key={index} to={`/users/${user._id}`}>
+                    {user.username}
+                  </Link>
+                </Typography>
+              );
+            })}
+            <div>
+              {user._id === userDetails._id ? (
+                ""
+              ) : handleFollowing() ? (
+                <Button
+                  onClick={(event) => {
+                    onUnfollowUser(event, id);
+                  }}
+                  color="primary"
+                  variant="contained"
+                >
+                  <i class="fas fa-user-times fa-lg"></i>
+                  Unfollow
+                </Button>
+              ) : (
+                <Button
+                  onClick={(event) => {
+                    onFollowUser(event, id);
+                  }}
+                  color="primary"
+                  variant="contained"
+                >
+                  <PersonAddIcon />
+                  Follow
+                </Button>
+              )}
+            </div>
+          </Paper>
         </Grid>
-      </Paper>
+      </Grid>
     </>
   );
 }

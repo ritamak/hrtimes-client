@@ -48,96 +48,10 @@ export default function UserArticleCard({
               title={section}
             />
           )}
-          {favorites.includes(userId) ? (
-            <Grid>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={(event) => {
-                  onUnfavArticle(event, articleId);
-                }}
-              >
-                <i class="fas fa-star"></i>
-              </Button>
-            </Grid>
-          ) : (
-            <Grid>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={(event) => {
-                  onFavArticle(event, articleId);
-                }}
-              >
-                <i class="far fa-star"></i>
-              </Button>
-            </Grid>
-          )}
-          {likes.includes(userId) ? (
-            <Grid>
-              <Typography gutterBottom variant="h5" component="h5">
-                {likes.length}
-              </Typography>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={(event) => {
-                  onDecLikeArticle(event, articleId);
-                }}
-              >
-                <i class="fas fa-thumbs-up"></i>
-              </Button>
-            </Grid>
-          ) : (
-            <Grid>
-              <Typography gutterBottom variant="h5" component="h5">
-                {likes.length}
-              </Typography>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={(event) => {
-                  onIncLikeArticle(event, articleId);
-                }}
-              >
-                <i class="far fa-thumbs-up"></i>
-              </Button>
-            </Grid>
-          )}
-          {dislikes.includes(userId) ? (
-            <Grid>
-              <Typography gutterBottom variant="h5" component="h5">
-                {dislikes.length}
-              </Typography>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={(event) => {
-                  onDecDislikeArticle(event, articleId);
-                }}
-              >
-                <i class="fas fa-thumbs-down"></i>
-              </Button>
-            </Grid>
-          ) : (
-            <Grid>
-              <Typography gutterBottom variant="h5" component="h5">
-                {dislikes.length}
-              </Typography>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={(event) => {
-                  onIncDislikeArticle(event, articleId);
-                }}
-              >
-                <i class="far fa-thumbs-down"></i>
-              </Button>
-            </Grid>
-          )}
+
           <Typography
             gutterBottom
-            variant="h1"
+            variant="h2"
             component="h2"
             style={{ fontWeight: "bold" }}
           >
@@ -145,37 +59,29 @@ export default function UserArticleCard({
           </Typography>
           <Typography
             gutterBottom
-            variant="h2"
-            component="h2"
-            style={{ fontWeight: "bold" }}
-          >
-            {subsection}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="h5"
+            variant="p"
             component="h2"
             style={{ fontWeight: "bold" }}
           >
             {section}
           </Typography>
-
-          <Typography variant="body2" component="h2" style={{ color: "black" }}>
-            {body}
-          </Typography>
-          <br></br>
           <Typography
             gutterBottom
-            variant="h4"
+            variant="h3"
             component="h2"
             style={{ fontWeight: "bold" }}
           >
-            {author}
+            {subsection}
           </Typography>
+
+          <Typography variant="p" component="h2" style={{ color: "black" }}>
+            {body}
+          </Typography>
+          <br></br>
+
           <Typography
             gutterBottom
-            variant="h5"
-            component="h2"
+            variant="body"
             style={{ fontWeight: "bold" }}
           >
             {created_date}
@@ -187,11 +93,100 @@ export default function UserArticleCard({
             style={{
               fontWeight: "bold",
               color: "black",
-              fontSize: "15px",
+              fontSize: "30px",
             }}
           >
             <Link to={`/users/${authorId}`}>{author}</Link>
           </Typography>
+          <Grid container className="likes">
+            {favorites.includes(userId) ? (
+              <Grid>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={(event) => {
+                    onUnfavArticle(event, articleId);
+                  }}
+                >
+                  <i class="fas fa-star"></i>
+                </Button>
+              </Grid>
+            ) : (
+              <Grid>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={(event) => {
+                    onFavArticle(event, articleId);
+                  }}
+                >
+                  <i class="far fa-star"></i>
+                </Button>
+              </Grid>
+            )}
+            {likes.includes(userId) ? (
+              <Grid>
+                <Typography gutterBottom variant="h5" component="h5">
+                  {likes.length}
+                </Typography>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={(event) => {
+                    onDecLikeArticle(event, articleId);
+                  }}
+                >
+                  <i class="fas fa-thumbs-up"></i>
+                </Button>
+              </Grid>
+            ) : (
+              <Grid>
+                <Typography gutterBottom variant="h5" component="h5">
+                  {likes.length}
+                </Typography>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={(event) => {
+                    onIncLikeArticle(event, articleId);
+                  }}
+                >
+                  <i class="far fa-thumbs-up"></i>
+                </Button>
+              </Grid>
+            )}
+            {dislikes.includes(userId) ? (
+              <Grid>
+                <Typography gutterBottom variant="h5" component="h5">
+                  {dislikes.length}
+                </Typography>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={(event) => {
+                    onDecDislikeArticle(event, articleId);
+                  }}
+                >
+                  <i class="fas fa-thumbs-down"></i>
+                </Button>
+              </Grid>
+            ) : (
+              <Grid>
+                <Typography gutterBottom variant="h5" component="h5">
+                  {dislikes.length}
+                </Typography>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={(event) => {
+                    onIncDislikeArticle(event, articleId);
+                  }}
+                >
+                  <i class="far fa-thumbs-down"></i>
+                </Button>
+              </Grid>
+            )}
+          </Grid>
           <br></br>
         </Grid>
       </Paper>
