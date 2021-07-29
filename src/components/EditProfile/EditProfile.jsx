@@ -388,26 +388,22 @@ export default function EditProfile(props) {
         </>
       )}
 
-      <Grid classname="bigWrapper">
-        <Grid container className="wrapper">
+      <Grid className="bigWrapper">
+        <Grid container className="wrapperCommentsArticles">
           {comments.length > 0 && (
             <Grid className="commentsWrapperTwo">
-              {!comments.length ? "" : <h3>your comments:</h3>}
+              {!comments.length ? (
+                ""
+              ) : (
+                <h2 style={{ color: "black", fontWeight: "bold" }}>
+                  Your comments:
+                </h2>
+              )}
               {comments.length &&
                 comments.map((comment, index) => {
                   return (
-                    <Grid
-                      container
-                      className="comments"
-                      key={index}
-                      xs={12}
-                      sm={6}
-                      md={4}
-                      lg={3}
-                    >
-                      <Paper elevation={3}>
-                        <p>{comment.commentBody}</p>
-                      </Paper>
+                    <Grid className="editDeleteComments">
+                      <p>{comment.commentBody}</p>
                       <Tooltip title="Delete">
                         <IconButton
                           aria-label="delete"
@@ -424,15 +420,19 @@ export default function EditProfile(props) {
             </Grid>
           )}
           {articles.length > 0 && (
-            <Grid className="articles">
-              {!articles.length ? "" : <h3>your articles</h3>}
+            <Grid className="myArticleBox">
+              {!articles.length ? (
+                ""
+              ) : (
+                <h2 style={{ color: "black", fontWeight: "bold" }}>
+                  Your articles:
+                </h2>
+              )}
               {articles.length > 0 &&
                 articles.map((article, index) => {
                   return (
-                    <Grid container key={index} xs={12} sm={6} md={4} lg={3}>
-                      <Paper elevation={3}>
-                        <p>{article.title}</p>
-                      </Paper>
+                    <Grid className="editDeleteArticles">
+                      <p>{article.title}</p>
                       <Tooltip title="Delete">
                         <IconButton
                           aria-label="delete"
