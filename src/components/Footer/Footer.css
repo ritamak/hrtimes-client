@@ -1,16 +1,21 @@
-.MuiBottomNavigation-root {
+.footerNav {
   background-color: rgba(255, 255, 255, 0) !important;
   color: azure !important;
 }
 
-.MuiBottomNavigation-root p {
+.footerNav p {
   font-size: 20px !important;
   font-weight: bold !important;
-  text-shadow: 0 0 10px black !important;
+  text-shadow: 0 0 5px black !important;
 }
 
-.MuiBottomNavigation-root a {
+.footerLinks a {
   text-decoration: none !important;
   color: aqua;
   margin: 0 10px;
+}
+
+.footerLinks a:hover {
+  color: #64dfdf !important;
+  transition: color 250ms;
 }

@@ -26,18 +26,18 @@ function Navbar(props) {
           </Link>
         </IconButton>
         <Link to={`/create`}>
-          <Button>
+          <Button className="navBarButtons">
             <CreateIcon />
             Create Article
           </Button>
         </Link>
         <Link to={`/${user._id}/edit`}>
-          <Button>
+          <Button className="navBarButtons">
             <i class="fas fa-user-edit fa-lg"></i>
             Edit Profile
           </Button>
         </Link>
-        <Button onClick={onLogOut}>
+        <Button className="navBarButtons" onClick={onLogOut}>
           Logout
           <ExitToApp />
         </Button>
