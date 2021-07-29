@@ -58,3 +58,31 @@ h1 {
   transform: scale(1.1);
   background-color: rgb(121, 121, 121);
 }
+.userInfoCardWrapper {
+  width: 80%;
+  height: 50%;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 0 40px #241919 !important;
+  margin-bottom: 20px;
+  padding: 30px;
+  border-radius: 25px !important;
+  margin-top: 20px;
+  display: flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.editProfileForm {
+  background-color: white;
+  border-radius: 25px !important;
+  box-shadow: 0 0 40px #241919 !important;
+}
+
+.userInfo {
+  display: flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+}

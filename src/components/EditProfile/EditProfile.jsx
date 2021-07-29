@@ -19,6 +19,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Paper from "@material-ui/core/Paper";
 import "./EditProfile.css";
+import UserDetails from "../UserDetails/UserDetails";
+import Typography from "@material-ui/core/Typography";
+import CardMedia from "@material-ui/core/CardMedia";
 
 export default function EditProfile(props) {
   const useStyles = makeStyles((theme) => ({
@@ -119,6 +122,79 @@ export default function EditProfile(props) {
   }
   return (
     <>
+      <>
+        <h1>User Details</h1>
+        <Grid className="userInfo">
+          <Paper elevation={3} className="userInfoCardWrapper">
+            <Grid>
+              {user.image && (
+                <CardMedia className={classes.media} image={user.image} />
+              )}
+              <Typography
+                gutterBottom
+                variant="h1"
+                component="h2"
+                style={{ fontWeight: "bold" }}
+              >
+                {user.username}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h2"
+                component="h2"
+                style={{ fontWeight: "bold" }}
+              >
+                {user.firstName}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h2"
+                style={{ fontWeight: "bold" }}
+              >
+                {user.lastName}
+              </Typography>
+              <Typography
+                variant="body2"
+                component="h2"
+                style={{ color: "black" }}
+              >
+                {UserDetails.email}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h2"
+                style={{ fontWeight: "bold" }}
+              >
+                {user.country}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h2"
+                style={{ fontWeight: "bold" }}
+              >
+                {user.city}
+              </Typography>
+              {user.interests.map((interest, index) => {
+                return (
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                    key={index}
+                    style={{ fontWeight: "bold" }}
+                  >
+                    {interest}
+                  </Typography>
+                );
+              })}
+            </Grid>
+          </Paper>
+        </Grid>
+      </>
+
       <Grid classname="bigWrapper">
         <Grid container className="wrapper">
           {comments.length > 0 && (
@@ -190,16 +266,13 @@ export default function EditProfile(props) {
         </Grid>
         {!form ? (
           <Container component="main" maxWidth="xs">
+            {!interests.length ? (
+              <h1>Add your interests, country and city to your profile info</h1>
+            ) : (
+              ""
+            )}
             <CssBaseline />
             <Grid className="editProfileButton">
-              {!interests.length ? (
-                <h1>
-                  Add your interests, country and city to your profile info
-                </h1>
-              ) : (
-                ""
-              )}
-
               <Button
                 size="large"
                 style={{ backgroundColor: "black", color: "white" }}
@@ -212,7 +285,11 @@ export default function EditProfile(props) {
           </Container>
         ) : (
           <>
-            <Container component="main" maxWidth="xs">
+            <Container
+              component="main"
+              maxWidth="xs"
+              className="editProfileForm"
+            >
               <CssBaseline />
               <div className={classes.paper}>
                 <form
@@ -354,7 +431,8 @@ export default function EditProfile(props) {
                   </Button>
                   <Grid container justifyContent="flex-end">
                     <Button
-                      variant="outlined"
+                      variant="contained"
+                      color="secondary"
                       onClick={() => {
                         onDeleteProfile(user);
                       }}

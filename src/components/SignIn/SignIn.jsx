@@ -34,7 +34,7 @@ function SignIn(props) {
   const { onSignIn, onGoogleSuccess, onGoogleFailure } = props;
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className="signInContainer">
       <CssBaseline />
       <div className={classes.paper}>
         <form className={classes.form} onSubmit={onSignIn}>
@@ -60,10 +60,6 @@ function SignIn(props) {
             id="password"
             autoComplete="current-password"
           />
-          <GoogleButton
-            onSuccess={onGoogleSuccess}
-            onFailure={onGoogleFailure}
-          />
 
           <Button
             type="submit"
@@ -75,7 +71,13 @@ function SignIn(props) {
           >
             Sign In
           </Button>
-
+          <Grid container justifyContent="flex-end" style={{ color: "black" }}>
+            <GoogleButton
+              onSuccess={onGoogleSuccess}
+              onFailure={onGoogleFailure}
+              style={{ color: "black" }}
+            />
+          </Grid>
           <Grid container>
             <Grid item>
               <Link
