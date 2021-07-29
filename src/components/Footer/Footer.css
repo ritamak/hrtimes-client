@@ -19,3 +19,27 @@
   color: #64dfdf !important;
   transition: color 250ms;
 }
+
+@media (max-width: 600px) {
+  .footerNav p {
+    font-size: 12px !important;
+  }
+}
+
+@media (min-width: 600px) {
+  .footerNav p {
+    font-size: 16px !important;
+  }
+}
+
+@media (min-width: 960px) {
+  .footerNav p {
+    font-size: 20px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .footerNav p {
+    font-size: 24px !important;
+  }
+}
