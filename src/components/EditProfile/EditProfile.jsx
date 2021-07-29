@@ -192,6 +192,14 @@ export default function EditProfile(props) {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Grid className="editProfileButton">
+              {!interests.length ? (
+                <h1>
+                  Add your interests, country and city to your profile info
+                </h1>
+              ) : (
+                ""
+              )}
+
               <Button
                 size="large"
                 style={{ backgroundColor: "black", color: "white" }}

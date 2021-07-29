@@ -14,6 +14,7 @@ import ArticleDetails from "./components/ArticleDetails/ArticleDetails";
 import Navbar from "./components/Navbar/Navbar";
 import UserDetails from "./components/UserDetails/UserDetails";
 import "./App.css";
+import NotFound from "./components/NotFound/NotFound";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -24,6 +25,7 @@ function App(props) {
   const [articles, updateArticles] = useState([]);
   const [comments, updateComments] = useState([]);
   const [filteredData, updateFilteredData] = useState([]);
+  const [showLoading, updateShowLoading] = useState(true);
 
   const handleTopicChange = (newInterests) => {
     updateInterests(newInterests);
@@ -388,24 +390,29 @@ function App(props) {
     });
     updateFilteredData(filteredData);
   };
-  
+
   const handleFollowUser = (event, id) => {
     event.preventDefault();
-    axios.post(`${API_URL}/api/users/${id}/follow`, {}, { withCredentials: true })
-      .then ((response) => {
-
+    axios
+      .post(`${API_URL}/api/users/${id}/follow`, {}, { withCredentials: true })
+      .then((response) => {
         props.history.push(`/users/${id}`);
         updateUser(response.data);
-      }).catch ((error) => {
-          console.log("User not followed!", error);
       })
-  }
+      .catch((error) => {
+        console.log("User not followed!", error);
+      });
+  };
 
   const handleUnfollowUser = (event, id) => {
     event.preventDefault();
-    axios.post(`${API_URL}/api/users/${id}/unfollow`, {}, { withCredentials: true })
-      .then ((response) => {
-
+    axios
+      .post(
+        `${API_URL}/api/users/${id}/unfollow`,
+        {},
+        { withCredentials: true }
+      )
+      .then((response) => {
         props.history.push(`/users/${id}`);
         updateUser(response.data);
       })
@@ -415,7 +422,7 @@ function App(props) {
   };
 
   const handleGoogleSuccess = (data) => {
-    updateStatus(true);
+    updateShowLoading(true);
     const { givenName, familyName, email, imageUrl, googleId } =
       data.profileObj;
     let newUser = {
@@ -431,15 +438,19 @@ function App(props) {
         withCredentials: true,
       })
       .then((response) => {
+        console.log(response.data.data);
         updateUser(response.data.data);
         updateError(null);
         updateStatus(false);
+        updateShowLoading(false);
+        props.history.push(`/${response.data.data._id}/edit`);
       });
   };
 
   const handleGoogleFailure = (err) => {
     console.log(err);
   };
+
   if (fetchingUser) {
     return <p>Loading...</p>;
   }
@@ -601,6 +612,7 @@ function App(props) {
             );
           }}
         />
+        <Route component={NotFound} />
       </Switch>
       <Footer />
     </div>

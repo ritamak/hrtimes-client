@@ -11,13 +11,17 @@ import Grid from "@material-ui/core/Grid";
 
 function Navbar(props) {
   const { user, onLogOut } = props;
+  if (!user.image) {
+    user.image = "/media/user.png";
+  }
+
   return (
     <AppBar position="static" style={{ background: "#000000" }}>
       <Toolbar>
         <IconButton edge="start">
           <Link to={"/profile"}>
             <Button>
-              <Avatar alt="profile" src={user.image} />
+              <Avatar id="image" alt="profile" src={user.image} />
             </Button>
           </Link>
         </IconButton>

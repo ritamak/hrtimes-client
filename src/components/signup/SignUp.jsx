@@ -156,7 +156,10 @@ function SignUp(props) {
                 />
               </Grid>
             </Grid>
-
+            <GoogleButton
+              onSuccess={onGoogleSuccess}
+              onFailure={onGoogleFailure}
+            />
             <Button
               type="submit"
               fullWidth
@@ -180,10 +183,6 @@ function SignUp(props) {
                 </Link>
               </Grid>
             </Grid>
-            <GoogleButton
-              onSuccess={onGoogleSuccess}
-              onFailure={onGoogleFailure}
-            />
 
             {props.error && <p className="error">{props.error}</p>}
           </form>

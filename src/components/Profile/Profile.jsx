@@ -27,7 +27,11 @@ function Profile(props) {
         { withCredentials: true }
       )
       .then((result) => {
-        onDataChange(result.data.data);
+        if (!result) {
+          props.history.push(`/${user._id}/edit`);
+        } else {
+          onDataChange(result.data.data);
+        }
       })
       .catch((err) => {
         console.log(err);
