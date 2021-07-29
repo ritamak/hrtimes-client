@@ -1,0 +1,19 @@
+.notFound {
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column;
+}
+
+.notFoundWrapper {
+  margin-top: 70px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 0 40px #241919 !important;
+  margin-bottom: 20px;
+  padding: 30px;
+  border-radius: 25px !important;
+}

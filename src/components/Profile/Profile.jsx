@@ -6,6 +6,7 @@ import "./Profile.css";
 import UserArticleCard from "../UserArticleCard/UserArticleCard";
 import DataCard from "../DataCard/DataCard";
 import Grid from "@material-ui/core/Grid";
+import Loading from "../Loading/index";
 
 function Profile(props) {
   const {
@@ -79,7 +80,7 @@ function Profile(props) {
   };
 
   if (!data.length || !user) {
-    return <p>Loading</p>;
+    return <Loading />;
   }
 
   return (

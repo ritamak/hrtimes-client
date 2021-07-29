@@ -22,6 +22,7 @@ import "./EditProfile.css";
 import UserDetails from "../UserDetails/UserDetails";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
+import Loading from "../Loading/index";
 
 export default function EditProfile(props) {
   const useStyles = makeStyles((theme) => ({
@@ -118,7 +119,7 @@ export default function EditProfile(props) {
   };
 
   if (fetchingUser) {
-    return <p>Loading</p>;
+    return <Loading />;
   }
   return (
     <>

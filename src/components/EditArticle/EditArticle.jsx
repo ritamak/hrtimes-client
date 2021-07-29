@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import { Input } from "@material-ui/core";
+import Loading from "../Loading/index";
 
 function EditArticle(props) {
   const [articleDetails, updateDetails] = useState(null);
@@ -75,7 +76,7 @@ function EditArticle(props) {
   };
 
   if (!articleDetails) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   const { onEditArticle } = props;
