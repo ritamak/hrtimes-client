@@ -14,6 +14,7 @@ import ArticleDetails from "./components/ArticleDetails/ArticleDetails";
 import Navbar from "./components/Navbar/Navbar";
 import UserDetails from "./components/UserDetails/UserDetails";
 import "./App.css";
+import NotFound from "./components/NotFound/NotFound";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -421,12 +422,14 @@ function App(props) {
         updateUser(response.data.data);
         updateError(null);
         updateStatus(false);
+        props.history.push("/profile");
       });
   };
 
   const handleGoogleFailure = (err) => {
     console.log(err);
   };
+
   if (fetchingUser) {
     return <p>Loading...</p>;
   }
@@ -586,6 +589,7 @@ function App(props) {
             );
           }}
         />
+        <Route component={NotFound} />
       </Switch>
       <Footer />
     </div>
