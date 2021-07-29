@@ -154,7 +154,7 @@ export default function ArticleDetails(props) {
       )}
       <Grid container className="commentsWrapper">
         <Grid container className="commentsBox">
-          {!commentDetails.length < 0 && (
+          {commentDetails.length > 0 && (
             <>
               <h1>Reviews</h1>
               {commentDetails &&

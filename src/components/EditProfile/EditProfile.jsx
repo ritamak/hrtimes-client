@@ -390,17 +390,17 @@ export default function EditProfile(props) {
 
       <Grid className="bigWrapper">
         <Grid container className="wrapperCommentsArticles">
-          {comments.length > 0 && (
+          {user.comments.length > 0 && (
             <Grid className="commentsWrapperTwo">
-              {!comments.length ? (
+              {!user.comments.length ? (
                 ""
               ) : (
                 <h2 style={{ color: "black", fontWeight: "bold" }}>
                   Your comments:
                 </h2>
               )}
-              {comments.length &&
-                comments.map((comment, index) => {
+              {user.comments.length &&
+                user.comments.map((comment, index) => {
                   return (
                     <Grid className="editDeleteComments">
                       <p>{comment.commentBody}</p>
@@ -419,7 +419,7 @@ export default function EditProfile(props) {
                 })}
             </Grid>
           )}
-          {articles.length > 0 && (
+          {user.articles.length > 0 && (
             <Grid className="myArticleBox">
               {!articles.length ? (
                 ""
@@ -428,8 +428,8 @@ export default function EditProfile(props) {
                   Your articles:
                 </h2>
               )}
-              {articles.length > 0 &&
-                articles.map((article, index) => {
+              {user.articles.length > 0 &&
+                user.articles.map((article, index) => {
                   return (
                     <Grid className="editDeleteArticles">
                       <p>{article.title}</p>
