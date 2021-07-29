@@ -152,8 +152,10 @@ export default function ArticleDetails(props) {
           />
         </Grid>
       )}
-      {commentDetails && (
+      {commentDetails.length && (
         <Grid container className="commentsWrapper">
+          <h1>Reviews</h1>
+
           {commentDetails &&
             commentDetails.map((comment, index) => {
               console.log(comment);
@@ -166,9 +168,9 @@ export default function ArticleDetails(props) {
                 />
               );
             })}
-          <CreateComment articleId={id} onCreateComments={onCreateComments} />
         </Grid>
       )}
+      <CreateComment articleId={id} onCreateComments={onCreateComments} />
     </>
   );
 }
