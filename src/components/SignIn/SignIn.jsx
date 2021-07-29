@@ -4,11 +4,10 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
 import GoogleButton from "../GoogleButton/GoogleButton";
+import Alert from "@material-ui/lab/Alert";
 
 import "./SignIn.css";
 
@@ -25,8 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    color: "white",
-    background_color: "#6e6e6e",
   },
 }));
 
@@ -35,7 +32,7 @@ function SignIn(props) {
   const { onSignIn, onGoogleSuccess, onGoogleFailure } = props;
 
   return (
-    <Container component="main" maxWidth="xs" className="signInContainer">
+    <Container component="main" maxWidth="xs" className="signInFormContainer">
       <CssBaseline />
       <div className={classes.paper}>
         <form className={classes.form} onSubmit={onSignIn}>
@@ -67,33 +64,30 @@ function SignIn(props) {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
-            style={{ color: "white", background: "black" }}
+            className={`${classes.submit} formSignInButton`}
           >
             Sign In
           </Button>
-          <Grid container justifyContent="flex-end" style={{ color: "black" }}>
+          {props.error && (
+            <Alert variant="filled" severity="error" className="signInAlert">
+              {props.error}
+            </Alert>
+          )}
+          <Grid container justifyContent="center">
             <GoogleButton
               onSuccess={onGoogleSuccess}
               onFailure={onGoogleFailure}
-              style={{ color: "black" }}
             />
           </Grid>
           <Grid container>
             <Grid item>
-              <Link
-                className="form-link"
-                to="/signup"
-                style={{ color: "black" }}
-              >
+              <Link className="form-link" to="/signup">
                 Don't have an account? Sign Up!
               </Link>
             </Grid>
           </Grid>
-          {props.error && <p className="error">{props.error}</p>}
         </form>
       </div>
-      <Box mt={8}></Box>
     </Container>
   );
 }

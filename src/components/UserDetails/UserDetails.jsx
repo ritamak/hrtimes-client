@@ -52,6 +52,15 @@ function UserDetails(props) {
     })();
   }, []);
 
+  const handleFollowing = () => {
+    let followingUsers = [];
+    user.following.map((followingUser) => {
+      followingUsers.push(followingUser._id);
+    });
+
+    return followingUsers.includes(userDetails._id);
+  };
+
   if (!userDetails || fetchingUser) {
     return <Loading />;
   }
@@ -65,7 +74,7 @@ function UserDetails(props) {
           <div>
             {user._id === userDetails._id ? (
               ""
-            ) : user.following.includes(userDetails._id) ? (
+            ) : handleFollowing() ? (
               <Button
                 onClick={(event) => {
                   onUnfollowUser(event, id);
