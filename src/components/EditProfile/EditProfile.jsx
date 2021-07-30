@@ -19,7 +19,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Paper from "@material-ui/core/Paper";
 import "./EditProfile.css";
-import UserDetails from "../UserDetails/UserDetails";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
 import Loading from "../Loading/index";
@@ -74,6 +73,7 @@ export default function EditProfile(props) {
         let articleResponse = await axios.get(`${API_URL}/api/articles`, {
           withCredentials: true,
         });
+
         updateComments(commentResponse.data);
         updateArticles(articleResponse.data);
       } catch (err) {
@@ -125,89 +125,91 @@ export default function EditProfile(props) {
   }
 
   return (
-    <>
-      <>
-        <h1>User Details</h1>
-        <Grid className="userInfo">
-          <Paper elevation={3} className="userInfoCardWrapper">
-            <Grid className="firstGridOfUserInfo">
-              <h1>Account</h1>
-              <CardMedia className={classes.media} image={user.image} />
-              <Typography
-                gutterBottom
-                variant="h5"
-                style={{ fontWeight: "bold" }}
-              >
-                Username: {user.username}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                style={{ fontWeight: "bold" }}
-              >
-                First name: {user.firstName}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                style={{ fontWeight: "bold" }}
-              >
-                Last name: {user.lastName}
-              </Typography>
-              <Typography variant="h5" style={{ fontWeight: "bold" }}>
-                Email: {user.email}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                style={{ fontWeight: "bold" }}
-              >
-                Country: {user.country}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                style={{ fontWeight: "bold" }}
-              >
-                City: {user.city}
-              </Typography>
+    <Container component="main" maxWidth="sm" className="editProfileContainer">
+      <Container className="profileInfoContainer">
+        <Typography className="editProfileHeader" variant="h2" gutterBottom>
+          User Details
+        </Typography>
+        <Paper elevation={3} className="userInfoCardWrapper">
+          <Typography className="profileInfoHeaders" variant="h3" gutterBottom>
+            Account
+          </Typography>
+          <Grid container className="userInfo">
+            <Grid item xs={12} md={6} className="firstGridOfUserInfo">
+              <CardMedia
+                className={`${classes.media} profileInfoImage`}
+                component="img"
+                alt="profile-image"
+                image={user.image}
+              />
+              <p className="accountTitles">
+                Username:
+                <Typography gutterBottom variant="h5">
+                  {user.username}
+                </Typography>
+              </p>
+              <p className="accountTitles">
+                First name:
+                <Typography gutterBottom variant="h5">
+                  {user.firstName}
+                </Typography>
+              </p>
+              <p className="accountTitles">
+                Last name:
+                <Typography gutterBottom variant="h5">
+                  {user.lastName}
+                </Typography>
+              </p>
+              <p className="accountTitles">
+                Email:
+                <Typography variant="h5">{user.email}</Typography>
+              </p>
+              <p className="accountTitles">
+                Country:
+                <Typography gutterBottom variant="h5">
+                  {user.country}
+                </Typography>
+              </p>
+              <p className="accountTitles">
+                City:
+                <Typography gutterBottom variant="h5">
+                  {user.city}
+                </Typography>
+              </p>
             </Grid>
-            <Grid className="secondGridOfUserInfo">
-              {!interests.length > 0 && <h1>Your interests</h1>}
-
+            <Grid item xs={12} md={6} className="secondGridOfUserInfo">
+              <Typography variant="h4" className="profileInfoHeaders">
+                Your interests:
+              </Typography>
               {user.interests.map((interest, index) => {
                 return (
                   <Typography
+                    className="profileInfoInterests"
                     gutterBottom
                     variant="h5"
-                    component="h2"
                     key={index}
-                    style={{ fontWeight: "bold" }}
                   >
-                    {interest}
+                    <i class="fas fa-arrow-right"></i> {interest}
                   </Typography>
                 );
               })}
               {following.length > 0 && <h1>Following</h1>}
               {user.following.map((people, index) => {
-                console.log(people.following);
                 return (
                   <Typography
+                    className="profileInfoFollowings"
                     gutterBottom
                     variant="h5"
-                    component="h2"
                     key={index}
-                    style={{ fontWeight: "bold" }}
                   >
-                    {people.username}
+                    <i class="fas fa-arrow-right"></i> {people.username}
                   </Typography>
                 );
               })}
             </Grid>
-          </Paper>
-        </Grid>
-      </>
+          </Grid>
+        </Paper>
+      </Container>
       {!form ? (
         <Container component="main" maxWidth="xs">
           {!interests ? (
@@ -216,22 +218,29 @@ export default function EditProfile(props) {
             ""
           )}
           <CssBaseline />
-          <Grid className="editProfileButton">
+          <Grid className="showEditProfileButtonContainer">
             <Button
-              size="large"
-              style={{ backgroundColor: "black", color: "white" }}
-              className="editButton"
+              className="showEditFormButton"
               onClick={handleForm}
+              variant="contained"
+              color="primary"
             >
-              Edit Profile
+              <i class="fas fa-user-edit"></i> Edit Profile
             </Button>
           </Grid>
         </Container>
       ) : (
         <>
-          <Container component="main" maxWidth="xs" className="editProfileForm">
+          <Container
+            component="main"
+            maxWidth="xs"
+            className="editProfileFormContainer"
+          >
             <CssBaseline />
             <div className={classes.paper}>
+              <Typography gutterBottom variant="h3">
+                Edit Your Info
+              </Typography>
               <form
                 className={classes.form}
                 noValidate
@@ -320,7 +329,7 @@ export default function EditProfile(props) {
                       onChange={handleCity}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       variant="outlined"
                       required
@@ -349,7 +358,7 @@ export default function EditProfile(props) {
                       multiValue={interests}
                     />
                   </Grid>
-                  <Grid>
+                  <Grid item xs={12}>
                     <FormHelperText>Upload your photo</FormHelperText>
                     <Input
                       type="file"
@@ -364,13 +373,13 @@ export default function EditProfile(props) {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  className={classes.submit}
-                  style={{ color: "white", background: "black" }}
+                  className={`${classes.submit} editFormEditButton`}
                 >
                   Done
                 </Button>
-                <Grid container justifyContent="flex-end">
+                <Grid container className="editFormDeleteButtonContainer">
                   <Button
+                    className="editFormDeleteButton"
                     variant="contained"
                     color="secondary"
                     onClick={() => {
@@ -388,76 +397,80 @@ export default function EditProfile(props) {
         </>
       )}
 
-      <Grid className="bigWrapper">
+      <Grid className="bigWrapperCommentArticles">
         <Grid container className="wrapperCommentsArticles">
           {user.comments.length > 0 && (
-            <Grid className="commentsWrapperTwo">
-              {!user.comments.length ? (
-                ""
-              ) : (
-                <h2 style={{ color: "black", fontWeight: "bold" }}>
-                  Your comments:
-                </h2>
-              )}
-              {user.comments.length &&
-                user.comments.map((comment, index) => {
-                  return (
-                    <Grid className="editDeleteComments">
-                      <p>{comment.commentBody}</p>
-                      <Tooltip title="Delete">
-                        <IconButton
-                          aria-label="delete"
-                          onClick={() => {
-                            onDeleteComment(comment._id);
-                          }}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </Grid>
-                  );
-                })}
+            <Grid item xs={12} sm={6} className="commentsWrapperTwo">
+              <h2>Your comments:</h2>
+              <Grid container>
+                {user.comments.length &&
+                  user.comments.map((comment, index) => {
+                    return (
+                      <Grid item xs={10} className="editDeleteArticlesComments">
+                        <Typography variant="h5">
+                          {comment.commentBody}
+                        </Typography>
+                        <Tooltip title="Delete">
+                          <IconButton
+                            className="articleCommentDeleteIcon"
+                            aria-label="delete"
+                            onClick={() => {
+                              onDeleteComment(comment._id);
+                            }}
+                          >
+                            <i class="fas fa-trash-alt"></i>
+                          </IconButton>
+                        </Tooltip>
+                      </Grid>
+                    );
+                  })}
+              </Grid>
             </Grid>
           )}
           {user.articles.length > 0 && (
-            <Grid className="myArticleBox">
-              {!articles.length ? (
-                ""
-              ) : (
-                <h2 style={{ color: "black", fontWeight: "bold" }}>
-                  Your articles:
-                </h2>
-              )}
-              {user.articles.length > 0 &&
-                user.articles.map((article, index) => {
-                  return (
-                    <Grid className="editDeleteArticles">
-                      <p>{article.title}</p>
-                      <Tooltip title="Delete">
-                        <IconButton
-                          aria-label="delete"
-                          onClick={() => {
-                            onDeleteArticle(article._id);
-                          }}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Tooltip>
+            <Grid item xs={12} sm={6} className="myArticleBox">
+              <h2>Your articles:</h2>
+              <Grid container>
+                {user.articles.length > 0 &&
+                  user.articles.map((article, index) => {
+                    return (
+                      <Grid item xs={10} className="editDeleteArticlesComments">
+                        <Typography variant="h5">{article.title}</Typography>
+                        <div>
+                          <Tooltip title="Delete">
+                            <IconButton
+                              className="articleCommentDeleteIcon"
+                              aria-label="delete"
+                              onClick={() => {
+                                onDeleteArticle(article._id);
+                              }}
+                            >
+                              <i class="fas fa-trash-alt"></i>
+                            </IconButton>
+                          </Tooltip>
 
-                      <Tooltip title="Edit">
-                        <Link to={`/article/${article._id}/edit`}>
-                          <IconButton aria-label="edit">
-                            <SettingsIcon />
-                          </IconButton>
-                        </Link>
-                      </Tooltip>
-                    </Grid>
-                  );
-                })}
+                          <Tooltip title="Edit">
+                            <Link
+                              className="articleEditButton"
+                              to={`/article/${article._id}/edit`}
+                            >
+                              <IconButton
+                                className="articleEditIcon"
+                                aria-label="edit"
+                              >
+                                <i class="fas fa-edit"></i>
+                              </IconButton>
+                            </Link>
+                          </Tooltip>
+                        </div>
+                      </Grid>
+                    );
+                  })}
+              </Grid>
             </Grid>
           )}
         </Grid>
       </Grid>
-    </>
+    </Container>
   );
 }

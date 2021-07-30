@@ -159,7 +159,6 @@ export default function ArticleDetails(props) {
               <h1>Reviews</h1>
               {commentDetails &&
                 commentDetails.map((comment, index) => {
-                  console.log(comment);
                   return (
                     <CommentBox
                       image={comment.author.image}

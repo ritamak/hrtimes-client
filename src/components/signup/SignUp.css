@@ -15,8 +15,15 @@
   transition: color 250ms;
 }
 
-.signUpLinkContainer {
+.signInLinkContainer {
   justify-content: center;
+}
+
+.signUpMainContainer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+  height: 94.1vh;
 }
 
 .signUpFormContainer {
@@ -53,12 +60,12 @@
 
 @media (max-width: 460px) {
   .signInFormText {
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
 }
 
 @media (max-width: 400px) {
   .signInFormText {
-    font-size: 10px !important;
+    font-size: 9px !important;
   }
 }

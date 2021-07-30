@@ -1,94 +1,136 @@
-.bigWrapper {
-  justify-content: center !important;
-  align-items: center !important;
+.editProfileContainer {
+  margin-top: 30px;
+}
+
+.editProfileHeader {
   display: flex;
+  justify-content: center;
+  color: #1d3557;
+  text-shadow: 0px 0px 2px black;
+  font-weight: bold !important;
+}
+
+.profileInfoHeaders {
+  color: black;
+}
+
+.profileInfoImage {
+  border-radius: 50%;
+  margin-bottom: 20px;
+  width: 50% !important;
+}
+
+.firstGridOfUserInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.accountTitles {
+  margin: 0;
+}
+
+.profileInfoInterests {
+  margin: 10px !important;
+}
+
+.profileInfoFollowings {
+  margin: 10px !important;
+}
+
+.userInfoCardWrapper {
+  height: 50%;
+  text-align: center;
   margin-bottom: 40px;
+  padding: 40px;
+  background-color: #ffffff91 !important;
+  border-radius: 50px !important;
+  box-shadow: 0 0 10px 5px black !important;
+}
+
+.showEditProfileButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.showEditFormButton {
+  background-color: black !important;
+  box-shadow: 0 0 5px 1px black !important;
+  font-weight: bold !important;
+  padding: 10px !important;
+  margin-top: 20px !important;
+  transition: all 0.05s ease-in-out;
+}
+
+.showEditFormButton:hover {
+  transform: scale(1.1);
+  background-color: #36393b !important;
+}
+
+.editProfileFormContainer {
+  background-color: #ffffff91 !important;
+  border-radius: 50px !important;
+  box-shadow: 0 0 10px 5px black !important;
+  padding: 10px 40px !important;
+}
+
+.editFormEditButton {
+  background-color: black !important;
+  box-shadow: 0 0 5px 1px black !important;
+  font-weight: bold !important;
+  padding: 10px !important;
+}
+
+.editFormEditButton:hover {
+  background-color: #343a40 !important;
+}
+
+.editFormDeleteButton {
+  background-color: red !important;
+  box-shadow: 0 0 5px 1px black !important;
+  font-weight: bold !important;
+  padding: 10px !important;
+}
+
+.editFormDeleteButton:hover {
+  background-color: rgb(255, 95, 95) !important;
+}
+
+.editFormDeleteButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bigWrapperCommentArticles {
+  margin-top: 50px;
+  margin-bottom: 30px;
 }
 
 .wrapperCommentsArticles {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center !important;
-  margin-top: 20px;
   text-align: center;
-  box-shadow: 0 0 40px #241919 !important;
-  padding: 30px;
-  border-radius: 25px !important;
-  width: 70% !important;
-  background-color: #dbdbdb;
-  margin-top: 50px;
-}
-
-h1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: #ffffff91 !important;
+  border-radius: 50px !important;
+  box-shadow: 0 0 10px 5px black !important;
+  padding: 10px 40px !important;
 }
 
 .commentsWrapperTwo {
-  align-items: center;
-  width: 30%;
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
-  /* border: 2px solid black; */
-}
-.comments {
-  width: 200px;
-  padding: 20px;
+  align-items: center !important;
 }
 
-.myArticlesBox {
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  height: 50%;
-  text-align: center;
-  padding: 10px;
-  box-shadow: 0 0 40px #241919 !important;
-  margin-bottom: 20px;
-  padding: 30px;
-  border-radius: 25px !important;
+.commentsWrapperTwo .MuiGrid-container {
+  justify-content: center !important;
+  align-items: center !important;
 }
 
-.editProfileButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.editButton {
-  margin-top: 20px !important;
-  transition: all 0.2s ease-in-out;
-}
-
-.editButton:hover {
-  transform: scale(1.1);
-  background-color: rgb(121, 121, 121);
-}
-.userInfoCardWrapper {
-  width: 80%;
-  height: 50%;
-  text-align: center;
-  box-shadow: 0 0 40px #241919 !important;
-  margin-bottom: 20px;
-  padding: 30px;
-  border-radius: 25px !important;
-  margin-top: 20px;
-  display: flex !important;
-  align-items: center;
-  justify-content: space-evenly !important;
-  flex-direction: row !important;
-  background-color: #7d7d7d !important;
-}
-
-.editProfileForm {
-  background-color: white;
-  border-radius: 25px !important;
-  box-shadow: 0 0 40px #241919 !important;
+.myArticleBox .MuiGrid-container {
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .userInfo {
@@ -98,51 +140,26 @@ h1 {
   justify-content: center !important;
 }
 
-.firstGridOfUserInfo {
-  background-color: #7d7d7d;
-  padding: 10px;
-  width: 80%;
-  margin-right: 10px;
-  border-radius: 25px !important;
-  color: white;
-}
-
-.secondGridOfUserInfo {
-  background-color: #7d7d7d;
-  color: white;
-  padding: 10px;
-  width: 80%;
-  height: 100%;
-  border-radius: 25px !important;
-}
-
-.myArticleBox {
-  width: 30%;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 350px;
-}
-
-.editDeleteComments {
-  display: flex;
-  flex-direction: row !important;
-  align-items: center;
-  box-shadow: 0 0 10px #241919 !important;
-  border-radius: 25px !important;
-  padding: 10px;
-  background-color: white;
-  margin: 10px;
-}
-
-.editDeleteArticles {
+.editDeleteArticlesComments {
   display: flex;
   flex-direction: row !important;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 0 10px #241919 !important;
   border-radius: 25px !important;
-  margin: 10px;
   padding: 10px;
   background-color: white;
+  margin: 10px;
+}
+
+.articleEditButton {
+  text-decoration: none;
+}
+
+.articleCommentDeleteIcon {
+  color: red !important;
+}
+
+.articleEditIcon {
+  color: orange !important;
 }

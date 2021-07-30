@@ -16,31 +16,33 @@ function Navbar(props) {
   }
 
   return (
-    <AppBar position="static" style={{ background: "#000000" }}>
+    <AppBar position="static">
       <Toolbar>
-        <IconButton edge="start">
+        <IconButton Button edge="start">
           <Link to={"/profile"}>
             <Button>
               <Avatar id="image" alt="profile" src={user.image} />
             </Button>
           </Link>
         </IconButton>
-        <Link to={`/create`}>
-          <Button className="navBarButtons">
-            <CreateIcon />
-            Create Article
+        <div className="navBarButtonsContainer">
+          <Link to={`/create`}>
+            <Button className="navBarButtons">
+              <CreateIcon />
+              <span className="navBarButtonLabels">Create Article</span>
+            </Button>
+          </Link>
+          <Link to={`/${user._id}/edit`}>
+            <Button className="navBarButtons">
+              <i class="fas fa-user-edit fa-lg"></i>
+              <span className="navBarButtonLabels">Edit Profile</span>
+            </Button>
+          </Link>
+          <Button className="navBarButtons" onClick={onLogOut}>
+            <ExitToApp />
+            <span className="navBarButtonLabels">Logout</span>
           </Button>
-        </Link>
-        <Link to={`/${user._id}/edit`}>
-          <Button className="navBarButtons">
-            <i class="fas fa-user-edit fa-lg"></i>
-            Edit Profile
-          </Button>
-        </Link>
-        <Button className="navBarButtons" onClick={onLogOut}>
-          Logout
-          <ExitToApp />
-        </Button>
+        </div>
       </Toolbar>
     </AppBar>
   );

@@ -311,8 +311,8 @@ function App(props) {
 
         props.history.push(`/article/${id}`);
         updateArticles(response.data);
-      } catch (err) {
-        console.log("Edited failed", err);
+      } catch (error) {
+        updateError(error.response.data.error);
         updateStatus(false);
       }
     }
@@ -456,7 +456,7 @@ function App(props) {
    return <Loading />;;
   }
   return (
-    <div  className="mainPageContainer">
+    <div className="mainPageContainer">
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route
