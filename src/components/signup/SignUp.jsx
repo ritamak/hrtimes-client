@@ -11,47 +11,53 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { topStoriesTopics } from "../../data/data";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import Typography from "@material-ui/core/Typography";
 import GoogleButton from "../GoogleButton/GoogleButton";
+import Alert from "@material-ui/lab/Alert";
 import "./SignUp.css";
 
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(3),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
 function SignUp(props) {
+  const classes = useStyles();
   const {
     onSignUp,
     interests,
     onTopicChange,
     onGoogleSuccess,
     onGoogleFailure,
+    error,
   } = props;
-
-  const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: "100%", // Fix IE 11 issue.
-      marginTop: theme.spacing(3),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  }));
-  const classes = useStyles();
 
   return (
     <>
-      <Container component="main" maxWidth="xs" className="signUpContainer">
+      <Container component="main" maxWidth="xs" className="signUpFormContainer">
         <CssBaseline />
         <div className={classes.paper}>
+          <Typography className="signUpHeader" variant="h3" gutterBottom>
+            Sign Up
+          </Typography>
           <form className={classes.form} noValidate onSubmit={onSignUp}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6} sm={6}>
                 <TextField
                   autoComplete="uname"
                   name="username"
@@ -63,7 +69,7 @@ function SignUp(props) {
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6} sm={6}>
                 <TextField
                   autoComplete="fname"
                   name="firstName"
@@ -148,7 +154,7 @@ function SignUp(props) {
                   multiValue={interests}
                 />
               </Grid>
-              <Grid>
+              <Grid item xs={12}>
                 <FormHelperText>Upload your photo</FormHelperText>
                 <Input
                   type="file"
@@ -157,38 +163,39 @@ function SignUp(props) {
                 />
               </Grid>
             </Grid>
-            <GoogleButton
-              onSuccess={onGoogleSuccess}
-              onFailure={onGoogleFailure}
-            />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
-              style={{ color: "white", background: "black" }}
+              className={`${classes.submit} formSignUpButton`}
             >
               Sign Up
             </Button>
-
-            <Grid container justifyContent="flex-end">
+            {error && (
+              <Alert variant="filled" severity="error" className="signUpAlert">
+                {error}
+              </Alert>
+            )}
+            <Grid container justifyContent="center">
+              <GoogleButton
+                onSuccess={onGoogleSuccess}
+                onFailure={onGoogleFailure}
+                className="googleSignUpButton"
+              />
+            </Grid>
+            <Grid container className="signInLinkContainer">
               <Grid item>
-                <Link
-                  className="form-link"
-                  to="/signin"
-                  variant="body2"
-                  style={{ color: "black" }}
-                >
-                  Already have an account? Sign in!
-                </Link>
+                <p className="signInFormText">
+                  Already have an account?
+                  <Link className="signInFormLink" to="/signin">
+                    Sign In!
+                  </Link>
+                </p>
               </Grid>
             </Grid>
-
-            {props.error && <p className="error">{props.error}</p>}
           </form>
         </div>
-        <Box mt={5}></Box>
       </Container>
     </>
   );

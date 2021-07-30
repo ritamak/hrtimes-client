@@ -1,28 +1,54 @@
-.error {
-  text-align: center;
-  padding: 5px;
-  font-weight: bold;
-  text-transform: lowercase;
-  text-decoration: underline;
-  color: #9c0000;
+.signUpFormText {
+  font-size: 18px !important;
+  margin: 10px;
+  font-weight: 900 !important;
 }
 
-.form-link {
-  text-decoration: none;
+.signUpFormLink {
+  text-shadow: 0px 0px 5px black;
+  color: aqua;
+  margin: 0 5px;
 }
 
-.form-link:hover {
-  text-decoration: underline;
+.signUpFormLink:hover {
+  color: #64dfdf;
+  transition: color 250ms;
+}
+
+.signUpLinkContainer {
+  justify-content: center;
 }
 
 .signInFormContainer {
-  background-color: #ffffffe5;
+  background-color: #ffffffde;
   border-radius: 50px !important;
   box-shadow: 0 0 10px 5px black !important;
-  padding: 20px;
+  padding: 40px !important;
   margin: 30px auto;
 }
 
 .singInAlert {
   margin-bottom: 20px;
+}
+
+.signInHeader {
+  color: black;
+  font-weight: 700 !important;
+}
+
+.formSignInButton {
+  background-color: black !important;
+  box-shadow: 0 0 5px 1px black !important;
+  font-weight: bold !important;
+  padding: 10px !important;
+}
+
+.formSignInButton:hover {
+  background-color: #343a40 !important;
+}
+
+@media (max-width: 450px) {
+  .signUpFormText {
+    font-size: 11px !important;
+  }
 }

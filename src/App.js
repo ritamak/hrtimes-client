@@ -40,8 +40,6 @@ function App(props) {
     updateUser(param);
   };
 
- 
-
   useEffect(() => {
     (async () => {
       try {
@@ -75,22 +73,21 @@ function App(props) {
         withCredentials: true,
       });
       updateUser(response.data);
-      props.history.push("/profile");
       updateStatus(false);
+      props.history.push("/profile");
     } catch (error) {
-      updateError(error.response.data.error);
+      updateError(error.response.data.errorMessage);
       updateStatus(false);
     }
   };
-
+  
   const handleSignUp = async (event) => {
     event.preventDefault();
     let formData = new FormData();
     formData.append("imageUrl", event.target.myImage.files[0]);
-
+    
     let imgResponse = await axios.post(`${API_URL}/api/upload`, formData);
-    console.log(imgResponse);
-
+    
     const {
       username,
       firstName,
@@ -116,17 +113,16 @@ function App(props) {
       interests: values,
       image: imgResponse.data.image,
     };
-
+    
     try {
       let response = await axios.post(`${API_URL}/api/signup`, newUser, {
         withCredentials: true,
       });
       updateUser(response.data);
       updateStatus(false);
-
       props.history.push("/profile");
-    } catch (err) {
-      console.log("Signup failed", err);
+    } catch (error) {
+      updateError(error.response.data.errorMessage);
       updateStatus(false);
     }
   };

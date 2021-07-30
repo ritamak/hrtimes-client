@@ -6,7 +6,7 @@
 .footerNav p {
   font-size: 20px !important;
   font-weight: bold !important;
-  text-shadow: 0 0 5px black !important;
+  text-shadow: 0 0 10px black !important;
 }
 
 .footerLinks a {
@@ -20,13 +20,13 @@
   transition: color 250ms;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .footerNav p {
-    font-size: 12px !important;
+    font-size: 10px !important;
   }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   .footerNav p {
     font-size: 16px !important;
   }

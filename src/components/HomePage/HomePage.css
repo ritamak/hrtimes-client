@@ -23,10 +23,10 @@
   align-items: center !important;
   justify-content: center;
   text-align: center;
-  font-size: 2rem;
+  font-size: 30px;
   font-weight: 700;
   line-height: 1.5;
-  background-color: #ffffff98;
+  background-color: #ffffffab;
   color: #250902;
   box-shadow: 0 0 10px 5px black !important;
   padding: 30px;
@@ -82,7 +82,10 @@
   transition: color 250ms;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 620px) {
+  .signUpText {
+    font-size: 18px !important;
+  }
   .homePageIntroBox {
     border-radius: 50px 50px 0 0;
   }

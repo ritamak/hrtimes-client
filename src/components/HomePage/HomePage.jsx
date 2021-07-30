@@ -13,7 +13,7 @@ function HomePage() {
       <hr className="homePageLine" />
 
       <Grid container spacing={0} className="homePageIntroContainer">
-        <Grid item xs={12} sm={10} md={8} lg={5} className="homePageIntroBox">
+        <Grid item xs={11} sm={10} md={8} lg={5} className="homePageIntroBox">
           <p className="homePageIntro">
             Gather all topics of your interest.<br></br>
             You can easily choose the topics you are interested in and check
@@ -27,14 +27,14 @@ function HomePage() {
             </Button>
           </Link>
           <p className="signUpText">
-            You don't have an account?
+            Don't have an account?
             <Link to="/signup" className="signUpLink">
               {" "}
               Sign Up!...
             </Link>
           </p>
         </Grid>
-        <Grid item xs={12} sm={10} md={8} lg={5} className="homePageImg">
+        <Grid item xs={11} sm={10} md={8} lg={5} className="homePageImg">
           <img src="/media/landing.jpg" alt="newspaper"></img>
         </Grid>
       </Grid>
