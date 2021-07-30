@@ -22,3 +22,12 @@ button i {
 button svg {
   margin: 0 5px;
 }
+
+@media (max-width: 570px) {
+  .navBarButtonLabels {
+    display: none;
+  }
+  MuiAppBar-root div {
+    justify-content: space-between;
+  }
+}

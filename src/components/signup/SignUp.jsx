@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import { Input } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -49,15 +48,15 @@ function SignUp(props) {
 
   return (
     <>
-      <Container component="main" maxWidth="xs" className="signUpFormContainer">
+      <Container component="main" maxWidth="sm" className="signUpMainContainer">
         <CssBaseline />
-        <div className={classes.paper}>
+        <div className={`${classes.paper} signUpFormContainer`}>
           <Typography className="signUpHeader" variant="h3" gutterBottom>
             Sign Up
           </Typography>
           <form className={classes.form} noValidate onSubmit={onSignUp}>
             <Grid container spacing={2}>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="uname"
                   name="username"
@@ -69,7 +68,7 @@ function SignUp(props) {
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="fname"
                   name="firstName"
@@ -127,7 +126,7 @@ function SignUp(props) {
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
                   required

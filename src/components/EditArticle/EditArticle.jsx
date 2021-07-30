@@ -10,6 +10,9 @@ import Container from "@material-ui/core/Container";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import { Input } from "@material-ui/core";
 import Loading from "../Loading/index";
+import Typography from "@material-ui/core/Typography";
+import Alert from "@material-ui/lab/Alert";
+import "./EditArticle.css";
 
 function EditArticle(props) {
   const [articleDetails, updateDetails] = useState(null);
@@ -79,13 +82,19 @@ function EditArticle(props) {
     return <Loading />;
   }
 
-  const { onEditArticle } = props;
+  const { onEditArticle, error } = props;
 
   return (
     <>
-      <Container component="main" maxWidth="s">
+      <Container
+        component="main"
+        maxWidth="md"
+        className="editArticleContainer"
+      >
         <div className={classes.paper}>
-          <h1>Edit your article:</h1>
+          <Typography className="editArticleHeader" variant="h3" gutterBottom>
+            Edit Your Article
+          </Typography>
           <form
             className={classes.form}
             noValidate
@@ -172,13 +181,20 @@ function EditArticle(props) {
                 type="submit"
                 variant="contained"
                 color="primary"
-                className={classes.submit}
-                style={{ color: "white", background: "black" }}
+                className={`${classes.submit} formEditArticleButton`}
               >
                 Upload
               </Button>
+              {error && (
+                <Alert
+                  variant="filled"
+                  severity="error"
+                  className="signUpAlert"
+                >
+                  {error}
+                </Alert>
+              )}
             </Grid>
-            {props.error && <p className="error">{props.error}</p>}
           </form>
         </div>
         <Box mt={5}></Box>

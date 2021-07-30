@@ -1,0 +1,33 @@
+.editArticleContainer {
+  background-color: #ffffffb0;
+  border-radius: 50px !important;
+  box-shadow: 0 0 10px 5px black !important;
+  padding: 40px !important;
+  margin: 30px auto;
+}
+
+.editArticleAlert {
+  margin-bottom: 20px;
+}
+
+.editArticleHeader {
+  color: black;
+  font-weight: 700 !important;
+}
+
+.formEditArticleButton {
+  background-color: black !important;
+  box-shadow: 0 0 5px 1px black !important;
+  font-weight: bold !important;
+  padding: 10px !important;
+}
+
+.formEditArticleButton:hover {
+  background-color: #343a40 !important;
+}
+
+@media (max-width: 460px) {
+}
+
+@media (max-width: 400px) {
+}

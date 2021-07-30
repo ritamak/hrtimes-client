@@ -18,10 +18,6 @@
   color: white;
 }
 
-h3 {
-  color: white;
-}
-
 .dataCards {
   display: flex;
   flex-flow: row wrap;

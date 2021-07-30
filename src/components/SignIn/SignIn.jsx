@@ -33,8 +33,9 @@ function SignIn(props) {
   const { onSignIn, onGoogleSuccess, onGoogleFailure, error } = props;
 
   return (
-    <Container component="main" maxWidth="xs" className="signInFormContainer">
-      <div className={classes.paper}>
+    <Container component="main" maxWidth="sm" className="signInMainContainer">
+      <CssBaseline />
+      <div className={`${classes.paper} signInFormContainer`}>
         <Typography className="signInHeader" variant="h3" gutterBottom>
           Sign In
         </Typography>
